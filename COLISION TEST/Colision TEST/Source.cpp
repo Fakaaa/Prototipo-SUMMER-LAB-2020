@@ -32,13 +32,15 @@ bool isPrinted = false;
 //FUNCTIONS
 void printBoard(char matriz[][columns]);
 void placeCircle(Circles &circle1, Circles &circle2);
+void showCircle();
 
 int main()
 {
 	srand(time(NULL));
 
 	placeCircle(circle1,circle2);
-	printBoard(matriz);
+	showCircle();
+	//printBoard(matriz);
 
 
 	system("pause");
@@ -72,6 +74,29 @@ void placeCircle(Circles &circle1, Circles &circle2)
 	matriz[circle1.center.x][circle1.center.y] = circle1.centerCh;
 	matriz[circle2.center.x][circle2.center.y] = circle2.centerCh;
 
+}
+
+void showCircle()
+{
+
+	cout << "                   ****** \n";
+	cout << "               ************** \n";
+	cout << "             ******************\n";
+	cout << "	   **********************\n";
+	cout << "	 *************************\n";
+	cout << "	***************************\n";
+	cout << "	****************************\n";
+	cout << "	****************************\n";
+	cout << "	****************************\n";
+	cout << "	 **************************\n";
+	cout << "	  ************************\n";
+	cout << "	    *********************\n";
+	cout << "	      *****************		1 \n";
+	cout << "               **************\n";
+	cout << "                   ****** \n";
+	
+	
+	
 }
 
 void colisionTest()
