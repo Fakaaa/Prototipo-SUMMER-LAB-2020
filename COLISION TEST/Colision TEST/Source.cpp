@@ -1,12 +1,18 @@
 #include <iostream>
 #include <time.h>
+#include <cmath>
+#include "raylib.h"
 using namespace std;
 
 //CONST & VARIABLES
 const int rows = 40;
 const int columns = 40;
-const int minimumValueOfCenter = 15;
-
+const int minimumValueOfCenter = 105;
+int hipotenus = 0;
+int catet1 = 0;
+int catet2 = 0;
+int colision = 0;
+bool areColliding = false;
 
 //STUCTS
 
@@ -30,79 +36,64 @@ bool isPrinted = false;
 
 
 //FUNCTIONS
-void printBoard(char matriz[][columns]);
 void placeCircle(Circles &circle1, Circles &circle2);
-void showCircle();
+void colisionTest(Circles &circle1, Circles &circle2, int &colision, int &hipotenus, int &catet1, int &catet2);
 
 int main()
 {
 	srand(time(NULL));
-
+	InitWindow(800,460,"FACUNDO");
 	placeCircle(circle1,circle2);
-	showCircle();
-	//printBoard(matriz);
-
-
-	system("pause");
-	return 0;
-}
-
-void printBoard(char matriz[][columns])
-{
-	for (int i = 0; i < rows; i++)
+	while(!WindowShouldClose())
 	{
-		for (int j = 0; j < columns; j++)
-		{
-			if (isPrinted == false)
-			{
-				matriz[i][j] = '\0';
-			}	
-			cout <<  matriz[i][j];
-		}
-		cout << endl;
-		isPrinted = true;
+		colisionTest(circle1, circle2, colision,hipotenus,catet1,catet2);
+		BeginDrawing();
+		ClearBackground(WHITE);
+		DrawCircle(circle1.center.x, circle1.center.y,circle1.rad,GREEN);
+		DrawCircle(circle2.center.x, circle2.center.y, circle2.rad, RED);
+		EndDrawing();
 	}
+
+
+	return 0;
 }
 
 void placeCircle(Circles &circle1, Circles &circle2)
 {
-	circle1.center.x = rand() % 10 + minimumValueOfCenter;
-	circle1.center.y = rand() % 10 + minimumValueOfCenter;
-	circle2.center.x = rand() % 10 + minimumValueOfCenter;
-	circle2.center.y = rand() % 10 + minimumValueOfCenter;
-	
-	matriz[circle1.center.x][circle1.center.y] = circle1.centerCh;
-	matriz[circle2.center.x][circle2.center.y] = circle2.centerCh;
+	circle1.center.x = rand() % 200 + minimumValueOfCenter;
+	circle1.center.y = rand() % 200 + minimumValueOfCenter;
+	circle2.center.x = rand() % 200 + minimumValueOfCenter;
+	circle2.center.y = rand() % 200 + minimumValueOfCenter;
 
+	circle1.rad = rand() % 20+ 40;
+	circle2.rad = rand() % 20 + 40;
 }
 
-void showCircle()
+void colisionTest(Circles &circle1, Circles &circle2, int &colision, int &hipotenus, int &catet1, int &catet2)
 {
 
-	cout << "                   ****** \n";
-	cout << "               ************** \n";
-	cout << "             ******************\n";
-	cout << "	   **********************\n";
-	cout << "	 *************************\n";
-	cout << "	***************************\n";
-	cout << "	****************************\n";
-	cout << "	****************************\n";
-	cout << "	****************************\n";
-	cout << "	 **************************\n";
-	cout << "	  ************************\n";
-	cout << "	    *********************\n";
-	cout << "	      *****************		1 \n";
-	cout << "               **************\n";
-	cout << "                   ****** \n";
-	
-	
-	
-}
+	catet1 = circle1.center.x - circle2.center.x;
+	catet2 = circle1.center.y - circle2.center.y;
 
-void colisionTest()
-{
+	hipotenus = sqrt((catet1 * catet1) + (catet2 * catet2));
 
+	colision = hipotenus - (circle1.rad + circle2.rad);
 
+	if (colision <= 0)
+	{
+		areColliding = true;
+	}
+	else if (colision > 0)
+	{
+		areColliding = false;
+	}
 
-
+	if (areColliding == true)
+	{
+		DrawText("LAS CIRCUNFERENCIAS ESTAN COLISIONANDO", 100, 435, 25, GREEN);
+	}
+	else if(areColliding == false)
+	{
+		DrawText("LAS CIRCUNFERENCIAS NO ESTAN COLISIONANDO", 100, 435, 25, RED);
+	}
 }
