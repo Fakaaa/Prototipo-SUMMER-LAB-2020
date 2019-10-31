@@ -6,7 +6,7 @@ using namespace std;
 
 //CONSTANTES
 const int heigth = 720;
-const int width = 1080;
+const int width = 1150;
 
 //VARIABLES
 	//CIRCLES
@@ -25,6 +25,7 @@ const int width = 1080;
 		//ImpactPoint
 			float posPx;
 			float posPy;
+			float radPoint;
 		//VectorDIRECTMainCicle-Mouse
 			Vector2 vecMM;
 
@@ -35,12 +36,14 @@ const int width = 1080;
 	float resCollision = 0;
 	float parameter = rad;
 	float porcentageOfStraigth = 0;
+	bool impact = false;
 
 //FUNCIONES
 void drawCirclesAndLines();
 void placeCircles();
-void calcCollision();
+void checkCollision();
 void calcImpactPoint();
+void applyCollision();
 
 int main(){
 
@@ -53,7 +56,8 @@ int main(){
 
 		placeCircles();
 		drawCirclesAndLines();
-		calcCollision();
+		checkCollision();
+		applyCollision();
 		calcImpactPoint();
 
 		EndDrawing();
@@ -67,8 +71,9 @@ int main(){
 void drawCirclesAndLines(){
 
 	DrawCircleGradient(posx,posy,rad,SKYBLUE,WHITE);
+	DrawCircleGradient(posx, posy, rad - 90, BLACK, WHITE);
 	DrawCircleGradient(posMousex, posMousey, radMouse, WHITE, BLUE);
-	DrawCircleGradient(vecMM.x, vecMM.y, radMouse - 20, BLACK, BLUE);
+	DrawCircleGradient(vecMM.x, vecMM.y, radPoint, BLACK, BLUE);
 	DrawLine(posMousex,posMousey,posx,posy,WHITE);
 
 }
@@ -82,11 +87,11 @@ void placeCircles(){
 	posMousex = GetMouseX();
 	posMousey = GetMouseY();
 
-	radMouse = 50;
-
+	radMouse = 15;
+	radPoint = 5;
 }
 
-void calcCollision(){
+void checkCollision(){
 
 	base = (posx - posMousex);
 	high = (posy - posMousey);
@@ -104,6 +109,14 @@ void calcCollision(){
 		DrawText("LOS CIRCULOS COLISIONAN", width / 3, heigth - 100, 25, GREEN);
 	}
 
+	if (hipo / 2.1f <= rad)//(vecMM.x,vecMM.y) <= rad)
+	{
+		DrawText("EL PUNTO DE IMPACTO COLISIONA CON LA CIRCUNFERENCIA", width / 6, heigth - 150, 25, GREEN);
+	}
+	else if(hipo / 2.1f > rad)//(vecMM.x, vecMM.y) > rad)
+	{
+		DrawText("EL PUNTO DE IMPACTO -NO- COLISIONA CON LA CIRCUNFERENCIA", width / 6, heigth - 150, 25, RED);
+	}
 
 	porcentageOfStraigth = hipo - rad;
 
@@ -111,13 +124,41 @@ void calcCollision(){
 
 void calcImpactPoint(){
 
-	vecMM.x = (centerPoint.x + mousePoint.x) /2;
-	vecMM.y = (centerPoint.y + mousePoint.y) /2;
-
 	centerPoint.x = posx;
 	centerPoint.y = posy;
-
 	mousePoint.x = posMousex;
 	mousePoint.y = posMousey;
- 
+
+	vecMM.x = (centerPoint.x + mousePoint.x) / 2;
+	vecMM.y = (centerPoint.y + mousePoint.y) / 2;
+
+}
+
+void applyCollision(){
+
+
+	do
+	{
+		if (CheckCollisionCircles(vecMM, radPoint, centerPoint, rad))
+		{
+			DisableCursor();
+			vecMM.x = (centerPoint.x + mousePoint.x);
+			vecMM.y = (centerPoint.y + mousePoint.y);
+
+			if (true)
+			{
+				vecMM.x = ((centerPoint.x + mousePoint.x) / 2) + 2;
+				vecMM.y = ((centerPoint.y + mousePoint.y) / 2) + 2;
+			}
+
+		}
+		else
+		{
+			EnableCursor();
+			break;
+		}
+
+	} while (!CheckCollisionCircles(vecMM, radPoint, centerPoint, rad));
+	
+
 }
