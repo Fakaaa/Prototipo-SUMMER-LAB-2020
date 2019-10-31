@@ -4,96 +4,86 @@
 #include "raylib.h"
 using namespace std;
 
-//CONST & VARIABLES
-const int rows = 40;
-const int columns = 40;
-const int minimumValueOfCenter = 105;
-int hipotenus = 0;
-int catet1 = 0;
-int catet2 = 0;
-int colision = 0;
-bool areColliding = false;
+//CONSTANTES
+const int heigth = 720;
+const int width = 1080;
 
-//STUCTS
+//VARIABLES
+float posx;
+float posy;
+float posMousex;
+float posMousey;
 
-struct Pos
-{
-	int x;
-	int y;
-};
+float rad;
+float radMouse;
 
-struct Circles
-{
-	Pos center;
-	int rad;
-	char centerCh = '.';
-};
+float hipo = 0;
+float high = 0;
+float base = 0;
+float resCollision = 0;
 
-char matriz[rows][columns];
-Circles circle1;
-Circles circle2;
-bool isPrinted = false;
+//FUNCIONES
+void drawCircles();
+void placeCircles();
+void calcCollision();
 
+int main(){
 
-//FUNCTIONS
-void placeCircle(Circles &circle1, Circles &circle2);
-void colisionTest(Circles &circle1, Circles &circle2, int &colision, int &hipotenus, int &catet1, int &catet2);
+	InitWindow(width,heigth, "COLLISIONS");
 
-int main()
-{
-	srand(time(NULL));
-	InitWindow(800,460,"FACUNDO");
-	placeCircle(circle1,circle2);
-	while(!WindowShouldClose())
+	while (!WindowShouldClose())
 	{
-		colisionTest(circle1, circle2, colision,hipotenus,catet1,catet2);
 		BeginDrawing();
-		ClearBackground(WHITE);
-		DrawCircle(circle1.center.x, circle1.center.y,circle1.rad,GREEN);
-		DrawCircle(circle2.center.x, circle2.center.y, circle2.rad, RED);
+		ClearBackground(BLACK);
+
+		placeCircles();
+		drawCircles();
+		calcCollision();
+
 		EndDrawing();
 	}
+
 
 
 	return 0;
 }
 
-void placeCircle(Circles &circle1, Circles &circle2)
-{
-	circle1.center.x = rand() % 200 + minimumValueOfCenter;
-	circle1.center.y = rand() % 200 + minimumValueOfCenter;
-	circle2.center.x = rand() % 200 + minimumValueOfCenter;
-	circle2.center.y = rand() % 200 + minimumValueOfCenter;
+void drawCircles(){
 
-	circle1.rad = rand() % 20+ 40;
-	circle2.rad = rand() % 20 + 40;
+	DrawCircleGradient(posx,posy,rad,SKYBLUE,WHITE);
+	DrawCircleGradient(posMousex, posMousey, radMouse, WHITE, BLUE);
+
 }
 
-void colisionTest(Circles &circle1, Circles &circle2, int &colision, int &hipotenus, int &catet1, int &catet2)
-{
+void placeCircles(){
 
-	catet1 = circle1.center.x - circle2.center.x;
-	catet2 = circle1.center.y - circle2.center.y;
+	posx = width / 2;
+	posy = heigth / 2;
+	rad = 100;
 
-	hipotenus = sqrt((catet1 * catet1) + (catet2 * catet2));
+	posMousex = GetMouseX();
+	posMousey = GetMouseY();
 
-	colision = hipotenus - (circle1.rad + circle2.rad);
+	radMouse = 50;
 
-	if (colision <= 0)
+}
+
+void calcCollision(){
+
+	base = (posx - posMousex);
+	high = (posy - posMousey);
+
+	hipo = sqrt((base * base) + (high * high));
+
+	resCollision = hipo - (rad + radMouse);
+
+	if (resCollision > 0)
 	{
-		areColliding = true;
+		DrawText("LOS CIRCULOS -NO- COLISIONAN", width / 3, heigth - 100, 25, RED);
 	}
-	else if (colision > 0)
+	else if (resCollision <= 0)
 	{
-		areColliding = false;
+		DrawText("LOS CIRCULOS COLISIONAN", width / 3, heigth - 100, 25, GREEN);
 	}
 
-	if (areColliding == true)
-	{
-		DrawText("LAS CIRCUNFERENCIAS ESTAN COLISIONANDO", 100, 435, 25, GREEN);
-	}
-	else if(areColliding == false)
-	{
-		DrawText("LAS CIRCUNFERENCIAS NO ESTAN COLISIONANDO", 100, 435, 25, RED);
-	}
 }
