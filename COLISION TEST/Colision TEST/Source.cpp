@@ -9,23 +9,38 @@ const int heigth = 720;
 const int width = 1080;
 
 //VARIABLES
-float posx;
-float posy;
-float posMousex;
-float posMousey;
+	//CIRCLES
+		//CircleMain
+			float posx;
+			float posy;
+			float rad;
+			Vector2 centerPoint;
+		//CircleMouse
+			float posMousex;
+			float posMousey;
+			float radMouse;
+			Vector2 mousePoint;
+		//StraihtWithinCircleAndMouse
+			
+		//ImpactPoint
+			float posPx;
+			float posPy;
+		//VectorDIRECTMainCicle-Mouse
+			Vector2 vecMM;
 
-float rad;
-float radMouse;
-
-float hipo = 0;
-float high = 0;
-float base = 0;
-float resCollision = 0;
+	//COLLISIONS
+	float hipo = 0;
+	float high = 0;
+	float base = 0;
+	float resCollision = 0;
+	float parameter = rad;
+	float porcentageOfStraigth = 0;
 
 //FUNCIONES
-void drawCircles();
+void drawCirclesAndLines();
 void placeCircles();
 void calcCollision();
+void calcImpactPoint();
 
 int main(){
 
@@ -37,8 +52,9 @@ int main(){
 		ClearBackground(BLACK);
 
 		placeCircles();
-		drawCircles();
+		drawCirclesAndLines();
 		calcCollision();
+		calcImpactPoint();
 
 		EndDrawing();
 	}
@@ -48,10 +64,12 @@ int main(){
 	return 0;
 }
 
-void drawCircles(){
+void drawCirclesAndLines(){
 
 	DrawCircleGradient(posx,posy,rad,SKYBLUE,WHITE);
 	DrawCircleGradient(posMousex, posMousey, radMouse, WHITE, BLUE);
+	DrawCircleGradient(vecMM.x, vecMM.y, radMouse - 20, BLACK, BLUE);
+	DrawLine(posMousex,posMousey,posx,posy,WHITE);
 
 }
 
@@ -86,4 +104,20 @@ void calcCollision(){
 		DrawText("LOS CIRCULOS COLISIONAN", width / 3, heigth - 100, 25, GREEN);
 	}
 
+
+	porcentageOfStraigth = hipo - rad;
+
+}
+
+void calcImpactPoint(){
+
+	vecMM.x = (centerPoint.x + mousePoint.x) /2;
+	vecMM.y = (centerPoint.y + mousePoint.y) /2;
+
+	centerPoint.x = posx;
+	centerPoint.y = posy;
+
+	mousePoint.x = posMousex;
+	mousePoint.y = posMousey;
+ 
 }
