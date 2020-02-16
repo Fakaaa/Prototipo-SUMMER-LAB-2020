@@ -2,5 +2,24 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="..\src\main.cpp" />
+    <ClCompile Include="..\src\objects\player.cpp">
+      <Filter>objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\objects\enemies.cpp">
+      <Filter>objects</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="objects">
+      <UniqueIdentifier>{7e438341-9f84-425d-b3ae-2962f30ac937}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\src\objects\player.h">
+      <Filter>objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\objects\enemies.h">
+      <Filter>objects</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
