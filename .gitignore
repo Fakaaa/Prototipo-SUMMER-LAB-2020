@@ -25,7 +25,7 @@ x86/
 [Aa][Rr][Mm]64/
 bld/
 [Bb]in/
-!flappy_bird_game/lib/raylib-2.5.0-Win32-msvc15/[Bb]in
+!Proyecto-SumerLab/lib/raylib-2.5.0-Win32-msvc15/[Bb]in
 [Oo]bj/
 [Ll]og/
 [Ll]ogs/

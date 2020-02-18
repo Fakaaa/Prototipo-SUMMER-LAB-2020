@@ -2,8 +2,8 @@
 
 #include "objects/player.h"
 
-const int SCREENWIDTH = 1200;
-const int SCREENHEIGHT = 1000;
+const int SCREENWIDTH = 1600;
+const int SCREENHEIGHT = 500;
 
 static void Initialize();
 

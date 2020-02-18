@@ -9,7 +9,7 @@ namespace Player
 		player.body.height = 100;
 		player.body.width = 200;
 		player.body.x = 50;
-		player.body.y = 450;
+		player.body.y = 200;
 
 		player.inGame = true;
 		player.lives = 1;
@@ -23,19 +23,11 @@ namespace Player
 		}
 		if (IsKeyPressed(KEY_S))
 		{
-			player.body.y = 250;
+			player.body.y = 200;
 		}
 		if (IsKeyPressed(KEY_D))
 		{
-			player.body.y = 450;
-		}
-		if (IsKeyPressed(KEY_F))
-		{
-			player.body.y = 650;
-		}
-		if (IsKeyPressed(KEY_G))
-		{
-			player.body.y = 850;
+			player.body.y = 350;
 		}
 	}
 
