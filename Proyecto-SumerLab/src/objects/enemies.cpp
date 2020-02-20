@@ -52,7 +52,5 @@ namespace Enemies
 	void Draw()
 	{
 
-		//DrawRectangleRec();
-
 	}
 }

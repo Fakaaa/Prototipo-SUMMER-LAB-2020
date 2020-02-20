@@ -1,5 +1,7 @@
 #include "player.h"
 
+#include "arrows.h"
+
 namespace Player
 {
 	PLAYER player;
@@ -17,7 +19,7 @@ namespace Player
 
 	void Input()
 	{
-		if (IsKeyPressed(KEY_A))
+		/*if (IsKeyPressed(KEY_A))
 		{
 			player.body.y = 50;
 		}
@@ -28,14 +30,38 @@ namespace Player
 		if (IsKeyPressed(KEY_D))
 		{
 			player.body.y = 350;
+		}*/
+
+		//YELLOW, ORANGE, RED, GREEN, BLUE, BROWN;
+
+		if (IsKeyPressed(KEY_KP_1)) // COLOR AMARILLO
+		{
+			player.body.y = 50;
+		}
+		if (IsKeyPressed(KEY_KP_2)) // COLOR NARANJA
+		{
+			player.body.y = 200;
+		}
+		if (IsKeyPressed(KEY_KP_3)) // COLOR ROJO
+		{
+			player.body.y = 350;
+		}
+		if (IsKeyPressed(KEY_KP_4)) // COLOR VERDE
+		{
+			player.body.y = 50;
+		}
+		if (IsKeyPressed(KEY_KP_5)) // COLOR AZUL
+		{
+			player.body.y = 200;
+		}
+		if (IsKeyPressed(KEY_KP_6)) // COLOR MARRON
+		{
+			player.body.y = 350;
 		}
 	}
 
 	void Draw()
 	{
-
-		DrawRectangleRec(player.body, YELLOW);
-
+		DrawRectangleRec(player.body, BEIGE);
 	}
-
 }

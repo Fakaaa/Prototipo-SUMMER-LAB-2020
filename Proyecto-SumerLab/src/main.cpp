@@ -1,6 +1,7 @@
 #include "raylib.h"
 
 #include "objects/player.h"
+#include "objects/arrows.h"
 
 const int SCREENWIDTH = 1600;
 const int SCREENHEIGHT = 500;
@@ -14,11 +15,13 @@ int main()
 	while (!WindowShouldClose() && Player::player.inGame == true)
 	{
 		Player::Input();
-		
+		Arrows::ChangeColor();
+
 		BeginDrawing();
 		ClearBackground(BLACK);
 		
 		Player::Draw();
+		Arrows::Draw();
 
 		EndDrawing();
 	}
@@ -34,4 +37,5 @@ static void Initialize()
 	SetTargetFPS(60);
 
 	Player::Initialize();
+	Arrows::Initialize();
 }

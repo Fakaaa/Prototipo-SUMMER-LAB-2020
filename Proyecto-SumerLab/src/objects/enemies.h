@@ -14,7 +14,7 @@ namespace Enemies
 
 	extern const float SPEED = 200.0f;
 
-	extern ENEMIES enemies[6];
+	extern ENEMIES enemies[4];
 
 	extern void Initialize();
 	extern void Move();
