@@ -8,18 +8,14 @@ namespace Enemies
 	struct ENEMIES
 	{
 		Rectangle body;
-		Color color;
-		int type;
+		bool aggressive; // es true si la trampa te mata, pero si es false no se tiene que dibujar
 	};
 
-	extern const float SPEED = 200.0f;
-
-	extern ENEMIES enemies[4];
+	extern ENEMIES enemies[6];
 
 	extern void Initialize();
 	extern void Move();
 	extern void Draw();
-
 }
 
 #endif // !ENEMIES_H

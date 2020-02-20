@@ -2,7 +2,7 @@
 
 namespace Arrows
 {
-	Color arrayOfColors[6] = { YELLOW, ORANGE, RED, GREEN, BLUE, MAROON };
+	Color arrayOfColors[6] = { YELLOW, ORANGE, RED, GREEN, BLUE, SKYBLUE };
 
 	ARROW arrows[3];
 

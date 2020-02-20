@@ -2,6 +2,7 @@
 
 #include "objects/player.h"
 #include "objects/arrows.h"
+#include "objects/enemies.h"
 
 const int SCREENWIDTH = 1600;
 const int SCREENHEIGHT = 500;
@@ -16,12 +17,14 @@ int main()
 	{
 		Player::Input();
 		Arrows::ChangeColor();
+		Enemies::Move();
 
 		BeginDrawing();
 		ClearBackground(BLACK);
 		
 		Player::Draw();
 		Arrows::Draw();
+		Enemies::Draw();
 
 		EndDrawing();
 	}
@@ -38,4 +41,5 @@ static void Initialize()
 
 	Player::Initialize();
 	Arrows::Initialize();
+	Enemies::Initialize();
 }

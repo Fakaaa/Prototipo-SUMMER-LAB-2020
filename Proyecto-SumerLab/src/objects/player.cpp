@@ -19,20 +19,7 @@ namespace Player
 
 	void Input()
 	{
-		/*if (IsKeyPressed(KEY_A))
-		{
-			player.body.y = 50;
-		}
-		if (IsKeyPressed(KEY_S))
-		{
-			player.body.y = 200;
-		}
-		if (IsKeyPressed(KEY_D))
-		{
-			player.body.y = 350;
-		}*/
-
-		//YELLOW = 0, ORANGE = 1, RED = 2, GREEN = 3, BLUE = 4, MARRON = 5;
+		//YELLOW = 0, ORANGE = 1, RED = 2, GREEN = 3, BLUE = 4, SKYBLUE = 5;
 
 		if (IsKeyPressed(KEY_KP_1)) // COLOR AMARILLO
 		{
@@ -84,7 +71,7 @@ namespace Player
 				}
 			}
 		}
-		if (IsKeyPressed(KEY_KP_6)) // COLOR MARRON
+		if (IsKeyPressed(KEY_KP_6)) // COLOR SKYBLUE
 		{
 			for (int i = 0; i < 3; i++)
 			{
