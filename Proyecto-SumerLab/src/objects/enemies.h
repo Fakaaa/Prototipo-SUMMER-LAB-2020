@@ -9,12 +9,16 @@ namespace Enemies
 	{
 		Rectangle body;
 		bool aggressive; // es true si la trampa te mata, pero si es false no se tiene que dibujar
+		bool collision;
 	};
 
-	extern ENEMIES enemies[6];
+	const int MAX_ENEMIES = 3;
+
+	extern ENEMIES enemies[MAX_ENEMIES];
 
 	extern void Initialize();
 	extern void Move();
+	extern void Reset();
 	extern void Draw();
 }
 

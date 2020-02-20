@@ -1,6 +1,7 @@
 #include "player.h"
 
 #include "arrows.h"
+#include "screens/all_the_screens.h"
 
 namespace Player
 {
@@ -14,7 +15,7 @@ namespace Player
 		player.body.y = 200;
 
 		player.inGame = true;
-		player.lives = 1;
+		player.lives = 3;
 	}
 
 	void Input()
@@ -81,10 +82,31 @@ namespace Player
 				}
 			}
 		}
+
+		if (IsKeyPressed(KEY_ESCAPE))
+		{
+			Screens::state = Screens::menu;
+		}
+	}
+
+	void Lose()
+	{
+		if (player.lives <= 0)
+			Screens::state = Screens::endScrene;
+	}
+
+	void Reset()
+	{
+		player.body.x = 50;
+		player.body.y = 200;
+
+		player.lives = 3;
 	}
 
 	void Draw()
 	{
 		DrawRectangleRec(player.body, BEIGE);
+
+		DrawText(FormatText("vidas %i", player.lives), 30, 10, 30, GOLD);
 	}
 }

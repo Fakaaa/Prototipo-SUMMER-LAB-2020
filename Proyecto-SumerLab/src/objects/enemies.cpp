@@ -1,50 +1,86 @@
 #include "enemies.h"
 
+#include "arrows.h"
+#include "player.h"
+
 namespace Enemies
 {
 	const int HEIGHT = 100;
 	const int WIDTH = 100;
 
-	extern const float SPEED = 4.0f;
+	const float SPEED = 400.0f;
+
+	int rememberPos;
 
 	//Para Los Enemigos
-	int randomEnemyAggressive = 0; //Es un random para seleccionar que enemigo es agresivo
-	int AggressorsOnScreen = 0; //Cantidad de enemigos en pantalla (MAX 2)
-	int iteratorForEnemyDraw = 0; //Iterador para el arreglo de enemigos en la funcion Draw(Usando el while)
-	int iteratorForEnemyMove = 0; //Iterador para el arreglo de enemigos en la funcion Move(Usando el while)
+	//int randomEnemyAggressive = 0; //Es un random para seleccionar que enemigo es agresivo
+	//int AggressorsOnScreen = 0; //Cantidad de enemigos en pantalla (MAX 2)
+	//int iteratorForEnemyDraw = 0; //Iterador para el arreglo de enemigos en la funcion Draw(Usando el while)
+	//int iteratorForEnemyMove = 0; //Iterador para el arreglo de enemigos en la funcion Move(Usando el while)
 
+	//bool resetEnemies = false;
 
-	bool resetEnemies = false;
+	ENEMIES enemies[3];
 
-	ENEMIES enemies[6];
-
-	//static void CollisionWithPlayer();
+	static void CollisionWithPlayer();
 
 	void Initialize()
 	{
-		for (int i = 0; i < 6; i++)
+		rememberPos = 0;
+
+		for (int i = 0; i < MAX_ENEMIES; i++)
 		{
 			enemies[i].body.height = HEIGHT;
 			enemies[i].body.width = WIDTH;
-			enemies[i].body.x = static_cast<float>(GetScreenWidth() - WIDTH);
+			enemies[i].body.x = static_cast<float>(GetScreenWidth() + WIDTH);
 
-			enemies[i].aggressive = false;
+			enemies[i].aggressive = true;
+			enemies[i].collision = false;
 		}
+
+		rememberPos = GetRandomValue(0, 2);
+		enemies[rememberPos].aggressive = false;
 
 		enemies[0].body.y = 50;
 		enemies[1].body.y = 200;
 		enemies[2].body.y = 350;
-		enemies[3].body.y = 50;
+		/*enemies[3].body.y = 50;
 		enemies[4].body.y = 200;
-		enemies[5].body.y = 350;
+		enemies[5].body.y = 350;*/
 	}
 
 	void Move()
 	{
-		// moviemiento
+		int random = 0;
 
+		for (int i = 0; i < MAX_ENEMIES; i++)
+		{
+			enemies[i].body.x -= SPEED * GetFrameTime();
+		}
+		
+		if (enemies[0].body.x + WIDTH <= 0)
+		{
+			for (int i = 0; i < MAX_ENEMIES; i++)
+			{
+				enemies[i].body.x = static_cast<float>(GetScreenWidth() + WIDTH);
+				enemies[i].aggressive = true;
+				enemies[i].collision = false;
+			}
 
-		if (enemies[0].aggressive == true)
+			do
+			{
+				random = GetRandomValue(0, 2);
+			} while (random == rememberPos);
+
+			rememberPos = random;
+			enemies[rememberPos].aggressive = false;
+
+			Arrows::ChangeColor();
+		}
+
+		CollisionWithPlayer();
+
+		/*if (enemies[0].aggressive == true)
 		{
 			enemies[0].body.x -= SPEED;
 		}
@@ -99,7 +135,7 @@ namespace Enemies
 		{
 			enemies[5].body.x = static_cast<float>(GetScreenWidth() - WIDTH);
 			resetEnemies = true;
-		}
+		}*/
 
 		//iteratorForEnemyMove++;
 		// consegui que en minimo uno solo de los carriles, una de las trampas no aparezca (siempre va a haber una trampa
@@ -109,8 +145,15 @@ namespace Enemies
 
 	void Draw()
 	{
-		// dibujar
-		randomEnemyAggressive = GetRandomValue(1, 10);
+		for (int i = 0; i < MAX_ENEMIES; i++)
+		{
+			if (enemies[i].aggressive == true)
+			{
+				DrawRectangleLinesEx(enemies[i].body, 10, WHITE);
+			}
+		}
+
+		/*randomEnemyAggressive = GetRandomValue(1, 10);
 
 		if (AggressorsOnScreen >= 0 && AggressorsOnScreen <= 1)
 		{
@@ -168,7 +211,7 @@ namespace Enemies
 			enemies[5].aggressive = false;
 
 			resetEnemies = false;
-		}
+		}*/
 
 		// solo se va a dibujar la trampa que tenga true en su bool "aggressive"
 
@@ -177,11 +220,37 @@ namespace Enemies
 				//(Un random de cual es agresivo)
 	}
 
+	void Reset()
+	{
+		rememberPos = 0;
+
+		for (int i = 0; i < MAX_ENEMIES; i++)
+		{
+			enemies[i].body.x = static_cast<float>(GetScreenWidth() + WIDTH);
+
+			enemies[i].aggressive = true;
+			enemies[i].collision = false;
+		}
+
+		rememberPos = GetRandomValue(0, 2);
+		enemies[rememberPos].aggressive = false;
+	}
+
 	// ----------------------------------
 	// Funciones que solo funcionan en este cpp (por el static)
 
-	//static void CollisionWithPlayer()
-	//{
-	//	// primero hace que se muevan, despues decime y veo como lo hiciste y depues haces esto
-	//}
+	static void CollisionWithPlayer()
+	{
+		for (int i = 0; i < MAX_ENEMIES; i++)
+		{
+			if (CheckCollisionRecs(Player::player.body, enemies[i].body) && enemies[i].collision == false && enemies[i].aggressive == true)
+			{
+				for (int j = 0; j < MAX_ENEMIES; j++)
+				{
+					enemies[j].collision = true;
+				}
+				Player::player.lives--;
+			}
+		}
+	}
 }

@@ -11,10 +11,16 @@
     <ClCompile Include="..\src\objects\arrows.cpp">
       <Filter>objects</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\screens\all_the_screens.cpp">
+      <Filter>screens</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="objects">
       <UniqueIdentifier>{7e438341-9f84-425d-b3ae-2962f30ac937}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="screens">
+      <UniqueIdentifier>{f3dd3609-ac2e-4b00-8985-c176a1f41f68}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -26,6 +32,9 @@
     </ClInclude>
     <ClInclude Include="..\src\objects\arrows.h">
       <Filter>objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\screens\all_the_screens.h">
+      <Filter>screens</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

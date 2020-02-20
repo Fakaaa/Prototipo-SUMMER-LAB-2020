@@ -3,6 +3,7 @@
 #include "objects/player.h"
 #include "objects/arrows.h"
 #include "objects/enemies.h"
+#include "screens/all_the_screens.h"
 
 const int SCREENWIDTH = 1600;
 const int SCREENHEIGHT = 500;
@@ -13,21 +14,8 @@ int main()
 {
 	Initialize();
 
-	while (!WindowShouldClose() && Player::player.inGame == true)
-	{
-		Player::Input();
-		Arrows::ChangeColor();
-		Enemies::Move();
-
-		BeginDrawing();
-		ClearBackground(BLACK);
-		
-		Player::Draw();
-		Arrows::Draw();
-		Enemies::Draw();
-
-		EndDrawing();
-	}
+	Screens::screenControler();
+	
 	return 0;
 }
 
@@ -42,4 +30,5 @@ static void Initialize()
 	Player::Initialize();
 	Arrows::Initialize();
 	Enemies::Initialize();
+	Screens::Initialize();
 }

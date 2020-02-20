@@ -17,8 +17,9 @@ namespace Player
 
 	extern void Initialize();
 	extern void Input();
+	extern void Lose();
+	extern void Reset();
 	extern void Draw();
-
 }
 
 #endif // !PLAYER

@@ -23,11 +23,13 @@
     <ClCompile Include="..\src\objects\arrows.cpp" />
     <ClCompile Include="..\src\objects\enemies.cpp" />
     <ClCompile Include="..\src\objects\player.cpp" />
+    <ClCompile Include="..\src\screens\all_the_screens.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\objects\arrows.h" />
     <ClInclude Include="..\src\objects\enemies.h" />
     <ClInclude Include="..\src\objects\player.h" />
+    <ClInclude Include="..\src\screens\all_the_screens.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
