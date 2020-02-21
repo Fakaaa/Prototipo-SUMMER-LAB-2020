@@ -9,7 +9,7 @@ namespace Player
 	struct PLAYER
 	{
 		Rectangle body;
-		//Texture2D texture;
+		Texture2D texture;
 		bool inGame;
 		int lives;
 		float distaceRecord;

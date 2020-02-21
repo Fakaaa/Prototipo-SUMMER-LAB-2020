@@ -9,15 +9,20 @@ const int SCREENWIDTH = 1600;
 const int SCREENHEIGHT = 500;
 
 static void Initialize();
+static void UnloadAssets();
 
 int main()
 {
 	Initialize();
-
+	
 	Screens::screenControler();
+
+	UnloadAssets();
 
 	return 0;
 }
+
+// ----------------------------
 
 static void Initialize()
 {
@@ -31,4 +36,10 @@ static void Initialize()
 	Arrows::Initialize();
 	Enemies::Initialize();
 	Screens::Initialize();
+}
+
+static void UnloadAssets()
+{
+	CloseWindow();
+	UnloadTexture(Player::player.texture);
 }

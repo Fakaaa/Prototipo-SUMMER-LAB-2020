@@ -9,11 +9,17 @@ namespace Player
 
 	void Initialize()
 	{
+		Image submarino;
+
 		player.body.height = 100;
 		player.body.width = 200;
 		player.body.x = 50;
 		player.body.y = 200;
-		//player.texture = LoadTexture("res/raw/submarino.png");
+
+		submarino = LoadImage("../res/assets/submarino.png");
+		ImageResize(&submarino, 200, 100);
+		player.texture = LoadTextureFromImage(submarino);
+		UnloadImage(submarino);
 
 		player.inGame = true;
 		player.lives = 3;
@@ -113,7 +119,8 @@ namespace Player
 
 	void Draw()
 	{
-		DrawRectangleRec(player.body, BEIGE);
+		//DrawRectangleRec(player.body, BEIGE);
+		DrawTexture(player.texture, static_cast<int>(player.body.x), static_cast<int>(player.body.y), WHITE);
 
 		DrawText(FormatText("vidas %i", player.lives), 30, 10, 30, GOLD);
 		DrawText(FormatText("distancia %i", static_cast<int>(player.distaceRecord)), GetScreenWidth() / 2 - 10, 10, 30, GOLD);
