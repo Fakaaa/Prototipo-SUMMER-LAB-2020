@@ -11,12 +11,14 @@ namespace Player
 		Rectangle body;
 		bool inGame;
 		int lives;
+		float distaceRecord;
 	};
 
 	extern PLAYER player;
 
 	extern void Initialize();
 	extern void Input();
+	extern void DistanceTraveled();
 	extern void Lose();
 	extern void Reset();
 	extern void Draw();

@@ -16,6 +16,7 @@ namespace Player
 
 		player.inGame = true;
 		player.lives = 3;
+		player.distaceRecord = 0;
 	}
 
 	void Input()
@@ -89,6 +90,11 @@ namespace Player
 		}
 	}
 
+	void DistanceTraveled()
+	{
+		player.distaceRecord += GetFrameTime() * 5;
+	}
+
 	void Lose()
 	{
 		if (player.lives <= 0)
@@ -101,6 +107,7 @@ namespace Player
 		player.body.y = 200;
 
 		player.lives = 3;
+		player.distaceRecord = 0;
 	}
 
 	void Draw()
@@ -108,5 +115,6 @@ namespace Player
 		DrawRectangleRec(player.body, BEIGE);
 
 		DrawText(FormatText("vidas %i", player.lives), 30, 10, 30, GOLD);
+		DrawText(FormatText("distancia %i", static_cast<int>(player.distaceRecord)), GetScreenWidth() / 2 - 10, 10, 30, GOLD);
 	}
 }

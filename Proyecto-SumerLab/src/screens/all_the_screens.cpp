@@ -64,6 +64,7 @@ namespace Screens
 	{
 		Player::Input();
 		Player::Lose();
+		Player::DistanceTraveled();
 
 		Enemies::Move();
 
@@ -90,6 +91,7 @@ namespace Screens
 		ClearBackground(BLACK);
 
 		DrawText("PERDISTE! - Presiona ENTER para volver a intentar", GetScreenWidth() / 4, GetScreenHeight() / 2, 40, WHITE);
+		DrawText(FormatText("distancia %i", static_cast<int>(Player::player.distaceRecord)), GetScreenWidth() / 2 - 10, 10, 30, GOLD);
 
 		EndDrawing();
 	}

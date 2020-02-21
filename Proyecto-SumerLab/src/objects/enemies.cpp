@@ -55,7 +55,7 @@ namespace Enemies
 
 		for (int i = 0; i < MAX_ENEMIES; i++)
 		{
-			enemies[i].body.x -= SPEED * GetFrameTime();
+			enemies[i].body.x -= SPEED * GetFrameTime() + Player::player.distaceRecord / 20;
 		}
 		
 		if (enemies[0].body.x + WIDTH <= 0)
