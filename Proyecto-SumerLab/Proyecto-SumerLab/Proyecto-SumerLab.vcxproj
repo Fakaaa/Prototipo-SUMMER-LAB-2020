@@ -133,6 +133,7 @@
       <AdditionalLibraryDirectories>$(SolutionDir)lib\raylib-2.5.0-Win32-msvc15\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>raylib.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Windows</SubSystem>
+      <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
     </Link>
     <PostBuildEvent>
       <Command>$(SolutionDir)tools\copy.bat "$(SolutionDir)lib\raylib-2.5.0-Win32-msvc15\bin\raylib.dll" "$(SolutionDir)res\assets" "$(OutDir)" "$(OutDir)assets"</Command>

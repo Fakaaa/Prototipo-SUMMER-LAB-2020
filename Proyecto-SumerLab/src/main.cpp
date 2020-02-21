@@ -15,7 +15,7 @@ int main()
 	Initialize();
 
 	Screens::screenControler();
-	
+
 	return 0;
 }
 

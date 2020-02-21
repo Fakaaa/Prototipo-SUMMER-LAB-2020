@@ -13,6 +13,7 @@ namespace Player
 		player.body.width = 200;
 		player.body.x = 50;
 		player.body.y = 200;
+		//player.texture = LoadTexture("res/raw/submarino.png");
 
 		player.inGame = true;
 		player.lives = 3;

@@ -8,7 +8,7 @@ namespace Enemies
 	struct ENEMIES
 	{
 		Rectangle body;
-		bool aggressive; // es true si la trampa te mata, pero si es false no se tiene que dibujar
+		bool aggressive;
 		bool collision;
 	};
 
