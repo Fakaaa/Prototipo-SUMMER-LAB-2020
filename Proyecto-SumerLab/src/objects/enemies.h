@@ -10,6 +10,7 @@ namespace Enemies
 		Rectangle body;
 		bool aggressive;
 		bool collision;
+		int numTexture;
 	};
 
 	const int MAX_ENEMIES = 3;
@@ -17,6 +18,7 @@ namespace Enemies
 	extern ENEMIES enemies[MAX_ENEMIES];
 
 	extern void Initialize();
+	extern void Unload();
 	extern void Move();
 	extern void Reset();
 	extern void Draw();

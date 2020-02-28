@@ -9,21 +9,39 @@ namespace Player
 
 	void Initialize()
 	{
-		Image submarino;
+		Image submarino1;
+		Image submarino2;
+		Image submarino3;
 
-		player.body.height = 100;
-		player.body.width = 200;
+		player.body.height = 200;
+		player.body.width = 300;
 		player.body.x = 50;
-		player.body.y = 200;
+		player.body.y = static_cast<float>(GetScreenHeight() / 4 + GetScreenHeight() / 4);
 
-		submarino = LoadImage("../res/assets/submarino.png");
-		ImageResize(&submarino, 200, 100);
-		player.texture = LoadTextureFromImage(submarino);
-		UnloadImage(submarino);
+		submarino1 = LoadImage("../res/assets/player/submarino 1.png");
+		submarino2 = LoadImage("../res/assets/player/submarino 2.png");
+		submarino3 = LoadImage("../res/assets/player/submarino 3.png");
+		ImageResize(&submarino1, static_cast<int>(player.body.width), static_cast<int>(player.body.height));
+		ImageResize(&submarino2, static_cast<int>(player.body.width), static_cast<int>(player.body.height));
+		ImageResize(&submarino3, static_cast<int>(player.body.width), static_cast<int>(player.body.height));
+		player.threeLives = LoadTextureFromImage(submarino1);
+		player.twoLives = LoadTextureFromImage(submarino2);
+		player.oneLive = LoadTextureFromImage(submarino3);
 
 		player.inGame = true;
 		player.lives = 3;
 		player.distaceRecord = 0;
+
+		UnloadImage(submarino1);
+		UnloadImage(submarino2);
+		UnloadImage(submarino3);
+	}
+
+	void Unload()
+	{
+		UnloadTexture(player.oneLive);
+		UnloadTexture(player.twoLives);
+		UnloadTexture(player.threeLives);
 	}
 
 	void Input()
@@ -36,7 +54,7 @@ namespace Player
 			{
 				if (Arrows::arrows[i].position == 0)
 				{
-					player.body.y = Arrows::arrows[i].body.y;
+					player.body.y = Arrows::arrows[i].body.y - player.body.height / 4;
 				}
 			}			
 		}
@@ -46,7 +64,7 @@ namespace Player
 			{
 				if (Arrows::arrows[i].position == 1)
 				{
-					player.body.y = Arrows::arrows[i].body.y;
+					player.body.y = Arrows::arrows[i].body.y - player.body.height / 4;
 				}
 			}
 		}
@@ -56,7 +74,7 @@ namespace Player
 			{
 				if (Arrows::arrows[i].position == 2)
 				{
-					player.body.y = Arrows::arrows[i].body.y;
+					player.body.y = Arrows::arrows[i].body.y - player.body.height / 4;
 				}
 			}
 		}
@@ -66,7 +84,7 @@ namespace Player
 			{
 				if (Arrows::arrows[i].position == 3)
 				{
-					player.body.y = Arrows::arrows[i].body.y;
+					player.body.y = Arrows::arrows[i].body.y - player.body.height / 4;
 				}
 			}
 		}
@@ -76,7 +94,7 @@ namespace Player
 			{
 				if (Arrows::arrows[i].position == 4)
 				{
-					player.body.y = Arrows::arrows[i].body.y;
+					player.body.y = Arrows::arrows[i].body.y - player.body.height / 4;
 				}
 			}
 		}
@@ -86,7 +104,7 @@ namespace Player
 			{
 				if (Arrows::arrows[i].position == 5)
 				{
-					player.body.y = Arrows::arrows[i].body.y;
+					player.body.y = Arrows::arrows[i].body.y - player.body.height / 4;
 				}
 			}
 		}
@@ -111,7 +129,7 @@ namespace Player
 	void Reset()
 	{
 		player.body.x = 50;
-		player.body.y = 200;
+		player.body.y = static_cast<float>(GetScreenHeight() / 4 + GetScreenHeight() / 4);
 
 		player.lives = 3;
 		player.distaceRecord = 0;
@@ -119,10 +137,21 @@ namespace Player
 
 	void Draw()
 	{
-		//DrawRectangleRec(player.body, BEIGE);
-		DrawTexture(player.texture, static_cast<int>(player.body.x), static_cast<int>(player.body.y), WHITE);
 
-		DrawText(FormatText("vidas %i", player.lives), 30, 10, 30, GOLD);
-		DrawText(FormatText("distancia %i", static_cast<int>(player.distaceRecord)), GetScreenWidth() / 2 - 10, 10, 30, GOLD);
+		if (player.lives == 3) 
+		{
+			DrawTexture(player.threeLives, static_cast<int>(player.body.x), static_cast<int>(player.body.y), WHITE);
+		}
+		else if (player.lives == 2)
+		{
+			DrawTexture(player.twoLives, static_cast<int>(player.body.x), static_cast<int>(player.body.y), WHITE);
+		}
+		else if (player.lives == 1)
+		{
+			DrawTexture(player.oneLive, static_cast<int>(player.body.x), static_cast<int>(player.body.y), WHITE);
+		}
+
+		//DrawText(FormatText("vidas %i", player.lives), 30, 50, 30, GOLD);
+		DrawText(FormatText("distancia %i", static_cast<int>(player.distaceRecord)), GetScreenWidth() / 2 - (45 * 2), GetScreenHeight() / 10, 45, GOLD);
 	}
 }

@@ -5,8 +5,8 @@
 
 namespace Enemies
 {
-	const int HEIGHT = 100;
-	const int WIDTH = 100;
+	const int HEIGHT = 200;
+	const int WIDTH = 200;
 
 	const float SPEED = 400.0f;
 
@@ -14,10 +14,18 @@ namespace Enemies
 
 	ENEMIES enemies[3];
 
+	Texture2D type[5];
+
 	static void CollisionWithPlayer();
 
 	void Initialize()
 	{
+		Image obstacle1;
+		Image obstacle2;
+		Image obstacle3;
+		Image obstacle4;
+		Image obstacle5;
+
 		rememberPos = 0;
 
 		for (int i = 0; i < MAX_ENEMIES; i++)
@@ -28,14 +36,50 @@ namespace Enemies
 
 			enemies[i].aggressive = true;
 			enemies[i].collision = false;
+			enemies[i].numTexture = GetRandomValue(0, 4);
 		}
 
 		rememberPos = GetRandomValue(0, 2);
-		enemies[rememberPos].aggressive = false;
+		enemies[rememberPos].aggressive = false;	
 
-		enemies[0].body.y = 50;
-		enemies[1].body.y = 200;
-		enemies[2].body.y = 350;
+		enemies[0].body.y = static_cast<float>(GetScreenHeight() / 4);
+		enemies[1].body.y = static_cast<float>(GetScreenHeight() / 4 + GetScreenHeight() / 4);
+		enemies[2].body.y = static_cast<float>(GetScreenHeight() / 4 + GetScreenHeight() / 4 + GetScreenHeight() / 4);
+
+
+
+		obstacle1 = LoadImage("../res/assets/enemies/obstaculo 1.png");
+		obstacle2 = LoadImage("../res/assets/enemies/obstaculo 2.png");
+		obstacle3 = LoadImage("../res/assets/enemies/obstaculo 3.png");
+		obstacle4 = LoadImage("../res/assets/enemies/obstaculo 4.png");
+		obstacle5 = LoadImage("../res/assets/enemies/obstaculo 5.png");
+		ImageResize(&obstacle1, WIDTH, HEIGHT);
+		ImageResize(&obstacle2, WIDTH, HEIGHT);
+		ImageResize(&obstacle3, WIDTH, HEIGHT);
+		ImageResize(&obstacle4, WIDTH, HEIGHT);
+		ImageResize(&obstacle5, WIDTH, HEIGHT);
+		type[0] = LoadTextureFromImage(obstacle1);
+		type[1] = LoadTextureFromImage(obstacle2);
+		type[2] = LoadTextureFromImage(obstacle3);
+		type[3] = LoadTextureFromImage(obstacle4);
+		type[4] = LoadTextureFromImage(obstacle5);
+
+
+
+		UnloadImage(obstacle1);
+		UnloadImage(obstacle2);
+		UnloadImage(obstacle3);
+		UnloadImage(obstacle4);
+		UnloadImage(obstacle5);
+	}
+
+	void Unload()
+	{
+		UnloadTexture(type[0]);
+		UnloadTexture(type[1]);
+		UnloadTexture(type[2]);
+		UnloadTexture(type[3]);
+		UnloadTexture(type[4]);
 	}
 
 	void Move()
@@ -54,6 +98,7 @@ namespace Enemies
 				enemies[i].body.x = static_cast<float>(GetScreenWidth() + WIDTH);
 				enemies[i].aggressive = true;
 				enemies[i].collision = false;
+				enemies[i].numTexture = GetRandomValue(0, 4);
 			}
 
 			do
@@ -70,17 +115,6 @@ namespace Enemies
 		CollisionWithPlayer();
 	}
 
-	void Draw()
-	{
-		for (int i = 0; i < MAX_ENEMIES; i++)
-		{
-			if (enemies[i].aggressive == true)
-			{
-				DrawRectangleLinesEx(enemies[i].body, 10, WHITE);
-			}
-		}
-	}
-
 	void Reset()
 	{
 		rememberPos = 0;
@@ -91,10 +125,24 @@ namespace Enemies
 
 			enemies[i].aggressive = true;
 			enemies[i].collision = false;
+			enemies[i].numTexture = GetRandomValue(0, 4);
 		}
 
 		rememberPos = GetRandomValue(0, 2);
 		enemies[rememberPos].aggressive = false;
+	}
+
+	void Draw()
+	{
+		for (int i = 0; i < MAX_ENEMIES; i++)
+		{
+			if (enemies[i].aggressive == true)
+			{
+				DrawRectangleLinesEx(enemies[i].body, 10, WHITE);
+
+				DrawTexture(type[enemies[i].numTexture], static_cast<int>(enemies[i].body.x), static_cast<int>(enemies[i].body.y), WHITE);
+			}
+		}
 	}
 
 	// ----------------------------------

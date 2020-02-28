@@ -9,7 +9,9 @@ namespace Player
 	struct PLAYER
 	{
 		Rectangle body;
-		Texture2D texture;
+		Texture2D threeLives;
+		Texture2D twoLives;
+		Texture2D oneLive;
 		bool inGame;
 		int lives;
 		float distaceRecord;
@@ -18,6 +20,7 @@ namespace Player
 	extern PLAYER player;
 
 	extern void Initialize();
+	extern void Unload();
 	extern void Input();
 	extern void DistanceTraveled();
 	extern void Lose();

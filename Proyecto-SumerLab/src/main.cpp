@@ -5,8 +5,8 @@
 #include "objects/enemies.h"
 #include "screens/all_the_screens.h"
 
-const int SCREENWIDTH = 1600;
-const int SCREENHEIGHT = 500;
+//static const int SCREENWIDTH = 1600;
+//static const int SCREENHEIGHT = 500;
 
 static void Initialize();
 static void UnloadAssets();
@@ -26,7 +26,7 @@ int main()
 
 static void Initialize()
 {
-	InitWindow(SCREENWIDTH, SCREENHEIGHT, "Super Submarino!! - Sumer Lab");
+	InitWindow(GetScreenWidth(), GetScreenHeight(), "Super Submarino!! - Sumer Lab");
 	HideCursor();
 
 	SetExitKey(KEY_BACK);
@@ -40,6 +40,7 @@ static void Initialize()
 
 static void UnloadAssets()
 {
+	Player::Unload();
+	Enemies::Unload();
 	CloseWindow();
-	UnloadTexture(Player::player.texture);
 }
