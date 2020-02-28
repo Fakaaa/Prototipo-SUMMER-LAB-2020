@@ -26,8 +26,10 @@ int main()
 
 static void Initialize()
 {
-	InitWindow(GetScreenWidth(), GetScreenHeight(), "Super Submarino!! - Sumer Lab");
+	InitWindow(GetScreenWidth(), GetScreenHeight(), "Into the Deep - Sumer Lab");
 	HideCursor();
+
+	ToggleFullscreen();
 
 	SetExitKey(KEY_BACK);
 	SetTargetFPS(60);

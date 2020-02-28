@@ -7,6 +7,8 @@ namespace Player
 {
 	PLAYER player;
 
+	static void Records();
+
 	void Initialize()
 	{
 		Image submarino1;
@@ -18,9 +20,9 @@ namespace Player
 		player.body.x = 50;
 		player.body.y = static_cast<float>(GetScreenHeight() / 4 + GetScreenHeight() / 4);
 
-		submarino1 = LoadImage("../res/assets/player/submarino 1.png");
-		submarino2 = LoadImage("../res/assets/player/submarino 2.png");
-		submarino3 = LoadImage("../res/assets/player/submarino 3.png");
+		submarino1 = LoadImage("assets/player/submarino 1.png");
+		submarino2 = LoadImage("assets/player/submarino 2.png");
+		submarino3 = LoadImage("assets/player/submarino 3.png");
 		ImageResize(&submarino1, static_cast<int>(player.body.width), static_cast<int>(player.body.height));
 		ImageResize(&submarino2, static_cast<int>(player.body.width), static_cast<int>(player.body.height));
 		ImageResize(&submarino3, static_cast<int>(player.body.width), static_cast<int>(player.body.height));
@@ -137,7 +139,6 @@ namespace Player
 
 	void Draw()
 	{
-
 		if (player.lives == 3) 
 		{
 			DrawTexture(player.threeLives, static_cast<int>(player.body.x), static_cast<int>(player.body.y), WHITE);
@@ -151,7 +152,47 @@ namespace Player
 			DrawTexture(player.oneLive, static_cast<int>(player.body.x), static_cast<int>(player.body.y), WHITE);
 		}
 
-		//DrawText(FormatText("vidas %i", player.lives), 30, 50, 30, GOLD);
+		for (int i = 0; i < player.lives; i++)
+		{
+			DrawCircle( 100 + i * 100, 100, 30, GRAY);
+		}
+
 		DrawText(FormatText("distancia %i", static_cast<int>(player.distaceRecord)), GetScreenWidth() / 2 - (45 * 2), GetScreenHeight() / 10, 45, GOLD);
+		
+		Records();
+	}
+
+	// ----------------------
+
+	static void Records()
+	{
+		if (player.distaceRecord < 100)
+		{
+			DrawText("Proximo Objetivo 100", GetScreenWidth() / 2 + GetScreenWidth() / 5, GetScreenHeight() / 10, 45, GREEN);
+		}
+		else if (player.distaceRecord >= 100 && player.distaceRecord < 200)
+		{
+			DrawText("Proximo Objetivo 200", GetScreenWidth() / 2 + GetScreenWidth() / 5, GetScreenHeight() / 10, 45, GREEN);
+		}
+		else if (player.distaceRecord >= 200 && player.distaceRecord < 300)
+		{
+			DrawText("Proximo Objetivo 500", GetScreenWidth() / 2 + GetScreenWidth() / 5, GetScreenHeight() / 10, 45, GREEN);
+		}
+		else if (player.distaceRecord >= 500 && player.distaceRecord < 1000)
+		{
+			DrawText("Proximo Objetivo 1000", GetScreenWidth() / 2 + GetScreenWidth() / 5, GetScreenHeight() / 10, 45, GREEN);
+		}
+		else if (player.distaceRecord >= 1000 && player.distaceRecord < 1500)
+		{
+			DrawText("Proximo Objetivo 1500", GetScreenWidth() / 2 + GetScreenWidth() / 5, GetScreenHeight() / 10, 45, GREEN);
+		}
+		else if (player.distaceRecord >= 1500 && player.distaceRecord < 2300)
+		{
+			DrawText("Proximo Objetivo 2300", GetScreenWidth() / 2 + GetScreenWidth() / 5, GetScreenHeight() / 10, 45, GREEN);
+		}
+		else if (player.distaceRecord >= 2300)
+		{
+			DrawText("Proximo Objetivo 3000", GetScreenWidth() / 2 + GetScreenWidth() / 5, GetScreenHeight() / 10, 45, GREEN);
+		}
 	}
 }

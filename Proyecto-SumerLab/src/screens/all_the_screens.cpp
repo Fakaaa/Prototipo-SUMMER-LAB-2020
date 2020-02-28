@@ -54,8 +54,9 @@ namespace Screens
 		BeginDrawing();
 		ClearBackground(DARKBLUE);
 
-		DrawText("Super Submarino!!", GetScreenWidth() / 3, GetScreenHeight() / 2, 70, GOLD);
-		DrawText("presiona ENTER", GetScreenWidth() / 3, GetScreenHeight() / 2 + 80, 20, WHITE);
+		DrawText("Into the Deep", GetScreenWidth() / 3, GetScreenHeight() / 2, 70, GOLD);
+		DrawText("presione ENTER", GetScreenWidth() / 3, GetScreenHeight() / 2 + 80, 20, WHITE);
+		DrawText("v0.3", 30, GetScreenHeight() - 60, 30, WHITE);
 
 		EndDrawing();
 	}
@@ -90,11 +91,9 @@ namespace Screens
 		BeginDrawing();
 		ClearBackground(DARKBLUE);
 
-		DrawText("PERDISTE! - Presiona ENTER para volver a intentar", GetScreenWidth() / 4, GetScreenHeight() / 2, 40, WHITE);
-		DrawText(FormatText("distancia %i", static_cast<int>(Player::player.distaceRecord)), GetScreenWidth() / 2 - (45 * 2), GetScreenHeight() / 10, 45, GOLD);
+		DrawText("HAS MUERTO! - Presiona ENTER para jugar de nuevo", GetScreenWidth() / 4, GetScreenHeight() / 2, 40, WHITE);
+		DrawText(FormatText("distance %i", static_cast<int>(Player::player.distaceRecord)), GetScreenWidth() / 2 - (45 * 2), GetScreenHeight() / 10, 45, GOLD);
 
 		EndDrawing();
 	}
-
-
 }

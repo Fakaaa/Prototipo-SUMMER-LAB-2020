@@ -46,13 +46,11 @@ namespace Enemies
 		enemies[1].body.y = static_cast<float>(GetScreenHeight() / 4 + GetScreenHeight() / 4);
 		enemies[2].body.y = static_cast<float>(GetScreenHeight() / 4 + GetScreenHeight() / 4 + GetScreenHeight() / 4);
 
-
-
-		obstacle1 = LoadImage("../res/assets/enemies/obstaculo 1.png");
-		obstacle2 = LoadImage("../res/assets/enemies/obstaculo 2.png");
-		obstacle3 = LoadImage("../res/assets/enemies/obstaculo 3.png");
-		obstacle4 = LoadImage("../res/assets/enemies/obstaculo 4.png");
-		obstacle5 = LoadImage("../res/assets/enemies/obstaculo 5.png");
+		obstacle1 = LoadImage("assets/enemies/obstaculo 1.png");
+		obstacle2 = LoadImage("assets/enemies/obstaculo 2.png");
+		obstacle3 = LoadImage("assets/enemies/obstaculo 3.png");
+		obstacle4 = LoadImage("assets/enemies/obstaculo 4.png");
+		obstacle5 = LoadImage("assets/enemies/obstaculo 5.png");
 		ImageResize(&obstacle1, WIDTH, HEIGHT);
 		ImageResize(&obstacle2, WIDTH, HEIGHT);
 		ImageResize(&obstacle3, WIDTH, HEIGHT);
@@ -63,8 +61,6 @@ namespace Enemies
 		type[2] = LoadTextureFromImage(obstacle3);
 		type[3] = LoadTextureFromImage(obstacle4);
 		type[4] = LoadTextureFromImage(obstacle5);
-
-
 
 		UnloadImage(obstacle1);
 		UnloadImage(obstacle2);
@@ -138,8 +134,6 @@ namespace Enemies
 		{
 			if (enemies[i].aggressive == true)
 			{
-				DrawRectangleLinesEx(enemies[i].body, 10, WHITE);
-
 				DrawTexture(type[enemies[i].numTexture], static_cast<int>(enemies[i].body.x), static_cast<int>(enemies[i].body.y), WHITE);
 			}
 		}
