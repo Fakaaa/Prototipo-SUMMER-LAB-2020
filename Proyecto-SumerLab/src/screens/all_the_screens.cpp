@@ -40,12 +40,10 @@ namespace Screens
 
 	static void Menu()
 	{
-		if (IsKeyPressed(KEY_ENTER))
-		{
-			state = game;
-			Player::Reset();
-			Enemies::Reset();
-		}
+		Player::InputMenu();
+		Player::Reset();
+		Enemies::Reset();
+
 		if (IsKeyPressed(KEY_ESCAPE))
 		{
 			Player::player.inGame = false;
@@ -58,12 +56,14 @@ namespace Screens
 		DrawText("presione ENTER", GetScreenWidth() / 3, GetScreenHeight() / 2 + 80, 20, WHITE);
 		DrawText("v0.3", 30, GetScreenHeight() - 60, 30, WHITE);
 
+		Arrows::DrawMenu();
+
 		EndDrawing();
 	}
 
 	static void Game()
 	{
-		Player::Input();
+		Player::InputGamePlay();
 		Player::Lose();
 		Player::DistanceTraveled();
 
@@ -73,7 +73,7 @@ namespace Screens
 		ClearBackground(DARKBLUE);
 
 		Player::Draw();
-		Arrows::Draw();
+		Arrows::DrawGamePlay();
 		Enemies::Draw();
 
 		EndDrawing();
@@ -86,6 +86,7 @@ namespace Screens
 			state = game;
 			Player::Reset();
 			Enemies::Reset();
+			Arrows::Reset();
 		}
 
 		BeginDrawing();

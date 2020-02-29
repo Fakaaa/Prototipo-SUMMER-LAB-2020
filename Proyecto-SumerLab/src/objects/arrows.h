@@ -14,12 +14,14 @@ namespace Arrows
 		int position;
 	};
 
-	extern ARROW arrows[3];
+	extern ARROW arrowsGame[3];
+	extern ARROW arrowMenu;
 
 	extern void Initialize();
+	extern void Reset();
 	extern void ChangeColor();
-	extern void Draw();
-
+	extern void DrawGamePlay();
+	extern void DrawMenu();
 }
 
 #endif // !ARROWS_H

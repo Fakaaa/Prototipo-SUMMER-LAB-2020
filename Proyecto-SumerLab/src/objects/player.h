@@ -21,7 +21,8 @@ namespace Player
 
 	extern void Initialize();
 	extern void Unload();
-	extern void Input();
+	extern void InputGamePlay();
+	extern void InputMenu();
 	extern void DistanceTraveled();
 	extern void Lose();
 	extern void Reset();

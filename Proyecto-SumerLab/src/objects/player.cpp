@@ -46,7 +46,7 @@ namespace Player
 		UnloadTexture(player.threeLives);
 	}
 
-	void Input()
+	void InputGamePlay()
 	{
 		//YELLOW = 0, ORANGE = 1, RED = 2, GREEN = 3, BLUE = 4, SKYBLUE = 5;
 
@@ -54,9 +54,9 @@ namespace Player
 		{
 			for (int i = 0; i < 3; i++)
 			{
-				if (Arrows::arrows[i].position == 0)
+				if (Arrows::arrowsGame[i].position == 0)
 				{
-					player.body.y = Arrows::arrows[i].body.y - player.body.height / 4;
+					player.body.y = Arrows::arrowsGame[i].body.y - player.body.height / 4;
 				}
 			}			
 		}
@@ -64,9 +64,9 @@ namespace Player
 		{
 			for (int i = 0; i < 3; i++)
 			{
-				if (Arrows::arrows[i].position == 1)
+				if (Arrows::arrowsGame[i].position == 1)
 				{
-					player.body.y = Arrows::arrows[i].body.y - player.body.height / 4;
+					player.body.y = Arrows::arrowsGame[i].body.y - player.body.height / 4;
 				}
 			}
 		}
@@ -74,9 +74,9 @@ namespace Player
 		{
 			for (int i = 0; i < 3; i++)
 			{
-				if (Arrows::arrows[i].position == 2)
+				if (Arrows::arrowsGame[i].position == 2)
 				{
-					player.body.y = Arrows::arrows[i].body.y - player.body.height / 4;
+					player.body.y = Arrows::arrowsGame[i].body.y - player.body.height / 4;
 				}
 			}
 		}
@@ -84,9 +84,9 @@ namespace Player
 		{
 			for (int i = 0; i < 3; i++)
 			{
-				if (Arrows::arrows[i].position == 3)
+				if (Arrows::arrowsGame[i].position == 3)
 				{
-					player.body.y = Arrows::arrows[i].body.y - player.body.height / 4;
+					player.body.y = Arrows::arrowsGame[i].body.y - player.body.height / 4;
 				}
 			}
 		}
@@ -94,9 +94,9 @@ namespace Player
 		{
 			for (int i = 0; i < 3; i++)
 			{
-				if (Arrows::arrows[i].position == 4)
+				if (Arrows::arrowsGame[i].position == 4)
 				{
-					player.body.y = Arrows::arrows[i].body.y - player.body.height / 4;
+					player.body.y = Arrows::arrowsGame[i].body.y - player.body.height / 4;
 				}
 			}
 		}
@@ -104,9 +104,9 @@ namespace Player
 		{
 			for (int i = 0; i < 3; i++)
 			{
-				if (Arrows::arrows[i].position == 5)
+				if (Arrows::arrowsGame[i].position == 5)
 				{
-					player.body.y = Arrows::arrows[i].body.y - player.body.height / 4;
+					player.body.y = Arrows::arrowsGame[i].body.y - player.body.height / 4;
 				}
 			}
 		}
@@ -114,6 +114,53 @@ namespace Player
 		if (IsKeyPressed(KEY_ESCAPE))
 		{
 			Screens::state = Screens::menu;
+		}
+	}
+
+	void InputMenu()
+	{
+		if (IsKeyPressed(KEY_KP_1)) // COLOR AMARILLO
+		{
+			if (Arrows::arrowMenu.position == 0)
+			{
+				Screens::state = Screens::game;
+			}
+		}
+		if (IsKeyPressed(KEY_KP_2)) // COLOR NARANJA
+		{
+			if (Arrows::arrowMenu.position == 1)
+			{
+				Screens::state = Screens::game;
+			}		
+		}
+		if (IsKeyPressed(KEY_KP_3)) // COLOR ROJO
+		{
+			if (Arrows::arrowMenu.position == 2)
+			{
+				Screens::state = Screens::game;
+			}			
+		}
+		if (IsKeyPressed(KEY_KP_4)) // COLOR VERDE
+		{
+			if (Arrows::arrowMenu.position == 3)
+			{
+				Screens::state = Screens::game;
+			}			
+		}
+		if (IsKeyPressed(KEY_KP_5)) // COLOR AZUL
+		{
+			
+			if (Arrows::arrowMenu.position == 4)
+			{
+				Screens::state = Screens::game;
+			}
+		}
+		if (IsKeyPressed(KEY_KP_6)) // COLOR SKYBLUE
+		{			
+			if (Arrows::arrowMenu.position == 5)
+			{
+				Screens::state = Screens::game;
+			}			
 		}
 	}
 
@@ -125,7 +172,9 @@ namespace Player
 	void Lose()
 	{
 		if (player.lives <= 0)
+		{
 			Screens::state = Screens::endScrene;
+		}
 	}
 
 	void Reset()
