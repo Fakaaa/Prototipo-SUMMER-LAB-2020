@@ -52,9 +52,8 @@ namespace Screens
 		BeginDrawing();
 		ClearBackground(DARKBLUE);
 
-		DrawText("Into the Deep", GetScreenWidth() / 3, GetScreenHeight() / 2, 70, GOLD);
-		DrawText("presione ENTER", GetScreenWidth() / 3, GetScreenHeight() / 2 + 80, 20, WHITE);
-		DrawText("v0.3", 30, GetScreenHeight() - 60, 30, WHITE);
+		DrawText("Into the Deep", GetScreenWidth() / 3, GetScreenHeight() / 3, 70, GOLD);
+		DrawText("v0.3.1", 30, GetScreenHeight() - 60, 30, WHITE);
 
 		Arrows::DrawMenu();
 

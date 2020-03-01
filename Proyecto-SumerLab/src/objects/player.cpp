@@ -18,7 +18,7 @@ namespace Player
 		player.body.height = 200;
 		player.body.width = 300;
 		player.body.x = 50;
-		player.body.y = static_cast<float>(GetScreenHeight() / 4 + GetScreenHeight() / 4);
+		player.body.y = Arrows::arrowsGame[1].body.y - player.body.height / 4;
 
 		submarino1 = LoadImage("assets/player/submarino 1.png");
 		submarino2 = LoadImage("assets/player/submarino 2.png");
@@ -180,7 +180,7 @@ namespace Player
 	void Reset()
 	{
 		player.body.x = 50;
-		player.body.y = static_cast<float>(GetScreenHeight() / 4 + GetScreenHeight() / 4);
+		player.body.y = Arrows::arrowsGame[1].body.y - player.body.height / 4;
 
 		player.lives = 3;
 		player.distaceRecord = 0;
@@ -223,7 +223,7 @@ namespace Player
 		{
 			DrawText("Proximo Objetivo 200", GetScreenWidth() / 2 + GetScreenWidth() / 5, GetScreenHeight() / 10, 45, GREEN);
 		}
-		else if (player.distaceRecord >= 200 && player.distaceRecord < 300)
+		else if (player.distaceRecord >= 200 && player.distaceRecord < 500)
 		{
 			DrawText("Proximo Objetivo 500", GetScreenWidth() / 2 + GetScreenWidth() / 5, GetScreenHeight() / 10, 45, GREEN);
 		}
