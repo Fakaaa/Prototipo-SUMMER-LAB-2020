@@ -3,6 +3,7 @@
 #include "objects/player.h"
 #include "objects/arrows.h"
 #include "objects/enemies.h"
+#include "background/background.h"
 #include "screens/all_the_screens.h"
 
 //static const int SCREENWIDTH = 1600;
@@ -34,6 +35,8 @@ static void Initialize()
 	SetExitKey(KEY_BACK);
 	SetTargetFPS(60);
 
+	Background::LoadBackground();
+
 	Player::Initialize();
 	Arrows::Initialize();
 	Enemies::Initialize();
@@ -42,6 +45,7 @@ static void Initialize()
 
 static void UnloadAssets()
 {
+	Background::Unload();
 	Player::Unload();
 	Enemies::Unload();
 	CloseWindow();

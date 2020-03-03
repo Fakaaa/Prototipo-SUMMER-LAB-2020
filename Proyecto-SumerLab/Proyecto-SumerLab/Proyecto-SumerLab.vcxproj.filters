@@ -14,6 +14,9 @@
     <ClCompile Include="..\src\screens\all_the_screens.cpp">
       <Filter>screens</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\background\background.cpp">
+      <Filter>background</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="objects">
@@ -21,6 +24,9 @@
     </Filter>
     <Filter Include="screens">
       <UniqueIdentifier>{f3dd3609-ac2e-4b00-8985-c176a1f41f68}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="background">
+      <UniqueIdentifier>{d79224c9-31f9-4904-a6ca-196be7775ef9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -35,6 +41,9 @@
     </ClInclude>
     <ClInclude Include="..\src\screens\all_the_screens.h">
       <Filter>screens</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\background\background.h">
+      <Filter>background</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

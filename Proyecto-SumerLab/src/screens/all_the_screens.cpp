@@ -3,6 +3,7 @@
 #include "objects/player.h"
 #include "objects/arrows.h"
 #include "objects/enemies.h"
+#include "background/background.h"
 
 namespace Screens
 {
@@ -71,6 +72,7 @@ namespace Screens
 		BeginDrawing();
 		ClearBackground(DARKBLUE);
 
+		Background::Draw();
 		Player::Draw();
 		Arrows::DrawGamePlay();
 		Enemies::Draw();
