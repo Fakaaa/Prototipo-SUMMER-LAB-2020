@@ -206,7 +206,7 @@ namespace Player
 			DrawCircle( 100 + i * 100, 100, 30, GRAY);
 		}
 
-		DrawText(FormatText("distancia %i", static_cast<int>(player.distaceRecord)), GetScreenWidth() / 2 - (45 * 2), GetScreenHeight() / 10, 45, GOLD);
+		DrawText(FormatText("Distancia %i", static_cast<int>(player.distaceRecord)), GetScreenWidth() / 2 - (45 * 2), GetScreenHeight() / 10, 45, GOLD);
 		
 		Records();
 	}

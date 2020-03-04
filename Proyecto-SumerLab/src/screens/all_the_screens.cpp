@@ -9,9 +9,13 @@ namespace Screens
 {
 	States state;
 
+	static bool start = false;
+	static float time = 5;
+
 	static void Menu();
 	static void Game();
 	static void EndScreen();
+	static void Timer();
 
 	void Initialize()
 	{
@@ -54,7 +58,7 @@ namespace Screens
 		ClearBackground(DARKBLUE);
 
 		DrawText("Into the Deep", GetScreenWidth() / 3, GetScreenHeight() / 3, 70, GOLD);
-		DrawText("v0.3.1", 30, GetScreenHeight() - 60, 30, WHITE);
+		DrawText("v0.3.2", 30, GetScreenHeight() - 60, 30, WHITE);
 
 		Arrows::DrawMenu();
 
@@ -93,9 +97,57 @@ namespace Screens
 		BeginDrawing();
 		ClearBackground(DARKBLUE);
 
-		DrawText("HAS MUERTO! - Presiona ENTER para jugar de nuevo", GetScreenWidth() / 4, GetScreenHeight() / 2, 40, WHITE);
-		DrawText(FormatText("distance %i", static_cast<int>(Player::player.distaceRecord)), GetScreenWidth() / 2 - (45 * 2), GetScreenHeight() / 10, 45, GOLD);
+		Timer();
+		DrawText(FormatText("Distancia %i", static_cast<int>(Player::player.distaceRecord)), GetScreenWidth() / 2 - (100 * 2), GetScreenHeight() / 6, 80, GOLD);
 
 		EndDrawing();
+	}
+
+	// ---------------------------
+
+	static void Timer()
+	{
+		const int FONT = 80;
+
+		if (start == false)
+		{
+			start = true;
+			time = 5;
+		}
+
+		time -= GetFrameTime();
+
+		if (time <= 0)
+		{
+			start = false;
+
+			state = menu;
+			Player::Reset();
+			Enemies::Reset();
+			Arrows::Reset();
+		}
+
+		// -----
+
+		if (time > 4 && time <= 5)
+		{
+			DrawText("5", GetScreenWidth() / 2, GetScreenHeight() / 2, FONT, WHITE);
+		}
+		else if (time > 3 && time <= 4)
+		{
+			DrawText("4", GetScreenWidth() / 2, GetScreenHeight() / 2, FONT, WHITE);
+		}
+		else if (time > 2 && time <= 3)
+		{
+			DrawText("3", GetScreenWidth() / 2, GetScreenHeight() / 2, FONT, WHITE);
+		}
+		else if (time > 1 && time <= 2)
+		{
+			DrawText("2", GetScreenWidth() / 2, GetScreenHeight() / 2, FONT, WHITE);
+		}
+		else if (time > 0 && time <= 1)
+		{
+			DrawText("1", GetScreenWidth() / 2, GetScreenHeight() / 2, FONT, WHITE);
+		}
 	}
 }
