@@ -7,12 +7,13 @@ namespace Background
 {
 	struct BACKGROUND
 	{
-		Texture2D bg;
-		float posy;
-		float posx;
+		Texture2D texture;
+		float y;
+		float x;
 	};
 
-	extern void Draw();
+	extern void DrawMenu();
+	extern void DrawGamePlay();
 	extern void LoadBackground();
 	extern void Unload();
 }

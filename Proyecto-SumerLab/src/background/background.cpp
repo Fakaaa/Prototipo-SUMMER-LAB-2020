@@ -2,24 +2,45 @@
 
 namespace Background
 {
-	BACKGROUND background;
-	float scrollBack = 0; //Para el parallax luego
+	BACKGROUND backgroundGame;
+	BACKGROUND backgroundMenu;
+	//float scrollBack = 0; //Para el parallax luego
 	
-	void Draw()
+	void DrawMenu()
 	{
-		background.posx = 0;
-		background.posy = 0;
+		DrawTexture(backgroundMenu.texture, static_cast<int>(backgroundMenu.x), static_cast<int>(backgroundMenu.y), WHITE);
+	}
 
-		DrawTexture(background.bg, static_cast<int>(background.posx), static_cast<int>(background.posy), WHITE);
+	void DrawGamePlay()
+	{
+		DrawTexture(backgroundGame.texture, static_cast<int>(backgroundGame.x), static_cast<int>(backgroundGame.y), WHITE);
 	}
 
 	void LoadBackground()
 	{
-		background.bg = LoadTexture("assets/background/bg.png");
+		Image GamePlay;
+		Image Menu;
+
+		backgroundGame.x = 0;
+		backgroundGame.y = 0;
+		GamePlay = LoadImage("assets/background/bg.png");
+		ImageResize(&GamePlay, GetScreenWidth(), GetScreenHeight());
+		backgroundGame.texture = LoadTextureFromImage(GamePlay);
+		
+		backgroundMenu.x = 0;
+		backgroundMenu.y = 0;
+		Menu = LoadImage("assets/background/BGMuelleV2.png");
+		ImageResize(&Menu, GetScreenWidth(), GetScreenHeight());
+		backgroundMenu.texture = LoadTextureFromImage(Menu);
+
+
+		UnloadImage(GamePlay);
+		UnloadImage(Menu);
 	}
 	
 	void Unload()
 	{
-		UnloadTexture(background.bg);
+		UnloadTexture(backgroundGame.texture);
+		UnloadTexture(backgroundMenu.texture);
 	}
 }

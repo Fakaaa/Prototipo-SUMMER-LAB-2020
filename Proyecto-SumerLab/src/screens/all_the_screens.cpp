@@ -57,6 +57,7 @@ namespace Screens
 		BeginDrawing();
 		ClearBackground(DARKBLUE);
 
+		Background::DrawMenu();
 		DrawText("Into the Deep", GetScreenWidth() / 3, GetScreenHeight() / 3, 70, GOLD);
 		DrawText("v0.3.2", 30, GetScreenHeight() - 60, 30, WHITE);
 
@@ -76,7 +77,7 @@ namespace Screens
 		BeginDrawing();
 		ClearBackground(DARKBLUE);
 
-		Background::Draw();
+		Background::DrawGamePlay();
 		Player::Draw();
 		Arrows::DrawGamePlay();
 		Enemies::Draw();
