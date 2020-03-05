@@ -12,9 +12,12 @@ namespace Background
 		float x;
 	};
 
-	extern void DrawMenu();
-	extern void DrawGamePlay();
+	extern bool stopTransition;
+
 	extern void LoadBackground();
+	extern void DrawMenu();
+	extern void DrawTransition();
+	extern void DrawGamePlay();
 	extern void Unload();
 }
 

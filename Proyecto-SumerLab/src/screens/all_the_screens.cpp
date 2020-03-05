@@ -13,6 +13,7 @@ namespace Screens
 	static float time = 5;
 
 	static void Menu();
+	static void Transition();
 	static void Game();
 	static void EndScreen();
 	static void Timer();
@@ -30,6 +31,10 @@ namespace Screens
 			{
 			case menu:
 				Menu();
+				break;
+
+			case transition:
+				Transition();
 				break;
 
 			case game:
@@ -66,6 +71,21 @@ namespace Screens
 		EndDrawing();
 	}
 
+	static void Transition()
+	{
+		if (Background::stopTransition == true)
+		{
+			state = game;
+		}
+
+		BeginDrawing();
+		ClearBackground(DARKBLUE);
+
+		Background::DrawTransition();
+
+		EndDrawing();
+	}
+
 	static void Game()
 	{
 		Player::InputGamePlay();
@@ -97,6 +117,8 @@ namespace Screens
 
 		BeginDrawing();
 		ClearBackground(DARKBLUE);
+
+		Background::DrawGamePlay();
 
 		Timer();
 		DrawText(FormatText("Distancia %i", static_cast<int>(Player::player.distaceRecord)), GetScreenWidth() / 2 - (100 * 2), GetScreenHeight() / 6, 80, GOLD);

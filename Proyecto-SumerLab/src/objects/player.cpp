@@ -2,6 +2,7 @@
 
 #include "arrows.h"
 #include "screens/all_the_screens.h"
+#include "background/background.h"
 
 namespace Player
 {
@@ -114,6 +115,7 @@ namespace Player
 		if (IsKeyPressed(KEY_ESCAPE))
 		{
 			Screens::state = Screens::menu;
+			Background::stopTransition = false;
 		}
 	}
 
@@ -123,28 +125,28 @@ namespace Player
 		{
 			if (Arrows::arrowMenu.position == 0)
 			{
-				Screens::state = Screens::game;
+				Screens::state = Screens::transition;
 			}
 		}
 		if (IsKeyPressed(KEY_KP_2)) // COLOR NARANJA
 		{
 			if (Arrows::arrowMenu.position == 1)
 			{
-				Screens::state = Screens::game;
+				Screens::state = Screens::transition;
 			}		
 		}
 		if (IsKeyPressed(KEY_KP_3)) // COLOR ROJO
 		{
 			if (Arrows::arrowMenu.position == 2)
 			{
-				Screens::state = Screens::game;
+				Screens::state = Screens::transition;
 			}			
 		}
 		if (IsKeyPressed(KEY_KP_4)) // COLOR VERDE
 		{
 			if (Arrows::arrowMenu.position == 3)
 			{
-				Screens::state = Screens::game;
+				Screens::state = Screens::transition;
 			}			
 		}
 		if (IsKeyPressed(KEY_KP_5)) // COLOR AZUL
@@ -152,14 +154,14 @@ namespace Player
 			
 			if (Arrows::arrowMenu.position == 4)
 			{
-				Screens::state = Screens::game;
+				Screens::state = Screens::transition;
 			}
 		}
 		if (IsKeyPressed(KEY_KP_6)) // COLOR SKYBLUE
 		{			
 			if (Arrows::arrowMenu.position == 5)
 			{
-				Screens::state = Screens::game;
+				Screens::state = Screens::transition;
 			}			
 		}
 	}
@@ -174,6 +176,7 @@ namespace Player
 		if (player.lives <= 0)
 		{
 			Screens::state = Screens::endScrene;
+			Background::stopTransition = false;
 		}
 	}
 
