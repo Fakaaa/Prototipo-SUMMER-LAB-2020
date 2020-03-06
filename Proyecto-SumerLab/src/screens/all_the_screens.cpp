@@ -52,6 +52,7 @@ namespace Screens
 	{
 		Player::InputMenu();
 		Player::Reset();
+		Player::LoadFont();
 		Enemies::Reset();
 
 		if (IsKeyPressed(KEY_ESCAPE))
@@ -63,7 +64,7 @@ namespace Screens
 		ClearBackground(DARKBLUE);
 
 		Background::DrawMenu();
-		DrawText("Into the Deep", GetScreenWidth() / 3, GetScreenHeight() / 3, 70, GOLD);
+		DrawTextEx(Player::fontType, "Into the Deep", Vector2{ static_cast<float>(GetScreenWidth() / 3), static_cast<float>(GetScreenHeight() / 3)}, 140, 10,GOLD);
 		DrawText("v0.3.3", 30, GetScreenHeight() - 60, 30, WHITE);
 
 		Arrows::DrawMenu();
@@ -91,6 +92,7 @@ namespace Screens
 		Player::InputGamePlay();
 		Player::Lose();
 		Player::DistanceTraveled();
+		Player::DoPulseFont();
 
 		Enemies::Move();
 

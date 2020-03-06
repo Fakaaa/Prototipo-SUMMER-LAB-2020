@@ -7,6 +7,9 @@
 namespace Player
 {
 	PLAYER player;
+	Font fontType;
+
+	float fontPulse;
 
 	static void Records();
 
@@ -15,7 +18,9 @@ namespace Player
 		Image submarino1;
 		Image submarino2;
 		Image submarino3;
+		Image life;
 
+		fontPulse = 45;
 		player.body.height = 200;
 		player.body.width = 300;
 		player.body.x = 50;
@@ -24,12 +29,15 @@ namespace Player
 		submarino1 = LoadImage("assets/player/submarino 1.png");
 		submarino2 = LoadImage("assets/player/submarino 2.png");
 		submarino3 = LoadImage("assets/player/submarino 3.png");
+		life = LoadImage("assets/player/vida.png");
 		ImageResize(&submarino1, static_cast<int>(player.body.width), static_cast<int>(player.body.height));
 		ImageResize(&submarino2, static_cast<int>(player.body.width), static_cast<int>(player.body.height));
 		ImageResize(&submarino3, static_cast<int>(player.body.width), static_cast<int>(player.body.height));
+		ImageResize(&life, 90, 50);
 		player.threeLives = LoadTextureFromImage(submarino1);
 		player.twoLives = LoadTextureFromImage(submarino2);
 		player.oneLive = LoadTextureFromImage(submarino3);
+		player.lifes = LoadTextureFromImage(life);
 
 		player.inGame = true;
 		player.lives = 3;
@@ -38,6 +46,12 @@ namespace Player
 		UnloadImage(submarino1);
 		UnloadImage(submarino2);
 		UnloadImage(submarino3);
+		UnloadImage(life);
+	}
+
+	void LoadFont()
+	{
+		fontType = LoadFontEx("assets/fonts/HighVoltageRough.ttf", 140, 0, 0);
 	}
 
 	void Unload()
@@ -45,6 +59,8 @@ namespace Player
 		UnloadTexture(player.oneLive);
 		UnloadTexture(player.twoLives);
 		UnloadTexture(player.threeLives);
+		UnloadTexture(player.lifes);
+		UnloadFont(fontType);
 	}
 
 	void InputGamePlay()
@@ -189,6 +205,19 @@ namespace Player
 		player.distaceRecord = 0;
 	}
 
+	void DoPulseFont()
+	{
+		if (fontPulse <= 45)
+		{
+			fontPulse += GetFrameTime() * 5;
+		}
+
+		if (fontPulse >= 65)
+		{
+			fontPulse -= GetFrameTime() * 5;
+		}
+	}
+
 	void Draw()
 	{
 		if (player.lives == 3) 
@@ -206,11 +235,12 @@ namespace Player
 
 		for (int i = 0; i < player.lives; i++)
 		{
-			DrawCircle( 100 + i * 100, 100, 30, GRAY);
+			DrawTexture(player.lifes, 100 + i * 100, 100, RED);
 		}
 
-		DrawText(FormatText("Distancia %i", static_cast<int>(player.distaceRecord)), GetScreenWidth() / 2 - (45 * 2), GetScreenHeight() / 10, 45, GOLD);
-		
+		DrawTextEx(fontType, FormatText("Distancia %i", static_cast<int>(player.distaceRecord)), Vector2 { static_cast<float>(GetScreenWidth() / 2 - (60 * 2)), static_cast<float>(GetScreenHeight() / 10) },fontPulse,10,GOLD);
+
+
 		Records();
 	}
 
@@ -220,31 +250,31 @@ namespace Player
 	{
 		if (player.distaceRecord < 100)
 		{
-			DrawText("Proximo Objetivo 100", GetScreenWidth() / 2 + GetScreenWidth() / 5, GetScreenHeight() / 10, 45, GREEN);
+			DrawTextEx(fontType, "Proximo Objetivo 100", Vector2{ static_cast<float>(GetScreenWidth() / 2 + GetScreenWidth() / 5), static_cast<float>(GetScreenHeight() / 10) }, fontPulse, 10, GREEN);
 		}
 		else if (player.distaceRecord >= 100 && player.distaceRecord < 200)
 		{
-			DrawText("Proximo Objetivo 200", GetScreenWidth() / 2 + GetScreenWidth() / 5, GetScreenHeight() / 10, 45, GREEN);
+			DrawTextEx(fontType, "Proximo Objetivo 200", Vector2{ static_cast<float>(GetScreenWidth() / 2 + GetScreenWidth() / 5), static_cast<float>(GetScreenHeight() / 10) }, fontPulse, 10, GREEN);
 		}
 		else if (player.distaceRecord >= 200 && player.distaceRecord < 500)
 		{
-			DrawText("Proximo Objetivo 500", GetScreenWidth() / 2 + GetScreenWidth() / 5, GetScreenHeight() / 10, 45, GREEN);
+			DrawTextEx(fontType, "Proximo Objetivo 500", Vector2{ static_cast<float>(GetScreenWidth() / 2 + GetScreenWidth() / 5), static_cast<float>(GetScreenHeight() / 10) }, fontPulse, 10, GREEN);
 		}
 		else if (player.distaceRecord >= 500 && player.distaceRecord < 1000)
 		{
-			DrawText("Proximo Objetivo 1000", GetScreenWidth() / 2 + GetScreenWidth() / 5, GetScreenHeight() / 10, 45, GREEN);
+			DrawTextEx(fontType, "Proximo Objetivo 1000", Vector2{ static_cast<float>(GetScreenWidth() / 2 + GetScreenWidth() / 5), static_cast<float>(GetScreenHeight() / 10) }, fontPulse, 10, GREEN);
 		}
 		else if (player.distaceRecord >= 1000 && player.distaceRecord < 1500)
 		{
-			DrawText("Proximo Objetivo 1500", GetScreenWidth() / 2 + GetScreenWidth() / 5, GetScreenHeight() / 10, 45, GREEN);
+			DrawTextEx(fontType, "Proximo Objetivo 1500", Vector2{ static_cast<float>(GetScreenWidth() / 2 + GetScreenWidth() / 5), static_cast<float>(GetScreenHeight() / 10) }, fontPulse, 10, GREEN);
 		}
 		else if (player.distaceRecord >= 1500 && player.distaceRecord < 2300)
 		{
-			DrawText("Proximo Objetivo 2300", GetScreenWidth() / 2 + GetScreenWidth() / 5, GetScreenHeight() / 10, 45, GREEN);
+			DrawTextEx(fontType, "Proximo Objetivo 2300", Vector2{ static_cast<float>(GetScreenWidth() / 2 + GetScreenWidth() / 5), static_cast<float>(GetScreenHeight() / 10) }, fontPulse, 10, GREEN);
 		}
 		else if (player.distaceRecord >= 2300)
 		{
-			DrawText("Proximo Objetivo 3000", GetScreenWidth() / 2 + GetScreenWidth() / 5, GetScreenHeight() / 10, 45, GREEN);
+			DrawTextEx(fontType, "Proximo Objetivo 3000", Vector2{ static_cast<float>(GetScreenWidth() / 2 + GetScreenWidth() / 5), static_cast<float>(GetScreenHeight() / 10) }, fontPulse, 10, GREEN);
 		}
 	}
 }
