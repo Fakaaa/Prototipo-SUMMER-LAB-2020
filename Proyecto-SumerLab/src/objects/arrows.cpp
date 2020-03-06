@@ -5,7 +5,9 @@ namespace Arrows
 	Color arrayOfColors[6] = { YELLOW, ORANGE, RED, GREEN, BLUE, SKYBLUE };
 
 	ARROW arrowsGame[3];
-	ARROW arrowMenu;
+	//ARROW arrowMenu;
+
+	ARROW arrowsMenu[6];
 
 	static const int HEIGHT = 100;
 	static const int WIDTH = 200;
@@ -19,7 +21,7 @@ namespace Arrows
 		int random0 = 0;
 		int random1 = 0;
 		int random2 = 0;
-		int random3 = 0;
+		int randomMenu = 0;
 
 		//---
 
@@ -62,14 +64,27 @@ namespace Arrows
 
 		//---
 
-		arrowMenu.body.height = HEIGHT;
-		arrowMenu.body.width = WIDTH;
-		arrowMenu.body.x = static_cast<float>(GetScreenWidth() / 2 - WIDTH / 2);
-		arrowMenu.body.y = static_cast<float>(GetScreenHeight() - GetScreenHeight() / 3);
+		int distance = GetScreenWidth() / 7;
+		int cont = 1;
 
-		random3 = GetRandomValue(0, 5);
-		arrowMenu.color = arrayOfColors[random3];
-		arrowMenu.position = random3;
+		for (int i = 0; i < 6; i++)
+		{
+			arrowsMenu[i].body.height = HEIGHT;
+			arrowsMenu[i].body.width = WIDTH;
+
+			arrowsMenu[i].body.x = static_cast<float>((distance * cont) - WIDTH / 2);
+			
+			arrowsMenu[i].body.y = static_cast<float>(GetScreenHeight() - GetScreenHeight() / 3);
+
+			arrowsMenu[i].color = arrayOfColors[i];
+
+			arrowsMenu[i].initGame = false;
+
+			cont++;
+		}
+		randomMenu = GetRandomValue(0, 5);
+		arrowsMenu[randomMenu].initGame = true;
+
 	}
 
 	void Reset()
@@ -77,7 +92,7 @@ namespace Arrows
 		int random0 = 0;
 		int random1 = 0;
 		int random2 = 0;
-		int random3 = 0;
+		int randomMenu = 0;
 
 		//---
 
@@ -114,12 +129,13 @@ namespace Arrows
 
 		//---
 
-		arrowMenu.body.x = static_cast<float>(GetScreenWidth() / 2 - WIDTH / 2);
-		arrowMenu.body.y = static_cast<float>(GetScreenHeight() - GetScreenHeight() / 3);
+		for (int i = 0; i < 6; i++)
+		{
+			arrowsMenu[i].initGame = false;
+		}
+		randomMenu = GetRandomValue(0, 5);
+		arrowsMenu[randomMenu].initGame = true;
 
-		random3 = GetRandomValue(0, 5);
-		arrowMenu.color = arrayOfColors[random3];
-		arrowMenu.position = random3;
 	}
 
 	void ChangeColor()
@@ -167,6 +183,46 @@ namespace Arrows
 	
 	void DrawMenu()
 	{
-		DrawRectangleRec(arrowMenu.body, arrowMenu.color);
+		float radius = 40;
+
+		DrawRectangleRec(arrowsMenu[0].body, arrowsMenu[0].color);
+		DrawRectangleRec(arrowsMenu[1].body, arrowsMenu[1].color);
+		DrawRectangleRec(arrowsMenu[2].body, arrowsMenu[2].color);
+		DrawRectangleRec(arrowsMenu[3].body, arrowsMenu[3].color);
+		DrawRectangleRec(arrowsMenu[4].body, arrowsMenu[4].color);
+		DrawRectangleRec(arrowsMenu[5].body, arrowsMenu[5].color);
+
+
+		if (arrowsMenu[0].initGame == true)
+		{
+
+			//DrawText("START", static_cast<int>(arrowsMenu[0].body.x + WIDTH / 2), static_cast<int>(arrowsMenu[0].body.y + WIDTH), 20, WHITE);
+			DrawCircleV( Vector2{ arrowsMenu[0].body.x + WIDTH / 2, arrowsMenu[0].body.y + WIDTH }, radius, GRAY);
+
+		}
+		if (arrowsMenu[1].initGame == true)
+		{
+			DrawCircleV(Vector2{ arrowsMenu[1].body.x + WIDTH / 2, arrowsMenu[1].body.y + WIDTH }, radius, GRAY);
+		}
+		if (arrowsMenu[2].initGame == true)
+		{
+			DrawCircleV(Vector2{ arrowsMenu[2].body.x + WIDTH / 2, arrowsMenu[2].body.y + WIDTH }, radius, GRAY);
+		}
+		if (arrowsMenu[3].initGame == true)
+		{
+			DrawCircleV(Vector2{ arrowsMenu[3].body.x + WIDTH / 2, arrowsMenu[3].body.y + WIDTH }, radius, GRAY);
+		}
+		if (arrowsMenu[4].initGame == true)
+		{
+			DrawCircleV(Vector2{ arrowsMenu[4].body.x + WIDTH / 2, arrowsMenu[4].body.y + WIDTH }, radius, GRAY);
+		}
+		if (arrowsMenu[5].initGame == true)
+		{
+			DrawCircleV(Vector2{ arrowsMenu[5].body.x + WIDTH / 2, arrowsMenu[5].body.y + WIDTH }, radius, GRAY);
+		}
+
+
+
+
 	}
 }

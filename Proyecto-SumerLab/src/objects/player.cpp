@@ -123,28 +123,28 @@ namespace Player
 	{
 		if (IsKeyPressed(KEY_KP_1)) // COLOR AMARILLO
 		{
-			if (Arrows::arrowMenu.position == 0)
+			if (Arrows::arrowsMenu[0].initGame == true)
 			{
 				Screens::state = Screens::transition;
 			}
 		}
 		if (IsKeyPressed(KEY_KP_2)) // COLOR NARANJA
 		{
-			if (Arrows::arrowMenu.position == 1)
+			if (Arrows::arrowsMenu[1].initGame == true)
 			{
 				Screens::state = Screens::transition;
 			}		
 		}
 		if (IsKeyPressed(KEY_KP_3)) // COLOR ROJO
 		{
-			if (Arrows::arrowMenu.position == 2)
+			if (Arrows::arrowsMenu[2].initGame == true)
 			{
 				Screens::state = Screens::transition;
 			}			
 		}
 		if (IsKeyPressed(KEY_KP_4)) // COLOR VERDE
 		{
-			if (Arrows::arrowMenu.position == 3)
+			if (Arrows::arrowsMenu[3].initGame == true)
 			{
 				Screens::state = Screens::transition;
 			}			
@@ -152,14 +152,14 @@ namespace Player
 		if (IsKeyPressed(KEY_KP_5)) // COLOR AZUL
 		{
 			
-			if (Arrows::arrowMenu.position == 4)
+			if (Arrows::arrowsMenu[4].initGame == true)
 			{
 				Screens::state = Screens::transition;
 			}
 		}
 		if (IsKeyPressed(KEY_KP_6)) // COLOR SKYBLUE
 		{			
-			if (Arrows::arrowMenu.position == 5)
+			if (Arrows::arrowsMenu[5].initGame == true)
 			{
 				Screens::state = Screens::transition;
 			}			

@@ -6,9 +6,6 @@
 #include "background/background.h"
 #include "screens/all_the_screens.h"
 
-//static const int SCREENWIDTH = 1600;
-//static const int SCREENHEIGHT = 500;
-
 static void Initialize();
 static void UnloadAssets();
 

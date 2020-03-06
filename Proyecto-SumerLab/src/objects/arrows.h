@@ -12,10 +12,13 @@ namespace Arrows
 		Rectangle body;
 		Color color;
 		int position;
+		bool initGame;
 	};
 
 	extern ARROW arrowsGame[3];
-	extern ARROW arrowMenu;
+	//extern ARROW arrowMenu;
+
+	extern ARROW arrowsMenu[6];
 
 	extern void Initialize();
 	extern void Reset();
