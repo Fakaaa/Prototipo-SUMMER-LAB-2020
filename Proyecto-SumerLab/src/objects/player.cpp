@@ -24,7 +24,7 @@ namespace Player
 		player.body.height = 200;
 		player.body.width = 300;
 		player.body.x = 50;
-		player.body.y = Arrows::arrowsGame[1].body.y - player.body.height / 4;
+		player.body.y = Arrows::arrowsGame[1].texturePos.y - player.body.height / 4;
 
 		submarino1 = LoadImage("assets/player/submarino 1.png");
 		submarino2 = LoadImage("assets/player/submarino 2.png");
@@ -73,7 +73,7 @@ namespace Player
 			{
 				if (Arrows::arrowsGame[i].position == 0)
 				{
-					player.body.y = Arrows::arrowsGame[i].body.y - player.body.height / 4;
+					player.body.y = Arrows::arrowsGame[i].texturePos.y - player.body.height / 4;
 				}
 			}			
 		}
@@ -83,7 +83,7 @@ namespace Player
 			{
 				if (Arrows::arrowsGame[i].position == 1)
 				{
-					player.body.y = Arrows::arrowsGame[i].body.y - player.body.height / 4;
+					player.body.y = Arrows::arrowsGame[i].texturePos.y - player.body.height / 4;
 				}
 			}
 		}
@@ -93,7 +93,7 @@ namespace Player
 			{
 				if (Arrows::arrowsGame[i].position == 2)
 				{
-					player.body.y = Arrows::arrowsGame[i].body.y - player.body.height / 4;
+					player.body.y = Arrows::arrowsGame[i].texturePos.y - player.body.height / 4;
 				}
 			}
 		}
@@ -103,7 +103,7 @@ namespace Player
 			{
 				if (Arrows::arrowsGame[i].position == 3)
 				{
-					player.body.y = Arrows::arrowsGame[i].body.y - player.body.height / 4;
+					player.body.y = Arrows::arrowsGame[i].texturePos.y - player.body.height / 4;
 				}
 			}
 		}
@@ -113,7 +113,7 @@ namespace Player
 			{
 				if (Arrows::arrowsGame[i].position == 4)
 				{
-					player.body.y = Arrows::arrowsGame[i].body.y - player.body.height / 4;
+					player.body.y = Arrows::arrowsGame[i].texturePos.y - player.body.height / 4;
 				}
 			}
 		}
@@ -123,7 +123,7 @@ namespace Player
 			{
 				if (Arrows::arrowsGame[i].position == 5)
 				{
-					player.body.y = Arrows::arrowsGame[i].body.y - player.body.height / 4;
+					player.body.y = Arrows::arrowsGame[i].texturePos.y - player.body.height / 4;
 				}
 			}
 		}
@@ -199,7 +199,7 @@ namespace Player
 	void Reset()
 	{
 		player.body.x = 50;
-		player.body.y = Arrows::arrowsGame[1].body.y - player.body.height / 4;
+		player.body.y = Arrows::arrowsGame[1].texturePos.y - player.body.height / 4;
 
 		player.lives = 3;
 		player.distaceRecord = 0;

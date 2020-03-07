@@ -6,9 +6,12 @@
 namespace Arrows
 {
 	extern Color arrayOfColors[6];
+	extern Texture2D arrayOfArrowsColors[6];
 
 	struct ARROW
 	{
+		Texture2D bodyTexture;
+		Vector2 texturePos;
 		Rectangle body;
 		Color color;
 		int position;
@@ -21,6 +24,8 @@ namespace Arrows
 	extern ARROW arrowsMenu[6];
 
 	extern void Initialize();
+	extern void UnLoad();
+	extern void ReScaleAndLoad();
 	extern void Reset();
 	extern void ChangeColor();
 	extern void DrawGamePlay();

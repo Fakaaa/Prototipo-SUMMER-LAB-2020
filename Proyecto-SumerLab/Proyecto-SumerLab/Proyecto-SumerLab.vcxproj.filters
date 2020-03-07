@@ -17,6 +17,9 @@
     <ClCompile Include="..\src\background\background.cpp">
       <Filter>background</Filter>
     </ClCompile>
+    <ClCompile Include="audio.cpp">
+      <Filter>audio</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="objects">
@@ -27,6 +30,9 @@
     </Filter>
     <Filter Include="background">
       <UniqueIdentifier>{d79224c9-31f9-4904-a6ca-196be7775ef9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="audio">
+      <UniqueIdentifier>{f9c1fcb4-4bb9-4c51-9f7e-d53cbcdbe182}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -44,6 +50,9 @@
     </ClInclude>
     <ClInclude Include="..\src\background\background.h">
       <Filter>background</Filter>
+    </ClInclude>
+    <ClInclude Include="audio.h">
+      <Filter>audio</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

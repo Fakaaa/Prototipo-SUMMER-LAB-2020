@@ -44,6 +44,7 @@ static void UnloadAssets()
 {
 	Background::Unload();
 	Player::Unload();
+	Arrows::UnLoad();
 	Enemies::Unload();
 	CloseWindow();
 }
