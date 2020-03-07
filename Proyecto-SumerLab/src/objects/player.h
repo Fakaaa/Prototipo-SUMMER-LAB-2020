@@ -5,7 +5,6 @@
 
 namespace Player
 {
-
 	struct PLAYER
 	{
 		Rectangle body;

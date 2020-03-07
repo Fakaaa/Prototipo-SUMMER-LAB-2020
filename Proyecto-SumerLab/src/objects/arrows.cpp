@@ -1,5 +1,7 @@
 #include "arrows.h"
 
+#include "player.h"
+
 namespace Arrows
 {
 	Color arrayOfColors[6] = { YELLOW, ORANGE, RED, GREEN, BLUE, SKYBLUE };
@@ -229,7 +231,7 @@ namespace Arrows
 	
 	void DrawMenu()
 	{
-		float radius = 40;
+		float FONT = 60;
 
 		DrawRectangleRec(arrowsMenu[0].body, arrowsMenu[0].color);
 		DrawRectangleRec(arrowsMenu[1].body, arrowsMenu[1].color);
@@ -241,30 +243,27 @@ namespace Arrows
 
 		if (arrowsMenu[0].initGame == true)
 		{
-
-			//DrawText("START", static_cast<int>(arrowsMenu[0].body.x + WIDTH / 2), static_cast<int>(arrowsMenu[0].body.y + WIDTH), 20, WHITE);
-			DrawCircleV( Vector2{ arrowsMenu[0].body.x + WIDTH / 2, arrowsMenu[0].body.y + WIDTH }, radius, GRAY);
-
+			DrawTextEx(Player::fontType, "START", Vector2 { ((arrowsMenu[0].body.x + arrowsMenu[0].body.width / 2) - (MeasureText("START", static_cast<int>(70)) / 4)), arrowsMenu[0].body.y + arrowsMenu[0].body.height / 4 } , FONT, 2, BLACK);
 		}
 		if (arrowsMenu[1].initGame == true)
 		{
-			DrawCircleV(Vector2{ arrowsMenu[1].body.x + WIDTH / 2, arrowsMenu[1].body.y + WIDTH }, radius, GRAY);
+			DrawTextEx(Player::fontType, "START", Vector2{ ((arrowsMenu[1].body.x + arrowsMenu[1].body.width / 2) - (MeasureText("START", static_cast<int>(70)) / 4)), arrowsMenu[1].body.y + arrowsMenu[1].body.height / 4 }, FONT, 2, BLACK);
 		}
 		if (arrowsMenu[2].initGame == true)
 		{
-			DrawCircleV(Vector2{ arrowsMenu[2].body.x + WIDTH / 2, arrowsMenu[2].body.y + WIDTH }, radius, GRAY);
+			DrawTextEx(Player::fontType, "START", Vector2{ ((arrowsMenu[2].body.x + arrowsMenu[2].body.width / 2) - (MeasureText("START", static_cast<int>(70)) / 4)), arrowsMenu[2].body.y + arrowsMenu[2].body.height / 4 }, FONT, 2, BLACK);
 		}
 		if (arrowsMenu[3].initGame == true)
 		{
-			DrawCircleV(Vector2{ arrowsMenu[3].body.x + WIDTH / 2, arrowsMenu[3].body.y + WIDTH }, radius, GRAY);
+			DrawTextEx(Player::fontType, "START", Vector2{ ((arrowsMenu[3].body.x + arrowsMenu[3].body.width / 2) - (MeasureText("START", static_cast<int>(70)) / 4)), arrowsMenu[3].body.y + arrowsMenu[3].body.height / 4 }, FONT, 2, BLACK);
 		}
 		if (arrowsMenu[4].initGame == true)
 		{
-			DrawCircleV(Vector2{ arrowsMenu[4].body.x + WIDTH / 2, arrowsMenu[4].body.y + WIDTH }, radius, GRAY);
+			DrawTextEx(Player::fontType, "START", Vector2{ ((arrowsMenu[4].body.x + arrowsMenu[4].body.width / 2) - (MeasureText("START", static_cast<int>(70)) / 4)), arrowsMenu[4].body.y + arrowsMenu[4].body.height / 4 }, FONT, 2, BLACK);
 		}
 		if (arrowsMenu[5].initGame == true)
 		{
-			DrawCircleV(Vector2{ arrowsMenu[5].body.x + WIDTH / 2, arrowsMenu[5].body.y + WIDTH }, radius, GRAY);
+			DrawTextEx(Player::fontType, "START", Vector2{ ((arrowsMenu[5].body.x + arrowsMenu[5].body.width / 2) - (MeasureText("START", static_cast<int>(70)) / 4)), arrowsMenu[5].body.y + arrowsMenu[5].body.height / 4 }, FONT, 2, BLACK);
 		}
 
 	}
