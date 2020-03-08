@@ -6,15 +6,25 @@
 
 namespace Player
 {
+	static float playersRecords[5];
+
 	PLAYER player;
 	Font fontType;
 
 	float fontPulse;
 
 	static void Records();
+	static void SavePlayersRecords();
 
 	void Initialize()
 	{
+		playersRecords[0] = 0;
+		playersRecords[2] = 0;
+		playersRecords[3] = 0;
+		playersRecords[4] = 0;
+		playersRecords[5] = 0;
+
+
 		Image submarino1;
 		Image submarino2;
 		Image submarino3;
@@ -193,6 +203,7 @@ namespace Player
 		{
 			Screens::state = Screens::endScrene;
 			Background::stopTransition = false;
+			SavePlayersRecords();
 		}
 	}
 
@@ -244,6 +255,24 @@ namespace Player
 		Records();
 	}
 
+	void DrawPlayersRecordsEndGame()
+	{
+		DrawTextEx(fontType, FormatText("1ra posicion - %i", static_cast<int>(playersRecords[0])), Vector2{ 200, 300}, 50, 2, WHITE);
+		DrawTextEx(fontType, FormatText("2da posicion - %i", static_cast<int>(playersRecords[1])), Vector2{ 200, 500}, 50, 2, WHITE);
+		DrawTextEx(fontType, FormatText("3ra posicion - %i", static_cast<int>(playersRecords[2])), Vector2{ 200, 700}, 50, 2, WHITE);
+		DrawTextEx(fontType, FormatText("4ta posicion - %i", static_cast<int>(playersRecords[3])), Vector2{ 200, 900}, 50, 2, WHITE);
+		DrawTextEx(fontType, FormatText("5ta posicion - %i", static_cast<int>(playersRecords[4])), Vector2{ 200, 1100}, 50, 2, WHITE);
+	}
+	
+	void DrawPlayersRecordsMenu()
+	{
+		DrawTextEx(fontType, FormatText("1ra posicion - %i", static_cast<int>(playersRecords[0])), Vector2{ 50, 50}, 50, 2, WHITE);
+		DrawTextEx(fontType, FormatText("2da posicion - %i", static_cast<int>(playersRecords[1])), Vector2{ 50, 150}, 50, 2, WHITE);
+		DrawTextEx(fontType, FormatText("3ra posicion - %i", static_cast<int>(playersRecords[2])), Vector2{ 50, 250}, 50, 2, WHITE);
+		DrawTextEx(fontType, FormatText("4ta posicion - %i", static_cast<int>(playersRecords[3])), Vector2{ 50, 350}, 50, 2, WHITE);
+		DrawTextEx(fontType, FormatText("5ta posicion - %i", static_cast<int>(playersRecords[4])), Vector2{ 50, 450}, 50, 2, WHITE);
+	}
+
 	// ----------------------
 
 	static void Records()
@@ -276,5 +305,45 @@ namespace Player
 		{
 			DrawTextEx(fontType, "Proximo Objetivo 3000", Vector2{ static_cast<float>(GetScreenWidth() / 2 + GetScreenWidth() / 5), static_cast<float>(GetScreenHeight() / 10) }, fontPulse, 10, GREEN);
 		}
+	}
+
+	static void SavePlayersRecords()
+	{
+		float aux = 0;
+		float newDat = player.distaceRecord;
+
+
+		for (int i = 0; i < 5; i++)
+		{
+			if (newDat > playersRecords[i])
+			{
+				aux = playersRecords[i];
+
+				playersRecords[i] = newDat;
+
+				newDat = aux;
+			}
+		}
+
+		/*while (out == false || i < 5)
+		{
+			if (player.distaceRecord > playersRecords[i])
+			{
+				out = true;
+
+				newDat = player.distaceRecord;
+
+				for (int j = i; j < 5; j++)
+				{
+					aux = playersRecords[j];
+
+					playersRecords[j] = newDat;
+
+					newDat = aux;
+				}
+			}
+
+			i++;
+		}*/
 	}
 }

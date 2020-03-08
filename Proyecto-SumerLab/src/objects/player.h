@@ -31,6 +31,8 @@ namespace Player
 	extern void Lose();
 	extern void Reset();
 	extern void Draw();
+	extern void DrawPlayersRecordsEndGame();
+	extern void DrawPlayersRecordsMenu();
 }
 
 #endif // !PLAYER

@@ -69,6 +69,8 @@ namespace Screens
 
 		Arrows::DrawMenu();
 
+		Player::DrawPlayersRecordsMenu();
+
 		EndDrawing();
 	}
 
@@ -109,14 +111,6 @@ namespace Screens
 	
 	static void EndScreen()
 	{
-		if (IsKeyPressed(KEY_ENTER))
-		{
-			state = game;
-			Player::Reset();
-			Enemies::Reset();
-			Arrows::Reset();
-		}
-
 		BeginDrawing();
 		ClearBackground(DARKBLUE);
 
@@ -124,6 +118,7 @@ namespace Screens
 
 		Timer();
 		DrawText(FormatText("Distancia %i", static_cast<int>(Player::player.distaceRecord)), GetScreenWidth() / 2 - (100 * 2), GetScreenHeight() / 6, 80, GOLD);
+		Player::DrawPlayersRecordsEndGame();
 
 		EndDrawing();
 	}
