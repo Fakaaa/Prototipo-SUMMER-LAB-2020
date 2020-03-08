@@ -19,21 +19,21 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\src\audio\audio.cpp" />
     <ClCompile Include="..\src\background\background.cpp" />
     <ClCompile Include="..\src\main.cpp" />
     <ClCompile Include="..\src\objects\arrows.cpp" />
     <ClCompile Include="..\src\objects\enemies.cpp" />
     <ClCompile Include="..\src\objects\player.cpp" />
     <ClCompile Include="..\src\screens\all_the_screens.cpp" />
-    <ClCompile Include="audio.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\src\audio\audio.h" />
     <ClInclude Include="..\src\background\background.h" />
     <ClInclude Include="..\src\objects\arrows.h" />
     <ClInclude Include="..\src\objects\enemies.h" />
     <ClInclude Include="..\src\objects\player.h" />
     <ClInclude Include="..\src\screens\all_the_screens.h" />
-    <ClInclude Include="audio.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

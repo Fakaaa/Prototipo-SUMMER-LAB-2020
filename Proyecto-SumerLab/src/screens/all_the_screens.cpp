@@ -1,9 +1,10 @@
 #include "all_the_screens.h"
 
+#include "audio/audio.h"
+#include "background/background.h"
 #include "objects/player.h"
 #include "objects/arrows.h"
 #include "objects/enemies.h"
-#include "background/background.h"
 
 namespace Screens
 {
@@ -55,6 +56,8 @@ namespace Screens
 		Player::LoadFont();
 		Enemies::Reset();
 
+		Audio::StateMenuMusic(Audio::update);
+
 		if (IsKeyPressed(KEY_ESCAPE))
 		{
 			Player::player.inGame = false;
@@ -80,6 +83,8 @@ namespace Screens
 		{
 			state = game;
 		}
+
+		Audio::TransitionUpdate();
 
 		BeginDrawing();
 		ClearBackground(DARKBLUE);

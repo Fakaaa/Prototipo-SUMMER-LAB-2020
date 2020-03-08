@@ -3,6 +3,7 @@
 #include "arrows.h"
 #include "screens/all_the_screens.h"
 #include "background/background.h"
+#include "audio/audio.h"
 
 namespace Player
 {
@@ -152,6 +153,7 @@ namespace Player
 			if (Arrows::arrowsMenu[0].initGame == true)
 			{
 				Screens::state = Screens::transition;
+				Audio::TransitionInitialize();
 			}
 		}
 		if (IsKeyPressed(KEY_KP_2)) // COLOR NARANJA
@@ -159,6 +161,7 @@ namespace Player
 			if (Arrows::arrowsMenu[1].initGame == true)
 			{
 				Screens::state = Screens::transition;
+				Audio::TransitionInitialize();
 			}		
 		}
 		if (IsKeyPressed(KEY_KP_3)) // COLOR ROJO
@@ -166,6 +169,7 @@ namespace Player
 			if (Arrows::arrowsMenu[2].initGame == true)
 			{
 				Screens::state = Screens::transition;
+				Audio::TransitionInitialize();
 			}			
 		}
 		if (IsKeyPressed(KEY_KP_4)) // COLOR VERDE
@@ -173,6 +177,7 @@ namespace Player
 			if (Arrows::arrowsMenu[3].initGame == true)
 			{
 				Screens::state = Screens::transition;
+				Audio::TransitionInitialize();
 			}			
 		}
 		if (IsKeyPressed(KEY_KP_5)) // COLOR AZUL
@@ -181,6 +186,7 @@ namespace Player
 			if (Arrows::arrowsMenu[4].initGame == true)
 			{
 				Screens::state = Screens::transition;
+				Audio::TransitionInitialize();
 			}
 		}
 		if (IsKeyPressed(KEY_KP_6)) // COLOR SKYBLUE
@@ -188,6 +194,7 @@ namespace Player
 			if (Arrows::arrowsMenu[5].initGame == true)
 			{
 				Screens::state = Screens::transition;
+				Audio::TransitionInitialize();
 			}			
 		}
 	}

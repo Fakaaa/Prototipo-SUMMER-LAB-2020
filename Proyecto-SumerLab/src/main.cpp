@@ -5,6 +5,7 @@
 #include "objects/enemies.h"
 #include "background/background.h"
 #include "screens/all_the_screens.h"
+#include "audio/audio.h"
 
 static void Initialize();
 static void UnloadAssets();
@@ -38,6 +39,7 @@ static void Initialize()
 	Arrows::Initialize();
 	Enemies::Initialize();
 	Screens::Initialize();
+	Audio::Initialize();
 }
 
 static void UnloadAssets()
@@ -46,5 +48,6 @@ static void UnloadAssets()
 	Player::Unload();
 	Arrows::UnLoad();
 	Enemies::Unload();
+	Audio::Unload();
 	CloseWindow();
 }

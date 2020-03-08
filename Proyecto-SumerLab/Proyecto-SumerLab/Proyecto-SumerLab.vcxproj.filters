@@ -17,7 +17,7 @@
     <ClCompile Include="..\src\background\background.cpp">
       <Filter>background</Filter>
     </ClCompile>
-    <ClCompile Include="audio.cpp">
+    <ClCompile Include="..\src\audio\audio.cpp">
       <Filter>audio</Filter>
     </ClCompile>
   </ItemGroup>
@@ -51,7 +51,7 @@
     <ClInclude Include="..\src\background\background.h">
       <Filter>background</Filter>
     </ClInclude>
-    <ClInclude Include="audio.h">
+    <ClInclude Include="..\src\audio\audio.h">
       <Filter>audio</Filter>
     </ClInclude>
   </ItemGroup>
