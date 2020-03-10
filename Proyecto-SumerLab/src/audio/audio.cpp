@@ -6,9 +6,10 @@ namespace Audio
 
 	//Sound jump;
 	//Sound die_sound;
-	//Sound screamSkull;
+	Sound clickMenu;
 
 	static Music menuMusic;
+	static Music menuMusicOcean;
 	static Music gameMusic;
 	static Music bubblesMusic;
 
@@ -19,22 +20,34 @@ namespace Audio
 	{
 		InitAudioDevice();
 
-		menuMusic = LoadMusicStream("assets/audio/musica menu temp.ogg");
+		menuMusic = LoadMusicStream("assets/audio/loop musica menu.ogg");
+		menuMusicOcean = LoadMusicStream("assets/audio/loop oceano menu.ogg");
 		gameMusic = LoadMusicStream("assets/audio/musica gameplay temp.ogg");
 		bubblesMusic = LoadMusicStream("assets/audio/burbuja real.ogg");
 
-		//jump = LoadSound("assets/sounds/player_sounds/jump.ogg");
+		clickMenu = LoadSound("assets/audio/click menu.ogg");
 
 		PlayMusicStream(menuMusic);
+		PlayMusicStream(menuMusicOcean);
 	}
 
 	void Unload()
 	{
 		UnloadMusicStream(menuMusic);
+		UnloadMusicStream(menuMusicOcean);
 		UnloadMusicStream(gameMusic);
 		UnloadMusicStream(bubblesMusic);
 
+		UnloadSound(clickMenu);
+
 		CloseAudioDevice();
+	}
+
+	void ResetSounds()
+	{
+		SetMusicVolume(gameMusic, 0.0f);
+		SetMusicVolume(menuMusic, 1.0f);
+		SetMusicVolume(menuMusicOcean, 0.80f);
 	}
 
 	void StateMenuMusic(STATE states)
@@ -49,6 +62,22 @@ namespace Audio
 			break;
 		case update:
 			UpdateMusicStream(menuMusic);
+			break;
+		}
+	}
+	
+	void StateMenuOceanMusic(STATE states)
+	{
+		switch (states)
+		{
+		case stop:
+			StopMusicStream(menuMusicOcean);
+			break;
+		case play:
+			PlayMusicStream(menuMusicOcean);
+			break;
+		case update:
+			UpdateMusicStream(menuMusicOcean);
 			break;
 		}
 	}
@@ -85,54 +114,24 @@ namespace Audio
 		}
 	}
 
-	//void StateEndMusic(STATE states)
-	//{
-	//	/*switch (states)
-	//	{
-	//	case stop:
-	//		StopMusicStream(endMusic);
-	//		break;
-	//	case play:
-	//		PlayMusicStream(endMusic);
-	//		break;
-	//	case update:
-	//		UpdateMusicStream(endMusic);
-	//		break;
-	//	}*/
-	//}
-
-	//void StatePlayerMusic(STATE states)
-	//{
-	//	/*switch (states)
-	//	{
-	//	case stop:
-	//		StopMusicStream(player_flames);
-	//		break;
-	//	case play:
-	//		PlayMusicStream(player_flames);
-	//		break;
-	//	case update:
-	//		UpdateMusicStream(player_flames);
-	//		break;
-	//	}*/
-	//}
-
 	void TransitionInitialize()
 	{
 		SetMusicVolume(gameMusic, 0.0f);
 		SetMusicVolume(menuMusic, 1.0f);
+		SetMusicVolume(menuMusicOcean, 0.80f);
 
 		StateBubblesMusic(play);
 		StateGameMusic(play);
 	}
 
-	float time = 0;
+	static float time = 0;
 
 	void TransitionUpdate()
 	{
 		StateBubblesMusic(update);
 		StateGameMusic(update);
 		StateMenuMusic(update);
+		StateMenuOceanMusic(update);
 
 		// -----
 
@@ -140,28 +139,31 @@ namespace Audio
 		{
 			SetMusicVolume(gameMusic, 0.20f);
 			SetMusicVolume(menuMusic, 0.80f);
+			SetMusicVolume(menuMusicOcean, 0.60f);
 		}
 		else if (time > 1 && time <= 2)
 		{
 			SetMusicVolume(gameMusic, 0.40f);
 			SetMusicVolume(menuMusic, 0.60f);
+			SetMusicVolume(menuMusicOcean, 0.40f);
 		}
 		else if (time > 2 && time <= 3)
 		{
 			SetMusicVolume(gameMusic, 0.60f);
 			SetMusicVolume(menuMusic, 0.40f);
+			SetMusicVolume(menuMusicOcean, 0.20f);
 		}
 		else if (time > 3 && time <= 4)
 		{
 			SetMusicVolume(gameMusic, 0.80f);
 			SetMusicVolume(menuMusic, 0.20f);
+			SetMusicVolume(menuMusicOcean, 0.00f);
 		}
 		else if (time > 4 && time <= 5)
 		{
 			SetMusicVolume(gameMusic, 1.0f);
 			SetMusicVolume(menuMusic, 0.0f);
 		}
-
 
 		time += GetFrameTime();
 	}

@@ -146,6 +146,7 @@ namespace Player
 		{
 			Screens::state = Screens::menu;
 			Background::stopTransition = false;
+			Audio::ResetSounds();
 		}
 	}
 
@@ -157,6 +158,7 @@ namespace Player
 			{
 				Screens::state = Screens::transition;
 				Audio::TransitionInitialize();
+				PlaySound(Audio::clickMenu);
 			}
 		}
 		if (IsKeyPressed(KEY_TWO)) // COLOR NARANJA
@@ -165,6 +167,7 @@ namespace Player
 			{
 				Screens::state = Screens::transition;
 				Audio::TransitionInitialize();
+				PlaySound(Audio::clickMenu);
 			}		
 		}
 		if (IsKeyPressed(KEY_THREE)) // COLOR ROJO
@@ -173,6 +176,7 @@ namespace Player
 			{
 				Screens::state = Screens::transition;
 				Audio::TransitionInitialize();
+				PlaySound(Audio::clickMenu);
 			}			
 		}
 		if (IsKeyPressed(KEY_FOUR)) // COLOR VERDE
@@ -181,6 +185,7 @@ namespace Player
 			{
 				Screens::state = Screens::transition;
 				Audio::TransitionInitialize();
+				PlaySound(Audio::clickMenu);
 			}			
 		}
 		if (IsKeyPressed(KEY_FIVE)) // COLOR AZUL
@@ -190,6 +195,7 @@ namespace Player
 			{
 				Screens::state = Screens::transition;
 				Audio::TransitionInitialize();
+				PlaySound(Audio::clickMenu);
 			}
 		}
 		if (IsKeyPressed(KEY_SIX)) // COLOR SKYBLUE
@@ -198,6 +204,7 @@ namespace Player
 			{
 				Screens::state = Screens::transition;
 				Audio::TransitionInitialize();
+				PlaySound(Audio::clickMenu);
 			}			
 		}
 	}

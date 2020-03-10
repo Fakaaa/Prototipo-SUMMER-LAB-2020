@@ -57,6 +57,7 @@ namespace Screens
 		Enemies::Reset();
 
 		Audio::StateMenuMusic(Audio::update);
+		Audio::StateMenuOceanMusic(Audio::update);
 
 		if (IsKeyPressed(KEY_ESCAPE))
 		{
