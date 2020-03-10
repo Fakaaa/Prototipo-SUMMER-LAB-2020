@@ -5,8 +5,8 @@
 
 namespace Enemies
 {
-	const int HEIGHT = 200;
-	const int WIDTH = 200;
+	const int HEIGHT = 250;
+	const int WIDTH = 250;
 
 	const float SPEED = 400.0f;
 
@@ -42,9 +42,9 @@ namespace Enemies
 		rememberPos = GetRandomValue(0, 2);
 		enemies[rememberPos].aggressive = false;	
 
-		enemies[0].body.y = static_cast<float>(GetScreenHeight() / 4);
-		enemies[1].body.y = static_cast<float>(GetScreenHeight() / 4 + GetScreenHeight() / 4);
-		enemies[2].body.y = static_cast<float>(GetScreenHeight() / 4 + GetScreenHeight() / 4 + GetScreenHeight() / 4);
+		enemies[0].body.y = static_cast<float>((GetScreenHeight() / 4) - 35);
+		enemies[1].body.y = static_cast<float>((GetScreenHeight() / 4 + GetScreenHeight() / 4) - 45);
+		enemies[2].body.y = static_cast<float>((GetScreenHeight() / 4 + GetScreenHeight() / 4 + GetScreenHeight() / 4) - 45);
 
 		obstacle1 = LoadImage("assets/enemies/obstaculo 1.png");
 		obstacle2 = LoadImage("assets/enemies/obstaculo 2.png");
@@ -54,7 +54,7 @@ namespace Enemies
 		ImageResize(&obstacle1, WIDTH, HEIGHT);
 		ImageResize(&obstacle2, WIDTH, HEIGHT);
 		ImageResize(&obstacle3, WIDTH, HEIGHT);
-		ImageResize(&obstacle4, WIDTH, HEIGHT);
+		ImageResize(&obstacle4, WIDTH + 60, HEIGHT);
 		ImageResize(&obstacle5, WIDTH, HEIGHT);
 		type[0] = LoadTextureFromImage(obstacle1);
 		type[1] = LoadTextureFromImage(obstacle2);
@@ -131,11 +131,28 @@ namespace Enemies
 
 	void Draw()
 	{
+
 		for (int i = 0; i < MAX_ENEMIES; i++)
 		{
 			if (enemies[i].aggressive == true)
 			{
-				DrawTexture(type[enemies[i].numTexture], static_cast<int>(enemies[i].body.x), static_cast<int>(enemies[i].body.y), WHITE);
+
+				if (enemies[i].numTexture == 3)
+				{
+					DrawTexture(type[enemies[i].numTexture], static_cast<int>(enemies[i].body.x - 85), static_cast<int>(enemies[i].body.y), WHITE);
+				}
+				else if (enemies[i].numTexture == 2)
+				{
+					DrawTexture(type[enemies[i].numTexture], static_cast<int>(enemies[i].body.x - 45), static_cast<int>(enemies[i].body.y), WHITE);
+				}
+				else if (enemies[i].numTexture == 4)
+				{
+					DrawTexture(type[enemies[i].numTexture], static_cast<int>(enemies[i].body.x - 55), static_cast<int>(enemies[i].body.y), WHITE);
+				}
+				else
+				{
+					DrawTexture(type[enemies[i].numTexture], static_cast<int>(enemies[i].body.x), static_cast<int>(enemies[i].body.y), WHITE);
+				}
 			}
 		}
 	}

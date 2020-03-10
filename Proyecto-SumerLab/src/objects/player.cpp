@@ -13,6 +13,7 @@ namespace Player
 	Font fontType;
 
 	float fontPulse;
+	bool isTeleporting = false;
 
 	static void Records();
 	static void SavePlayersRecords();
@@ -33,7 +34,7 @@ namespace Player
 
 		fontPulse = 45;
 		player.body.height = 200;
-		player.body.width = 300;
+		player.body.width = 250;
 		player.body.x = 50;
 		player.body.y = Arrows::arrowsGame[1].texturePos.y - player.body.height / 4;
 
@@ -41,9 +42,9 @@ namespace Player
 		submarino2 = LoadImage("assets/player/submarino 2.png");
 		submarino3 = LoadImage("assets/player/submarino 3.png");
 		life = LoadImage("assets/player/vida.png");
-		ImageResize(&submarino1, static_cast<int>(player.body.width), static_cast<int>(player.body.height));
-		ImageResize(&submarino2, static_cast<int>(player.body.width), static_cast<int>(player.body.height));
-		ImageResize(&submarino3, static_cast<int>(player.body.width), static_cast<int>(player.body.height));
+		ImageResize(&submarino1, static_cast<int>(player.body.width + 40), static_cast<int>(player.body.height));
+		ImageResize(&submarino2, static_cast<int>(player.body.width + 40), static_cast<int>(player.body.height));
+		ImageResize(&submarino3, static_cast<int>(player.body.width + 40), static_cast<int>(player.body.height));
 		ImageResize(&life, 90, 50);
 		player.threeLives = LoadTextureFromImage(submarino1);
 		player.twoLives = LoadTextureFromImage(submarino2);
@@ -78,8 +79,10 @@ namespace Player
 	{
 		//YELLOW = 0, ORANGE = 1, RED = 2, GREEN = 3, BLUE = 4, SKYBLUE = 5;
 
-		if (IsKeyPressed(KEY_KP_1)) // COLOR AMARILLO
+		if (IsKeyPressed(KEY_ONE)) // COLOR AMARILLO
 		{
+			//isTeleporting = true;
+
 			for (int i = 0; i < 3; i++)
 			{
 				if (Arrows::arrowsGame[i].position == 0)
@@ -88,7 +91,7 @@ namespace Player
 				}
 			}			
 		}
-		if (IsKeyPressed(KEY_KP_2)) // COLOR NARANJA
+		if (IsKeyPressed(KEY_TWO)) // COLOR NARANJA
 		{
 			for (int i = 0; i < 3; i++)
 			{
@@ -98,7 +101,7 @@ namespace Player
 				}
 			}
 		}
-		if (IsKeyPressed(KEY_KP_3)) // COLOR ROJO
+		if (IsKeyPressed(KEY_THREE)) // COLOR ROJO
 		{
 			for (int i = 0; i < 3; i++)
 			{
@@ -108,7 +111,7 @@ namespace Player
 				}
 			}
 		}
-		if (IsKeyPressed(KEY_KP_4)) // COLOR VERDE
+		if (IsKeyPressed(KEY_FOUR)) // COLOR VERDE
 		{
 			for (int i = 0; i < 3; i++)
 			{
@@ -118,7 +121,7 @@ namespace Player
 				}
 			}
 		}
-		if (IsKeyPressed(KEY_KP_5)) // COLOR AZUL
+		if (IsKeyPressed(KEY_FIVE)) // COLOR AZUL
 		{
 			for (int i = 0; i < 3; i++)
 			{
@@ -128,7 +131,7 @@ namespace Player
 				}
 			}
 		}
-		if (IsKeyPressed(KEY_KP_6)) // COLOR SKYBLUE
+		if (IsKeyPressed(KEY_SIX)) // COLOR SKYBLUE
 		{
 			for (int i = 0; i < 3; i++)
 			{
@@ -148,7 +151,7 @@ namespace Player
 
 	void InputMenu()
 	{
-		if (IsKeyPressed(KEY_KP_1)) // COLOR AMARILLO
+		if (IsKeyPressed(KEY_ONE)) // COLOR AMARILLO
 		{
 			if (Arrows::arrowsMenu[0].initGame == true)
 			{
@@ -156,7 +159,7 @@ namespace Player
 				Audio::TransitionInitialize();
 			}
 		}
-		if (IsKeyPressed(KEY_KP_2)) // COLOR NARANJA
+		if (IsKeyPressed(KEY_TWO)) // COLOR NARANJA
 		{
 			if (Arrows::arrowsMenu[1].initGame == true)
 			{
@@ -164,7 +167,7 @@ namespace Player
 				Audio::TransitionInitialize();
 			}		
 		}
-		if (IsKeyPressed(KEY_KP_3)) // COLOR ROJO
+		if (IsKeyPressed(KEY_THREE)) // COLOR ROJO
 		{
 			if (Arrows::arrowsMenu[2].initGame == true)
 			{
@@ -172,7 +175,7 @@ namespace Player
 				Audio::TransitionInitialize();
 			}			
 		}
-		if (IsKeyPressed(KEY_KP_4)) // COLOR VERDE
+		if (IsKeyPressed(KEY_FOUR)) // COLOR VERDE
 		{
 			if (Arrows::arrowsMenu[3].initGame == true)
 			{
@@ -180,7 +183,7 @@ namespace Player
 				Audio::TransitionInitialize();
 			}			
 		}
-		if (IsKeyPressed(KEY_KP_5)) // COLOR AZUL
+		if (IsKeyPressed(KEY_FIVE)) // COLOR AZUL
 		{
 			
 			if (Arrows::arrowsMenu[4].initGame == true)
@@ -189,7 +192,7 @@ namespace Player
 				Audio::TransitionInitialize();
 			}
 		}
-		if (IsKeyPressed(KEY_KP_6)) // COLOR SKYBLUE
+		if (IsKeyPressed(KEY_SIX)) // COLOR SKYBLUE
 		{			
 			if (Arrows::arrowsMenu[5].initGame == true)
 			{
@@ -203,6 +206,30 @@ namespace Player
 	{
 		player.distaceRecord += GetFrameTime() * 5;
 	}
+
+	/*
+	void DoTeleport(Texture2D subamrino)
+	{
+		float timer;
+		timer = 0;
+		
+		if (timer <= 0)
+		{
+			subamrino.height = static_cast<int>((player.body.height / 2) * GetFrameTime());
+			subamrino.width = static_cast<int>((player.body.height / 2) * GetFrameTime());
+		}
+		if (timer >= 2)
+		{
+			subamrino.height = static_cast<int>(player.body.height);
+			subamrino.width = static_cast<int>(player.body.width + 40);
+		}
+
+		DrawTexture(subamrino, static_cast<int>(player.body.x), static_cast<int>(player.body.y), WHITE);
+		isTeleporting = false;
+
+		timer += GetFrameTime();
+	}
+	*/
 
 	void Lose()
 	{
@@ -238,17 +265,39 @@ namespace Player
 
 	void Draw()
 	{
+
 		if (player.lives == 3) 
 		{
-			DrawTexture(player.threeLives, static_cast<int>(player.body.x), static_cast<int>(player.body.y), WHITE);
+			if (isTeleporting == true)
+			{
+				//DoTeleport(player.threeLives);
+			}
+			else
+			{
+				DrawTexture(player.threeLives, static_cast<int>(player.body.x), static_cast<int>(player.body.y), WHITE);
+			}
 		}
 		else if (player.lives == 2)
 		{
-			DrawTexture(player.twoLives, static_cast<int>(player.body.x), static_cast<int>(player.body.y), WHITE);
+			if (isTeleporting == true)
+			{
+				//DoTeleport(player.twoLives);
+			}
+			else
+			{
+				DrawTexture(player.twoLives, static_cast<int>(player.body.x), static_cast<int>(player.body.y), WHITE);
+			}
 		}
 		else if (player.lives == 1)
 		{
-			DrawTexture(player.oneLive, static_cast<int>(player.body.x), static_cast<int>(player.body.y), WHITE);
+			if (isTeleporting == true)
+			{
+				//DoTeleport(player.oneLive);
+			}
+			else
+			{
+				DrawTexture(player.oneLive, static_cast<int>(player.body.x), static_cast<int>(player.body.y), WHITE);
+			}
 		}
 
 		for (int i = 0; i < player.lives; i++)
