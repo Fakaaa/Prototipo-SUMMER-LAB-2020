@@ -69,7 +69,7 @@ namespace Screens
 
 		Background::DrawMenu();
 		DrawTextEx(Player::fontType, "Into the Deep", Vector2{ static_cast<float>(GetScreenWidth() / 3), static_cast<float>(GetScreenHeight() / 3)}, 140, 10,GOLD);
-		DrawText("v0.4", 30, GetScreenHeight() - 60, 30, WHITE);
+		DrawText("v0.5", 30, GetScreenHeight() - 60, 30, WHITE);
 
 		Arrows::DrawMenu();
 
@@ -83,6 +83,7 @@ namespace Screens
 		if (Background::stopTransition == true)
 		{
 			state = game;
+			Audio::StateGameMusic(Audio::play);
 		}
 
 		Audio::TransitionUpdate();
@@ -100,7 +101,7 @@ namespace Screens
 		Player::InputGamePlay();
 		Player::Lose();
 		Player::DistanceTraveled();
-		Player::DoPulseFont();
+		Player::RotationLife();
 
 		Audio::StateGameMusic(Audio::update);
 
@@ -119,6 +120,10 @@ namespace Screens
 	
 	static void EndScreen()
 	{
+		Audio::StateGameMusic(Audio::stop);
+		Audio::StateMenuMusic(Audio::stop);
+		Audio::StateMenuOceanMusic(Audio::stop);
+		
 		BeginDrawing();
 		ClearBackground(DARKBLUE);
 

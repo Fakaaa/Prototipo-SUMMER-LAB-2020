@@ -12,27 +12,30 @@ namespace Player
 	PLAYER player;
 	Font fontType;
 
-	float fontPulse;
-	bool isTeleporting = false;
+	bool rotation;
+	
+	static float FONT = 45;
+	static float aux_rotation;
 
 	static void Records();
 	static void SavePlayersRecords();
 
 	void Initialize()
 	{
+		rotation = false;
+		aux_rotation = 0;
+
 		playersRecords[0] = 0;
 		playersRecords[2] = 0;
 		playersRecords[3] = 0;
 		playersRecords[4] = 0;
 		playersRecords[5] = 0;
 
-
 		Image submarino1;
 		Image submarino2;
 		Image submarino3;
 		Image life;
 
-		fontPulse = 45;
 		player.body.height = 200;
 		player.body.width = 250;
 		player.body.x = 50;
@@ -45,7 +48,7 @@ namespace Player
 		ImageResize(&submarino1, static_cast<int>(player.body.width + 40), static_cast<int>(player.body.height));
 		ImageResize(&submarino2, static_cast<int>(player.body.width + 40), static_cast<int>(player.body.height));
 		ImageResize(&submarino3, static_cast<int>(player.body.width + 40), static_cast<int>(player.body.height));
-		ImageResize(&life, 90, 50);
+		ImageResize(&life, 140, 100);
 		player.threeLives = LoadTextureFromImage(submarino1);
 		player.twoLives = LoadTextureFromImage(submarino2);
 		player.oneLive = LoadTextureFromImage(submarino3);
@@ -219,29 +222,20 @@ namespace Player
 		player.distaceRecord += GetFrameTime() * 5;
 	}
 
-	/*
-	void DoTeleport(Texture2D subamrino)
+	void RotationLife()
 	{
-		float timer;
-		timer = 0;
-		
-		if (timer <= 0)
-		{
-			subamrino.height = static_cast<int>((player.body.height / 2) * GetFrameTime());
-			subamrino.width = static_cast<int>((player.body.height / 2) * GetFrameTime());
-		}
-		if (timer >= 2)
-		{
-			subamrino.height = static_cast<int>(player.body.height);
-			subamrino.width = static_cast<int>(player.body.width + 40);
-		}
+		float SPEED_ROTATION = 100;
 
-		DrawTexture(subamrino, static_cast<int>(player.body.x), static_cast<int>(player.body.y), WHITE);
-		isTeleporting = false;
-
-		timer += GetFrameTime();
+		if (rotation == true)
+		{
+			aux_rotation += SPEED_ROTATION * GetFrameTime();
+		}
+		if (aux_rotation >= 360)
+		{
+			rotation = false;
+			aux_rotation = 0;
+		}
 	}
-	*/
 
 	void Lose()
 	{
@@ -263,62 +257,32 @@ namespace Player
 		player.distaceRecord = 0;
 	}
 
-	void DoPulseFont()
-	{
-		if (fontPulse <= 45)
-		{
-			fontPulse += GetFrameTime() * 5;
-		}
-
-		if (fontPulse >= 65)
-		{
-			fontPulse -= GetFrameTime() * 5;
-		}
-	}
-
 	void Draw()
 	{
 		if (player.lives == 3) 
 		{
-			if (isTeleporting == true)
-			{
-				//DoTeleport(player.threeLives);
-			}
-			else
-			{
-				DrawTexture(player.threeLives, static_cast<int>(player.body.x), static_cast<int>(player.body.y), WHITE);
-			}
+			DrawTexture(player.threeLives, static_cast<int>(player.body.x), static_cast<int>(player.body.y), WHITE);
 		}
 		else if (player.lives == 2)
 		{
-			if (isTeleporting == true)
-			{
-				//DoTeleport(player.twoLives);
-			}
-			else
-			{
-				DrawTexture(player.twoLives, static_cast<int>(player.body.x), static_cast<int>(player.body.y), WHITE);
-			}
+			DrawTexture(player.twoLives, static_cast<int>(player.body.x), static_cast<int>(player.body.y), WHITE);
 		}
 		else if (player.lives == 1)
 		{
-			if (isTeleporting == true)
-			{
-				//DoTeleport(player.oneLive);
-			}
-			else
-			{
-				DrawTexture(player.oneLive, static_cast<int>(player.body.x), static_cast<int>(player.body.y), WHITE);
-			}
+			DrawTexture(player.oneLive, static_cast<int>(player.body.x), static_cast<int>(player.body.y), WHITE);
 		}
 
 		for (int i = 0; i < player.lives; i++)
 		{
-			DrawTexture(player.lifes, 100 + i * 100, 100, RED);
+			DrawTexture(player.lifes, 100 + i * 100, 100, WHITE);
 		}
 
-		DrawTextEx(fontType, FormatText("Distancia %i", static_cast<int>(player.distaceRecord)), Vector2 { static_cast<float>(GetScreenWidth() / 2 - (60 * 2)), static_cast<float>(GetScreenHeight() / 10) },fontPulse,10,GOLD);
-
+		if (rotation == true)
+		{
+			DrawTextureEx(player.lifes, Vector2{ (100 + (player.lives + 1) * 100 + aux_rotation / 2), (100 + aux_rotation) }, aux_rotation, 1, WHITE);
+		}
+			   		 	  	  
+		DrawTextEx(fontType, FormatText("Distancia %i", static_cast<int>(player.distaceRecord)), Vector2 { static_cast<float>(GetScreenWidth() / 2 - (60 * 2)), static_cast<float>(GetScreenHeight() / 10) },FONT,10,GOLD);
 
 		Records();
 	}
@@ -347,31 +311,31 @@ namespace Player
 	{
 		if (player.distaceRecord < 100)
 		{
-			DrawTextEx(fontType, "Proximo Objetivo 100", Vector2{ static_cast<float>(GetScreenWidth() / 2 + GetScreenWidth() / 5), static_cast<float>(GetScreenHeight() / 10) }, fontPulse, 10, GREEN);
+			DrawTextEx(fontType, "Proximo Objetivo 100", Vector2{ static_cast<float>(GetScreenWidth() / 2 + GetScreenWidth() / 5), static_cast<float>(GetScreenHeight() / 10) }, FONT, 10, GREEN);
 		}
 		else if (player.distaceRecord >= 100 && player.distaceRecord < 200)
 		{
-			DrawTextEx(fontType, "Proximo Objetivo 200", Vector2{ static_cast<float>(GetScreenWidth() / 2 + GetScreenWidth() / 5), static_cast<float>(GetScreenHeight() / 10) }, fontPulse, 10, GREEN);
+			DrawTextEx(fontType, "Proximo Objetivo 200", Vector2{ static_cast<float>(GetScreenWidth() / 2 + GetScreenWidth() / 5), static_cast<float>(GetScreenHeight() / 10) }, FONT, 10, GREEN);
 		}
 		else if (player.distaceRecord >= 200 && player.distaceRecord < 500)
 		{
-			DrawTextEx(fontType, "Proximo Objetivo 500", Vector2{ static_cast<float>(GetScreenWidth() / 2 + GetScreenWidth() / 5), static_cast<float>(GetScreenHeight() / 10) }, fontPulse, 10, GREEN);
+			DrawTextEx(fontType, "Proximo Objetivo 500", Vector2{ static_cast<float>(GetScreenWidth() / 2 + GetScreenWidth() / 5), static_cast<float>(GetScreenHeight() / 10) }, FONT, 10, GREEN);
 		}
 		else if (player.distaceRecord >= 500 && player.distaceRecord < 1000)
 		{
-			DrawTextEx(fontType, "Proximo Objetivo 1000", Vector2{ static_cast<float>(GetScreenWidth() / 2 + GetScreenWidth() / 5), static_cast<float>(GetScreenHeight() / 10) }, fontPulse, 10, GREEN);
+			DrawTextEx(fontType, "Proximo Objetivo 1000", Vector2{ static_cast<float>(GetScreenWidth() / 2 + GetScreenWidth() / 5), static_cast<float>(GetScreenHeight() / 10) }, FONT, 10, GREEN);
 		}
 		else if (player.distaceRecord >= 1000 && player.distaceRecord < 1500)
 		{
-			DrawTextEx(fontType, "Proximo Objetivo 1500", Vector2{ static_cast<float>(GetScreenWidth() / 2 + GetScreenWidth() / 5), static_cast<float>(GetScreenHeight() / 10) }, fontPulse, 10, GREEN);
+			DrawTextEx(fontType, "Proximo Objetivo 1500", Vector2{ static_cast<float>(GetScreenWidth() / 2 + GetScreenWidth() / 5), static_cast<float>(GetScreenHeight() / 10) }, FONT, 10, GREEN);
 		}
 		else if (player.distaceRecord >= 1500 && player.distaceRecord < 2300)
 		{
-			DrawTextEx(fontType, "Proximo Objetivo 2300", Vector2{ static_cast<float>(GetScreenWidth() / 2 + GetScreenWidth() / 5), static_cast<float>(GetScreenHeight() / 10) }, fontPulse, 10, GREEN);
+			DrawTextEx(fontType, "Proximo Objetivo 2300", Vector2{ static_cast<float>(GetScreenWidth() / 2 + GetScreenWidth() / 5), static_cast<float>(GetScreenHeight() / 10) }, FONT, 10, GREEN);
 		}
 		else if (player.distaceRecord >= 2300)
 		{
-			DrawTextEx(fontType, "Proximo Objetivo 3000", Vector2{ static_cast<float>(GetScreenWidth() / 2 + GetScreenWidth() / 5), static_cast<float>(GetScreenHeight() / 10) }, fontPulse, 10, GREEN);
+			DrawTextEx(fontType, "Proximo Objetivo 3000", Vector2{ static_cast<float>(GetScreenWidth() / 2 + GetScreenWidth() / 5), static_cast<float>(GetScreenHeight() / 10) }, FONT, 10, GREEN);
 		}
 	}
 
@@ -392,26 +356,5 @@ namespace Player
 				newDat = aux;
 			}
 		}
-
-		/*while (out == false || i < 5)
-		{
-			if (player.distaceRecord > playersRecords[i])
-			{
-				out = true;
-
-				newDat = player.distaceRecord;
-
-				for (int j = i; j < 5; j++)
-				{
-					aux = playersRecords[j];
-
-					playersRecords[j] = newDat;
-
-					newDat = aux;
-				}
-			}
-
-			i++;
-		}*/
 	}
 }

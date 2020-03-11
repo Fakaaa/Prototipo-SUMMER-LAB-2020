@@ -22,7 +22,7 @@ namespace Audio
 
 		menuMusic = LoadMusicStream("assets/audio/loop musica menu.ogg");
 		menuMusicOcean = LoadMusicStream("assets/audio/loop oceano menu.ogg");
-		gameMusic = LoadMusicStream("assets/audio/musica gameplay temp.ogg");
+		gameMusic = LoadMusicStream("assets/audio/loop musica gameplay.ogg");
 		bubblesMusic = LoadMusicStream("assets/audio/burbuja real.ogg");
 
 		clickMenu = LoadSound("assets/audio/stinger inicio gameplay.ogg");
@@ -58,6 +58,9 @@ namespace Audio
 		SetMusicVolume(gameMusic, 0.0f);
 		SetMusicVolume(menuMusic, 1.0f);
 		SetMusicVolume(menuMusicOcean, 0.80f);
+
+		StateMenuMusic(play);
+		StateMenuOceanMusic(play);
 	}
 
 	void StateMenuMusic(STATE states)
@@ -169,7 +172,7 @@ namespace Audio
 		}
 		else if (time > 4 && time <= 5)
 		{
-			SetMusicVolume(gameMusic, 1.0f);
+			SetMusicVolume(gameMusic, 0.80f);
 			SetMusicVolume(menuMusic, 0.0f);
 		}
 

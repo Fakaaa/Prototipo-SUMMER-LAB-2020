@@ -18,8 +18,8 @@ namespace Player
 	};
 
 	extern PLAYER player;
-	extern float fontPulse;
 	extern Font fontType;
+	extern bool rotation;
 
 	extern void Initialize();
 	extern void LoadFont();
@@ -27,7 +27,7 @@ namespace Player
 	extern void InputGamePlay();
 	extern void InputMenu();
 	extern void DistanceTraveled();
-	extern void DoPulseFont();
+	extern void RotationLife();
 	//static void DoTeleport(Texture2D subamrino);
 	extern void Lose();
 	extern void Reset();

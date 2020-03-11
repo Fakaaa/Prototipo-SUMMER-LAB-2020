@@ -1,5 +1,7 @@
 #include "background.h"
 
+#include "objects/player.h"
+
 namespace Background
 {
 	bool stopTransition = false;
@@ -197,7 +199,7 @@ namespace Background
 
 	static void MoveTransitionsBackgrounds()
 	{
-		float SPEED_BACKS = 180;
+		float SPEED_BACKS = 240;
 		float SPEED_BUBBLES = SPEED_BACKS * 3;
 
 		float SPEED_BUBBLES3 = SPEED_BACKS * 3;
@@ -236,9 +238,11 @@ namespace Background
 
 	static void MoveBackgroundGameplay()
 	{
-		scrolling_back1 -= 90.0f * GetFrameTime();
-		scrolling_back2 -= 60.0f * GetFrameTime();
-		scrolling_back3 -= 30.0f * GetFrameTime();
+		const float DIV_SPEED = 20.0f;
+
+		scrolling_back1 -= (90.0f + Player::player.distaceRecord / DIV_SPEED) * GetFrameTime();
+		scrolling_back2 -= (60.0f + Player::player.distaceRecord / DIV_SPEED) * GetFrameTime();
+		scrolling_back3 -= (30.0f + Player::player.distaceRecord / DIV_SPEED) * GetFrameTime();
 
 		if (scrolling_back1 <= -backgroundGame1.texture.width)
 			scrolling_back1 = 0;
