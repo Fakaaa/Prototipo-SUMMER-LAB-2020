@@ -102,6 +102,8 @@ namespace Screens
 		Player::DistanceTraveled();
 		Player::DoPulseFont();
 
+		Audio::StateGameMusic(Audio::update);
+
 		Enemies::Move();
 
 		BeginDrawing();
@@ -151,6 +153,7 @@ namespace Screens
 			Player::Reset();
 			Enemies::Reset();
 			Arrows::Reset();
+			Audio::ResetSounds();
 		}
 
 		// -----

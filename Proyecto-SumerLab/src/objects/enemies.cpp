@@ -2,6 +2,7 @@
 
 #include "arrows.h"
 #include "player.h"
+#include "audio/audio.h"
 
 namespace Enemies
 {
@@ -169,6 +170,7 @@ namespace Enemies
 				for (int j = 0; j < MAX_ENEMIES; j++)
 				{
 					enemies[j].collision = true;
+					PlaySound(Audio::loseLife);
 				}
 				Player::player.lives--;
 			}

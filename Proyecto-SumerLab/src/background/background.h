@@ -15,10 +15,10 @@ namespace Background
 	extern bool stopTransition;
 
 	extern void LoadBackground();
+	extern void Unload();
 	extern void DrawMenu();
 	extern void DrawTransition();
 	extern void DrawGamePlay();
-	extern void Unload();
 }
 
 #endif // !BACKGROUND_H

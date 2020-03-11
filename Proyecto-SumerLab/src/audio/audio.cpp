@@ -4,17 +4,17 @@ namespace Audio
 {
 	STATE state;
 
-	//Sound jump;
-	//Sound die_sound;
 	Sound clickMenu;
+	Sound movePlayer;
+	Sound loseLife;
+	Sound loseGame;
 
 	static Music menuMusic;
 	static Music menuMusicOcean;
 	static Music gameMusic;
 	static Music bubblesMusic;
 
-	static float increase = 0.0f;
-	static float decrease = 1.0f;
+	static float time = 0;
 
 	void Initialize()
 	{
@@ -25,7 +25,12 @@ namespace Audio
 		gameMusic = LoadMusicStream("assets/audio/musica gameplay temp.ogg");
 		bubblesMusic = LoadMusicStream("assets/audio/burbuja real.ogg");
 
-		clickMenu = LoadSound("assets/audio/click menu.ogg");
+		clickMenu = LoadSound("assets/audio/stinger inicio gameplay.ogg");
+		movePlayer = LoadSound("assets/audio/teleport.ogg");
+		loseLife = LoadSound("assets/audio/chocar.ogg");
+		loseGame = LoadSound("assets/audio/stinger derrota.ogg");
+
+		SetSoundVolume(loseLife, 4.0f);
 
 		PlayMusicStream(menuMusic);
 		PlayMusicStream(menuMusicOcean);
@@ -39,12 +44,17 @@ namespace Audio
 		UnloadMusicStream(bubblesMusic);
 
 		UnloadSound(clickMenu);
+		UnloadSound(movePlayer);
+		UnloadSound(loseLife);
+		UnloadSound(loseGame);
 
 		CloseAudioDevice();
 	}
 
 	void ResetSounds()
 	{
+		time = 0.0f;
+
 		SetMusicVolume(gameMusic, 0.0f);
 		SetMusicVolume(menuMusic, 1.0f);
 		SetMusicVolume(menuMusicOcean, 0.80f);
@@ -121,15 +131,13 @@ namespace Audio
 		SetMusicVolume(menuMusicOcean, 0.80f);
 
 		StateBubblesMusic(play);
-		StateGameMusic(play);
+		//StateGameMusic(play);
 	}
-
-	static float time = 0;
 
 	void TransitionUpdate()
 	{
 		StateBubblesMusic(update);
-		StateGameMusic(update);
+		//StateGameMusic(update);
 		StateMenuMusic(update);
 		StateMenuOceanMusic(update);
 

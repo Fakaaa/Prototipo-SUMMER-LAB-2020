@@ -13,6 +13,9 @@ namespace Audio
 	extern STATE state;
 
 	extern Sound clickMenu;
+	extern Sound movePlayer;
+	extern Sound loseLife;
+	extern Sound loseGame;
 
 	extern void Initialize();
 	extern void Unload();
