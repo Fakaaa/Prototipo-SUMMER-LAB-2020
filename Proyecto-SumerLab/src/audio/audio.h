@@ -12,6 +12,7 @@ namespace Audio
 
 	extern STATE state;
 
+	extern Sound initGameplay;
 	extern Sound clickMenu;
 	extern Sound movePlayer;
 	extern Sound loseLife;

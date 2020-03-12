@@ -14,6 +14,8 @@ namespace Screens
 	static float time = 5;
 
 	static void Menu();
+	static void Credits();
+	static void TablePoints();
 	static void Transition();
 	static void Game();
 	static void EndScreen();
@@ -33,6 +35,14 @@ namespace Screens
 			case menu:
 				Menu();
 				break;
+			
+			case credits:
+				Credits();
+				break;
+
+			case tablePoints:
+				TablePoints();
+				break;
 
 			case transition:
 				Transition();
@@ -48,6 +58,8 @@ namespace Screens
 			}
 		}
 	}
+
+	// -----------------------------
 
 	static void Menu()
 	{
@@ -73,6 +85,43 @@ namespace Screens
 
 		Arrows::DrawMenu();
 
+		EndDrawing();
+	}
+
+	static void Credits()
+	{
+		Audio::StateMenuMusic(Audio::update);
+		Audio::StateMenuOceanMusic(Audio::update);
+
+		if (IsKeyPressed(KEY_ESCAPE))
+		{
+			state = menu;
+		}
+
+		BeginDrawing();
+		ClearBackground(DARKBLUE);
+
+		Background::DrawMenu();
+
+		EndDrawing();
+	}
+
+	static void TablePoints()
+	{
+		Audio::StateMenuMusic(Audio::update);
+		Audio::StateMenuOceanMusic(Audio::update);
+
+		if (IsKeyPressed(KEY_ESCAPE))
+		{
+			state = menu;
+		}
+
+		BeginDrawing();
+		ClearBackground(DARKBLUE);
+
+		Background::DrawMenu();
+
+		DrawTextEx(Player::fontType, "Table Points", Vector2{ static_cast<float>(GetScreenWidth() / 3), static_cast<float>(GetScreenHeight() / 10) }, 140, 10, GOLD);
 		Player::DrawPlayersRecordsMenu();
 
 		EndDrawing();

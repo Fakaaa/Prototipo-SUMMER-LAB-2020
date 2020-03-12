@@ -8,8 +8,6 @@ namespace Arrows
 	Texture2D arrayOfArrowsColors[6];
 
 	ARROW arrowsGame[3];
-	//ARROW arrowMenu;
-
 	ARROW arrowsMenu[6];
 
 	static const int HEIGHT = 100;
@@ -21,11 +19,12 @@ namespace Arrows
 
 	void Initialize()
 	{
-		int randomMenu = 0;
+		int randomMenuGame = 0;
+		int randomMenuCredits = 0;
+		int randomMenuTablePoints = 0;
 		int random0Text = 0;
 		int random1Text = 0;
 		int random2Text = 0;
-
 
 		//------------
 
@@ -90,9 +89,21 @@ namespace Arrows
 
 			cont++;
 		}
-		randomMenu = GetRandomValue(0, 5);
-		arrowsMenu[randomMenu].initGame = true;
+		randomMenuGame = GetRandomValue(0, 5);
+		arrowsMenu[randomMenuGame].initGame = true;
 
+		while (randomMenuCredits == randomMenuGame)
+		{
+			randomMenuCredits = GetRandomValue(0, 5);
+		}
+		arrowsMenu[randomMenuCredits].initCredits = true;
+
+
+		while (randomMenuTablePoints == randomMenuGame || randomMenuTablePoints == randomMenuCredits)
+		{
+			randomMenuTablePoints = GetRandomValue(0, 5);
+		}
+		arrowsMenu[randomMenuTablePoints].initTablePoints = true;
 	}
 
 	void ReScaleAndLoad()
@@ -132,11 +143,12 @@ namespace Arrows
 
 	void Reset()
 	{
-
+		int randomMenuGame = 0;
+		int randomMenuCredits = 0;
+		int randomMenuTablePoints = 0;
 		int random0Text = 0;
 		int random1Text = 0;
 		int random2Text = 0;
-		int randomMenu = 0;
 
 		//---
 
@@ -177,9 +189,23 @@ namespace Arrows
 		{
 			arrowsMenu[i].initGame = false;
 		}
-		randomMenu = GetRandomValue(0, 5);
-		arrowsMenu[randomMenu].initGame = true;
+		randomMenuGame = GetRandomValue(0, 5);
+		arrowsMenu[randomMenuGame].initGame = true;
 
+		randomMenuGame = GetRandomValue(0, 5);
+		arrowsMenu[randomMenuGame].initGame = true;
+
+		while (randomMenuCredits == randomMenuGame)
+		{
+			randomMenuCredits = GetRandomValue(0, 5);
+		}
+		arrowsMenu[randomMenuCredits].initCredits = true;
+
+		while (randomMenuTablePoints == randomMenuGame || randomMenuTablePoints == randomMenuCredits)
+		{
+			randomMenuTablePoints = GetRandomValue(0, 5);
+		}
+		arrowsMenu[randomMenuTablePoints].initCredits = true;
 	}
 
 	void ChangeColor()
@@ -264,6 +290,60 @@ namespace Arrows
 		if (arrowsMenu[5].initGame == true)
 		{
 			DrawTextEx(Player::fontType, "START", Vector2{ ((arrowsMenu[5].body.x + arrowsMenu[5].body.width / 2) - (MeasureText("START", static_cast<int>(70)) / 4)), arrowsMenu[5].body.y + arrowsMenu[5].body.height / 4 }, FONT, 2, BLACK);
+		}
+
+
+
+		if (arrowsMenu[0].initCredits == true)
+		{
+			DrawTextEx(Player::fontType, "CREDITS", Vector2{ ((arrowsMenu[0].body.x + arrowsMenu[0].body.width / 2) - (MeasureText("START", static_cast<int>(85)) / 4)), arrowsMenu[0].body.y + arrowsMenu[0].body.height / 4 }, FONT, 2, BLACK);
+		}
+		if (arrowsMenu[1].initCredits == true)
+		{
+			DrawTextEx(Player::fontType, "CREDITS", Vector2{ ((arrowsMenu[1].body.x + arrowsMenu[1].body.width / 2) - (MeasureText("START", static_cast<int>(85)) / 4)), arrowsMenu[1].body.y + arrowsMenu[1].body.height / 4 }, FONT, 2, BLACK);
+		}
+		if (arrowsMenu[2].initCredits == true)
+		{
+			DrawTextEx(Player::fontType, "CREDITS", Vector2{ ((arrowsMenu[2].body.x + arrowsMenu[2].body.width / 2) - (MeasureText("START", static_cast<int>(85)) / 4)), arrowsMenu[2].body.y + arrowsMenu[2].body.height / 4 }, FONT, 2, BLACK);
+		}
+		if (arrowsMenu[3].initCredits == true)
+		{
+			DrawTextEx(Player::fontType, "CREDITS", Vector2{ ((arrowsMenu[3].body.x + arrowsMenu[3].body.width / 2) - (MeasureText("START", static_cast<int>(85)) / 4)), arrowsMenu[3].body.y + arrowsMenu[3].body.height / 4 }, FONT, 2, BLACK);
+		}
+		if (arrowsMenu[4].initCredits == true)
+		{
+			DrawTextEx(Player::fontType, "CREDITS", Vector2{ ((arrowsMenu[4].body.x + arrowsMenu[4].body.width / 2) - (MeasureText("START", static_cast<int>(85)) / 4)), arrowsMenu[4].body.y + arrowsMenu[4].body.height / 4 }, FONT, 2, BLACK);
+		}
+		if (arrowsMenu[5].initCredits == true)
+		{
+			DrawTextEx(Player::fontType, "CREDITS", Vector2{ ((arrowsMenu[5].body.x + arrowsMenu[5].body.width / 2) - (MeasureText("START", static_cast<int>(85)) / 4)), arrowsMenu[5].body.y + arrowsMenu[5].body.height / 4 }, FONT, 2, BLACK);
+		}
+
+
+
+		if (arrowsMenu[0].initTablePoints == true)
+		{
+			DrawTextEx(Player::fontType, "POINTS", Vector2{ ((arrowsMenu[0].body.x + arrowsMenu[0].body.width / 2) - (MeasureText("START", static_cast<int>(70)) / 4)), arrowsMenu[0].body.y + arrowsMenu[0].body.height / 4 }, FONT, 2, BLACK);
+		}
+		if (arrowsMenu[1].initTablePoints == true)
+		{
+			DrawTextEx(Player::fontType, "POINTS", Vector2{ ((arrowsMenu[1].body.x + arrowsMenu[1].body.width / 2) - (MeasureText("START", static_cast<int>(70)) / 4)), arrowsMenu[1].body.y + arrowsMenu[1].body.height / 4 }, FONT, 2, BLACK);
+		}
+		if (arrowsMenu[2].initTablePoints == true)
+		{
+			DrawTextEx(Player::fontType, "POINTS", Vector2{ ((arrowsMenu[2].body.x + arrowsMenu[2].body.width / 2) - (MeasureText("START", static_cast<int>(70)) / 4)), arrowsMenu[2].body.y + arrowsMenu[2].body.height / 4 }, FONT, 2, BLACK);
+		}
+		if (arrowsMenu[3].initTablePoints == true)
+		{
+			DrawTextEx(Player::fontType, "POINTS", Vector2{ ((arrowsMenu[3].body.x + arrowsMenu[3].body.width / 2) - (MeasureText("START", static_cast<int>(70)) / 4)), arrowsMenu[3].body.y + arrowsMenu[3].body.height / 4 }, FONT, 2, BLACK);
+		}
+		if (arrowsMenu[4].initTablePoints == true)
+		{
+			DrawTextEx(Player::fontType, "POINTS", Vector2{ ((arrowsMenu[4].body.x + arrowsMenu[4].body.width / 2) - (MeasureText("START", static_cast<int>(70)) / 4)), arrowsMenu[4].body.y + arrowsMenu[4].body.height / 4 }, FONT, 2, BLACK);
+		}
+		if (arrowsMenu[5].initTablePoints == true)
+		{
+			DrawTextEx(Player::fontType, "POINTS", Vector2{ ((arrowsMenu[5].body.x + arrowsMenu[5].body.width / 2) - (MeasureText("START", static_cast<int>(70)) / 4)), arrowsMenu[5].body.y + arrowsMenu[5].body.height / 4 }, FONT, 2, BLACK);
 		}
 
 	}

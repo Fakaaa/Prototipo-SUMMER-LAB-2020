@@ -5,7 +5,7 @@ namespace Screens
 {
 	enum States
 	{
-		menu, transition, game, endScrene
+		menu, credits, tablePoints, transition, game, endScrene
 	};
 
 	extern States state;

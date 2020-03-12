@@ -16,10 +16,11 @@ namespace Arrows
 		Color color;
 		int position;
 		bool initGame;
+		bool initCredits;
+		bool initTablePoints;
 	};
 
 	extern ARROW arrowsGame[3];
-	//extern ARROW arrowMenu;
 
 	extern ARROW arrowsMenu[6];
 
