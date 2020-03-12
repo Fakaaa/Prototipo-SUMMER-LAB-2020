@@ -12,10 +12,13 @@ namespace Enemies
 	const float SPEED = 400.0f;
 
 	int rememberPos;
+	float frameCounter;
+	float frameSpeed;
 
 	ENEMIES enemies[3];
 
 	Texture2D type[5];
+	Texture2D typeAnim[4];
 
 	static void CollisionWithPlayer();
 
@@ -26,7 +29,13 @@ namespace Enemies
 		Image obstacle3;
 		Image obstacle4;
 		Image obstacle5;
+		Image obstacle1Anim;
+		Image obstacle2Anim;
+		Image obstacle3Anim;
+		Image obstacle5Anim;
 
+		frameCounter = 0;
+		frameSpeed = 2;
 		rememberPos = 0;
 
 		for (int i = 0; i < MAX_ENEMIES; i++)
@@ -52,31 +61,51 @@ namespace Enemies
 		obstacle3 = LoadImage("assets/enemies/obstaculo 3.png");
 		obstacle4 = LoadImage("assets/enemies/obstaculo 4.png");
 		obstacle5 = LoadImage("assets/enemies/obstaculo 5.png");
+		obstacle1Anim = LoadImage("assets/enemies/obstaculo 1-2.png");
+		obstacle2Anim = LoadImage("assets/enemies/obstaculo 2-2.png");
+		obstacle3Anim = LoadImage("assets/enemies/obstaculo 3-2.png");
+		obstacle5Anim = LoadImage("assets/enemies/obstaculo 5-2.png");
 		ImageResize(&obstacle1, WIDTH, HEIGHT);
 		ImageResize(&obstacle2, WIDTH, HEIGHT);
 		ImageResize(&obstacle3, WIDTH, HEIGHT);
 		ImageResize(&obstacle4, WIDTH + 60, HEIGHT);
 		ImageResize(&obstacle5, WIDTH, HEIGHT);
+		ImageResize(&obstacle1Anim, WIDTH, HEIGHT);
+		ImageResize(&obstacle2Anim, WIDTH, HEIGHT);
+		ImageResize(&obstacle3Anim, WIDTH, HEIGHT);
+		ImageResize(&obstacle5Anim, WIDTH, HEIGHT);
 		type[0] = LoadTextureFromImage(obstacle1);
 		type[1] = LoadTextureFromImage(obstacle2);
 		type[2] = LoadTextureFromImage(obstacle3);
 		type[3] = LoadTextureFromImage(obstacle4);
 		type[4] = LoadTextureFromImage(obstacle5);
+		typeAnim[0] = LoadTextureFromImage(obstacle1Anim);
+		typeAnim[1] = LoadTextureFromImage(obstacle2Anim);
+		typeAnim[2] = LoadTextureFromImage(obstacle3Anim);
+		typeAnim[3] = LoadTextureFromImage(obstacle5Anim);
 
 		UnloadImage(obstacle1);
 		UnloadImage(obstacle2);
 		UnloadImage(obstacle3);
 		UnloadImage(obstacle4);
 		UnloadImage(obstacle5);
+		UnloadImage(obstacle1Anim);
+		UnloadImage(obstacle2Anim);
+		UnloadImage(obstacle3Anim);
+		UnloadImage(obstacle5Anim);
 	}
 
 	void Unload()
 	{
-		UnloadTexture(type[0]);
-		UnloadTexture(type[1]);
-		UnloadTexture(type[2]);
-		UnloadTexture(type[3]);
-		UnloadTexture(type[4]);
+		for (int i = 0; i < 5; i++)
+		{
+			UnloadTexture(type[i]);
+
+			if (i < 4)
+			{
+				UnloadTexture(typeAnim[i]);
+			}
+		}
 	}
 
 	void Move()
@@ -135,24 +164,55 @@ namespace Enemies
 
 		for (int i = 0; i < MAX_ENEMIES; i++)
 		{
+			frameCounter++;
+
 			if (enemies[i].aggressive == true)
 			{
-
-				if (enemies[i].numTexture == 3)
+				if (frameCounter >= (60/frameSpeed))
 				{
-					DrawTexture(type[enemies[i].numTexture], static_cast<int>(enemies[i].body.x - 85), static_cast<int>(enemies[i].body.y), WHITE);
-				}
-				else if (enemies[i].numTexture == 2)
-				{
-					DrawTexture(type[enemies[i].numTexture], static_cast<int>(enemies[i].body.x - 45), static_cast<int>(enemies[i].body.y), WHITE);
-				}
-				else if (enemies[i].numTexture == 4)
-				{
-					DrawTexture(type[enemies[i].numTexture], static_cast<int>(enemies[i].body.x - 55), static_cast<int>(enemies[i].body.y), WHITE);
-				}
-				else
-				{
+					/*
+					if (enemies[i].numTexture == 3)
+					{
+						DrawTexture(type[enemies[i].numTexture], static_cast<int>(enemies[i].body.x - 85), static_cast<int>(enemies[i].body.y), WHITE);
+					}
+					else if (enemies[i].numTexture == 2)
+					{
+						DrawTexture(type[enemies[i].numTexture], static_cast<int>(enemies[i].body.x - 45), static_cast<int>(enemies[i].body.y), WHITE);
+					}
+					else if (enemies[i].numTexture == 4)
+					{
+						DrawTexture(type[enemies[i].numTexture], static_cast<int>(enemies[i].body.x - 55), static_cast<int>(enemies[i].body.y), WHITE);
+					}
+					else
+					{
+						DrawTexture(type[enemies[i].numTexture], static_cast<int>(enemies[i].body.x), static_cast<int>(enemies[i].body.y), WHITE);
+					}
+					*/
 					DrawTexture(type[enemies[i].numTexture], static_cast<int>(enemies[i].body.x), static_cast<int>(enemies[i].body.y), WHITE);
+
+
+					frameCounter = 0;
+				}
+				else if (frameCounter <= (60/frameSpeed))
+				{
+					/*
+					if (enemies[i].numTexture == 2)
+					{
+						DrawTexture(typeAnim[2], static_cast<int>(enemies[i].body.x - 45), static_cast<int>(enemies[i].body.y), WHITE);
+					}
+					if (enemies[i].numTexture == 4)
+					{
+						DrawTexture(typeAnim[3], static_cast<int>(enemies[i].body.x - 55), static_cast<int>(enemies[i].body.y), WHITE);
+					}
+					*/
+					if (enemies[i].numTexture == 3)
+					{
+						DrawTexture(type[enemies[i].numTexture], static_cast<int>(enemies[i].body.x), static_cast<int>(enemies[i].body.y), WHITE);
+					}
+					else
+					{
+						DrawTexture(typeAnim[enemies[i].numTexture], static_cast<int>(enemies[i].body.x), static_cast<int>(enemies[i].body.y), WHITE);
+					}
 				}
 			}
 		}
