@@ -81,7 +81,7 @@ namespace Screens
 
 		Background::DrawMenu();
 		DrawTextEx(Player::fontType, "Into the Deep", Vector2{ static_cast<float>(GetScreenWidth() / 3), static_cast<float>(GetScreenHeight() / 3)}, 140, 10,GOLD);
-		DrawText("v0.5", 30, GetScreenHeight() - 60, 30, WHITE);
+		DrawText("v0.6", 30, GetScreenHeight() - 60, 30, WHITE);
 
 		Arrows::DrawMenu();
 
