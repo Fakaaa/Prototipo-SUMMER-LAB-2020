@@ -167,6 +167,16 @@ namespace Player
 			{
 				Screens::state = Screens::transition;
 				Audio::TransitionInitialize();
+				PlaySound(Audio::initGameplay);
+			}
+			else if (Arrows::arrowsMenu[0].initCredits == true)
+			{
+				Screens::state = Screens::credits;
+				PlaySound(Audio::clickMenu);
+			}
+			else if (Arrows::arrowsMenu[0].initTablePoints == true)
+			{
+				Screens::state = Screens::tablePoints;
 				PlaySound(Audio::clickMenu);
 			}
 		}
@@ -176,8 +186,18 @@ namespace Player
 			{
 				Screens::state = Screens::transition;
 				Audio::TransitionInitialize();
+				PlaySound(Audio::initGameplay);
+			}
+			else if (Arrows::arrowsMenu[1].initCredits == true)
+			{
+				Screens::state = Screens::credits;
 				PlaySound(Audio::clickMenu);
-			}		
+			}
+			else if (Arrows::arrowsMenu[1].initTablePoints == true)
+			{
+				Screens::state = Screens::tablePoints;
+				PlaySound(Audio::clickMenu);
+			}
 		}
 		if (IsKeyPressed(KEY_THREE)) // COLOR ROJO
 		{
@@ -185,8 +205,18 @@ namespace Player
 			{
 				Screens::state = Screens::transition;
 				Audio::TransitionInitialize();
+				PlaySound(Audio::initGameplay);
+			}
+			else if (Arrows::arrowsMenu[2].initCredits == true)
+			{
+				Screens::state = Screens::credits;
 				PlaySound(Audio::clickMenu);
-			}			
+			}
+			else if (Arrows::arrowsMenu[2].initTablePoints == true)
+			{
+				Screens::state = Screens::tablePoints;
+				PlaySound(Audio::clickMenu);
+			}
 		}
 		if (IsKeyPressed(KEY_FOUR)) // COLOR VERDE
 		{
@@ -194,8 +224,18 @@ namespace Player
 			{
 				Screens::state = Screens::transition;
 				Audio::TransitionInitialize();
+				PlaySound(Audio::initGameplay);
+			}
+			else if (Arrows::arrowsMenu[3].initCredits == true)
+			{
+				Screens::state = Screens::credits;
 				PlaySound(Audio::clickMenu);
-			}			
+			}
+			else if (Arrows::arrowsMenu[3].initTablePoints == true)
+			{
+				Screens::state = Screens::tablePoints;
+				PlaySound(Audio::clickMenu);
+			}
 		}
 		if (IsKeyPressed(KEY_FIVE)) // COLOR AZUL
 		{
@@ -203,6 +243,16 @@ namespace Player
 			{
 				Screens::state = Screens::transition;
 				Audio::TransitionInitialize();
+				PlaySound(Audio::initGameplay);
+			}
+			else if (Arrows::arrowsMenu[4].initCredits == true)
+			{
+				Screens::state = Screens::credits;
+				PlaySound(Audio::clickMenu);
+			}
+			else if (Arrows::arrowsMenu[4].initTablePoints == true)
+			{
+				Screens::state = Screens::tablePoints;
 				PlaySound(Audio::clickMenu);
 			}
 		}
@@ -212,8 +262,18 @@ namespace Player
 			{
 				Screens::state = Screens::transition;
 				Audio::TransitionInitialize();
+				PlaySound(Audio::initGameplay);
+			}
+			else if (Arrows::arrowsMenu[5].initCredits == true)
+			{
+				Screens::state = Screens::credits;
 				PlaySound(Audio::clickMenu);
-			}			
+			}
+			else if (Arrows::arrowsMenu[5].initTablePoints == true)
+			{
+				Screens::state = Screens::tablePoints;
+				PlaySound(Audio::clickMenu);
+			}
 		}
 	}
 
@@ -298,11 +358,11 @@ namespace Player
 	
 	void DrawPlayersRecordsMenu()
 	{
-		DrawTextEx(fontType, FormatText("1ra posicion - %i", static_cast<int>(playersRecords[0])), Vector2{ 50, 50}, 50, 2, WHITE);
-		DrawTextEx(fontType, FormatText("2da posicion - %i", static_cast<int>(playersRecords[1])), Vector2{ 50, 150}, 50, 2, WHITE);
-		DrawTextEx(fontType, FormatText("3ra posicion - %i", static_cast<int>(playersRecords[2])), Vector2{ 50, 250}, 50, 2, WHITE);
-		DrawTextEx(fontType, FormatText("4ta posicion - %i", static_cast<int>(playersRecords[3])), Vector2{ 50, 350}, 50, 2, WHITE);
-		DrawTextEx(fontType, FormatText("5ta posicion - %i", static_cast<int>(playersRecords[4])), Vector2{ 50, 450}, 50, 2, WHITE);
+		DrawTextEx(fontType, FormatText("1ra posicion - %i", static_cast<int>(playersRecords[0])), Vector2{ static_cast<float>(GetScreenWidth() / 3), 300}, 60, 2, WHITE);
+		DrawTextEx(fontType, FormatText("2da posicion - %i", static_cast<int>(playersRecords[1])), Vector2{ static_cast<float>(GetScreenWidth() / 3), 500}, 60, 2, WHITE);
+		DrawTextEx(fontType, FormatText("3ra posicion - %i", static_cast<int>(playersRecords[2])), Vector2{ static_cast<float>(GetScreenWidth() / 3), 700}, 60, 2, WHITE);
+		DrawTextEx(fontType, FormatText("4ta posicion - %i", static_cast<int>(playersRecords[3])), Vector2{ static_cast<float>(GetScreenWidth() / 3), 900}, 60, 2, WHITE);
+		DrawTextEx(fontType, FormatText("5ta posicion - %i", static_cast<int>(playersRecords[4])), Vector2{ static_cast<float>(GetScreenWidth() / 3), 1100}, 60, 2, WHITE);
 	}
 
 	// ----------------------

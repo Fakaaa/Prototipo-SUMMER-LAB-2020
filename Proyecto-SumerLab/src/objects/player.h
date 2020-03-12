@@ -28,7 +28,6 @@ namespace Player
 	extern void InputMenu();
 	extern void DistanceTraveled();
 	extern void RotationLife();
-	//static void DoTeleport(Texture2D subamrino);
 	extern void Lose();
 	extern void Reset();
 	extern void Draw();
