@@ -35,7 +35,7 @@ namespace Enemies
 		Image obstacle5Anim;
 
 		frameCounter = 0;
-		frameSpeed = 2;
+		frameSpeed = 8;
 		rememberPos = 0;
 
 		for (int i = 0; i < MAX_ENEMIES; i++)
@@ -161,61 +161,38 @@ namespace Enemies
 
 	void Draw()
 	{
-
-		for (int i = 0; i < MAX_ENEMIES; i++)
-		{
 			frameCounter++;
 
-			if (enemies[i].aggressive == true)
+			if (frameCounter >= (60 / frameSpeed))
 			{
-				if (frameCounter >= (60/frameSpeed))
+				for (int i = 0; i < MAX_ENEMIES; i++)
 				{
-					/*
-					if (enemies[i].numTexture == 3)
-					{
-						DrawTexture(type[enemies[i].numTexture], static_cast<int>(enemies[i].body.x - 85), static_cast<int>(enemies[i].body.y), WHITE);
-					}
-					else if (enemies[i].numTexture == 2)
-					{
-						DrawTexture(type[enemies[i].numTexture], static_cast<int>(enemies[i].body.x - 45), static_cast<int>(enemies[i].body.y), WHITE);
-					}
-					else if (enemies[i].numTexture == 4)
-					{
-						DrawTexture(type[enemies[i].numTexture], static_cast<int>(enemies[i].body.x - 55), static_cast<int>(enemies[i].body.y), WHITE);
-					}
-					else
+					if (enemies[i].aggressive == true)
 					{
 						DrawTexture(type[enemies[i].numTexture], static_cast<int>(enemies[i].body.x), static_cast<int>(enemies[i].body.y), WHITE);
 					}
-					*/
-					DrawTexture(type[enemies[i].numTexture], static_cast<int>(enemies[i].body.x), static_cast<int>(enemies[i].body.y), WHITE);
-
-
-					frameCounter = 0;
 				}
-				else if (frameCounter <= (60/frameSpeed))
+
+				frameCounter = 0;
+			}
+			else if (frameCounter <= (60 / frameSpeed))
+			{
+				for (int i = 0; i < MAX_ENEMIES; i++)
 				{
-					/*
-					if (enemies[i].numTexture == 2)
+					if (enemies[i].aggressive == true)
 					{
-						DrawTexture(typeAnim[2], static_cast<int>(enemies[i].body.x - 45), static_cast<int>(enemies[i].body.y), WHITE);
-					}
-					if (enemies[i].numTexture == 4)
-					{
-						DrawTexture(typeAnim[3], static_cast<int>(enemies[i].body.x - 55), static_cast<int>(enemies[i].body.y), WHITE);
-					}
-					*/
-					if (enemies[i].numTexture == 3)
-					{
-						DrawTexture(type[enemies[i].numTexture], static_cast<int>(enemies[i].body.x), static_cast<int>(enemies[i].body.y), WHITE);
-					}
-					else
-					{
-						DrawTexture(typeAnim[enemies[i].numTexture], static_cast<int>(enemies[i].body.x), static_cast<int>(enemies[i].body.y), WHITE);
+						if (enemies[i].numTexture == 3 || enemies[i].numTexture == 4)
+						{
+							DrawTexture(type[enemies[i].numTexture], static_cast<int>(enemies[i].body.x), static_cast<int>(enemies[i].body.y), WHITE);
+						}
+						else
+						{
+							DrawTexture(typeAnim[enemies[i].numTexture], static_cast<int>(enemies[i].body.x), static_cast<int>(enemies[i].body.y), WHITE);
+						}
 					}
 				}
 			}
-		}
+
 	}
 
 	// ----------------------------------
