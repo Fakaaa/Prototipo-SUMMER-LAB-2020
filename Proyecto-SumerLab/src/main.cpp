@@ -34,7 +34,6 @@ static void Initialize()
 	SetTargetFPS(60);
 
 	Background::LoadBackground();
-
 	Player::Initialize();
 	Arrows::Initialize();
 	Enemies::Initialize();
@@ -49,5 +48,6 @@ static void UnloadAssets()
 	Arrows::UnLoad();
 	Enemies::Unload();
 	Audio::Unload();
+	Screens::Unload();
 	CloseWindow();
 }

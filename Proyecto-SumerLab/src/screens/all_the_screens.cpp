@@ -10,6 +10,9 @@ namespace Screens
 {
 	States state;
 
+	static Texture2D creditN1;
+	static Texture2D creditN2;
+
 	static bool start = false;
 	static float time = 5;
 
@@ -24,6 +27,26 @@ namespace Screens
 	void Initialize()
 	{
 		state = menu;
+
+		Image credits1;
+		Image credits2;
+
+		credits1 = LoadImage("assets/background/BGCreditos1.png");
+		ImageResize(&credits1, 900, 500);
+		creditN1 = LoadTextureFromImage(credits1);
+
+		credits2 = LoadImage("assets/background/BGCreditos2.png");
+		ImageResize(&credits2, 900, 500);
+		creditN2 = LoadTextureFromImage(credits2);
+
+		UnloadImage(credits1);
+		UnloadImage(credits2);
+	}
+
+	void Unload()
+	{
+		UnloadTexture(creditN1);
+		UnloadTexture(creditN2);
 	}
 
 	void screenControler()
@@ -80,8 +103,8 @@ namespace Screens
 		ClearBackground(DARKBLUE);
 
 		Background::DrawMenu();
-		DrawTextEx(Player::fontType, "Into the Deep", Vector2{ static_cast<float>(GetScreenWidth() / 3), static_cast<float>(GetScreenHeight() / 3)}, 140, 10,GOLD);
-		DrawText("v0.6", 30, GetScreenHeight() - 60, 30, WHITE);
+		DrawTextEx(Player::fontType, "Into the Deep", Vector2{ static_cast<float>(GetScreenWidth() / 3.5), static_cast<float>(GetScreenHeight() / 3)}, 150, 10,GOLD);
+		DrawText("v0.7", 30, GetScreenHeight() - 60, 30, WHITE);
 
 		Arrows::DrawMenu();
 
@@ -102,6 +125,9 @@ namespace Screens
 		ClearBackground(DARKBLUE);
 
 		Background::DrawMenu();
+
+		DrawTexture(creditN1, GetScreenWidth() / 2 - creditN1.width / 2, GetScreenHeight() / 2 - (creditN1.height / 2 + creditN1.height / 3), WHITE);
+		DrawTexture(creditN2, GetScreenWidth() / 2 - creditN2.width / 2, GetScreenHeight() / 2, WHITE);
 
 		EndDrawing();
 	}
@@ -179,7 +205,7 @@ namespace Screens
 		Background::DrawGamePlay();
 
 		Timer();
-		DrawText(FormatText("Distancia %i", static_cast<int>(Player::player.distaceRecord)), GetScreenWidth() / 2 - (100 * 2), GetScreenHeight() / 6, 80, GOLD);
+		DrawTextEx(Player::fontType, FormatText("Distancia %i", static_cast<int>(Player::player.distaceRecord)), Vector2{ static_cast<float>(GetScreenWidth() / 2 - (100 * 2)), static_cast<float>(GetScreenHeight() / 6) }, 120, 10, GOLD);
 		Player::DrawPlayersRecordsEndGame();
 
 		EndDrawing();
@@ -189,7 +215,7 @@ namespace Screens
 
 	static void Timer()
 	{
-		const int FONT = 80;
+		const int FONT = 140;
 
 		if (start == false)
 		{
@@ -214,23 +240,23 @@ namespace Screens
 
 		if (time > 4 && time <= 5)
 		{
-			DrawText("5", GetScreenWidth() / 2, GetScreenHeight() / 2, FONT, WHITE);
+			DrawTextEx(Player::fontType, "5", Vector2{ static_cast<float>(GetScreenWidth() / 2),  static_cast<float>(GetScreenHeight() / 2) }, FONT, 2, RED);
 		}
 		else if (time > 3 && time <= 4)
 		{
-			DrawText("4", GetScreenWidth() / 2, GetScreenHeight() / 2, FONT, WHITE);
+			DrawTextEx(Player::fontType, "4", Vector2{ static_cast<float>(GetScreenWidth() / 2),  static_cast<float>(GetScreenHeight() / 2) }, FONT, 2, RED);
 		}
 		else if (time > 2 && time <= 3)
 		{
-			DrawText("3", GetScreenWidth() / 2, GetScreenHeight() / 2, FONT, WHITE);
+			DrawTextEx(Player::fontType, "3", Vector2{ static_cast<float>(GetScreenWidth() / 2),  static_cast<float>(GetScreenHeight() / 2) }, FONT, 2, RED);
 		}
 		else if (time > 1 && time <= 2)
 		{
-			DrawText("2", GetScreenWidth() / 2, GetScreenHeight() / 2, FONT, WHITE);
+			DrawTextEx(Player::fontType, "2", Vector2{ static_cast<float>(GetScreenWidth() / 2),  static_cast<float>(GetScreenHeight() / 2) }, FONT, 2, RED);
 		}
 		else if (time > 0 && time <= 1)
 		{
-			DrawText("1", GetScreenWidth() / 2, GetScreenHeight() / 2, FONT, WHITE);
+			DrawTextEx(Player::fontType, "1", Vector2{ static_cast<float>(GetScreenWidth() / 2),  static_cast<float>(GetScreenHeight() / 2) }, FONT, 2, RED);
 		}
 	}
 }
