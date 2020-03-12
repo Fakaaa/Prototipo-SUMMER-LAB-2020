@@ -11,9 +11,9 @@ namespace Enemies
 
 	const float SPEED = 400.0f;
 
-	int rememberPos;
-	float frameCounter;
-	float frameSpeed;
+	static int rememberPos;
+	static float frameCounter;
+	static const float frameSpeed = 0.75f;
 
 	ENEMIES enemies[3];
 
@@ -35,7 +35,6 @@ namespace Enemies
 		Image obstacle5Anim;
 
 		frameCounter = 0;
-		frameSpeed = 8;
 		rememberPos = 0;
 
 		for (int i = 0; i < MAX_ENEMIES; i++)
@@ -161,9 +160,9 @@ namespace Enemies
 
 	void Draw()
 	{
-			frameCounter++;
+			frameCounter += GetFrameTime();
 
-			if (frameCounter >= (60 / frameSpeed))
+			if (frameCounter >= frameSpeed / 2)
 			{
 				for (int i = 0; i < MAX_ENEMIES; i++)
 				{
@@ -172,10 +171,13 @@ namespace Enemies
 						DrawTexture(type[enemies[i].numTexture], static_cast<int>(enemies[i].body.x), static_cast<int>(enemies[i].body.y), WHITE);
 					}
 				}
-
-				frameCounter = 0;
+				
+				if (frameCounter >= frameSpeed)
+				{
+					frameCounter = 0;
+				}
 			}
-			else if (frameCounter <= (60 / frameSpeed))
+			else if (frameCounter < frameSpeed / 2)
 			{
 				for (int i = 0; i < MAX_ENEMIES; i++)
 				{
@@ -192,7 +194,6 @@ namespace Enemies
 					}
 				}
 			}
-
 	}
 
 	// ----------------------------------

@@ -84,8 +84,6 @@ namespace Player
 
 		if (IsKeyPressed(KEY_ONE)) // COLOR AMARILLO
 		{
-			//isTeleporting = true;
-
 			for (int i = 0; i < 3; i++)
 			{
 				if (Arrows::arrowsGame[i].position == 0)
@@ -290,7 +288,7 @@ namespace Player
 		{
 			aux_rotation += SPEED_ROTATION * GetFrameTime();
 		}
-		if (aux_rotation >= 360)
+		if (aux_rotation >= 180)
 		{
 			rotation = false;
 			aux_rotation = 0;
@@ -303,6 +301,7 @@ namespace Player
 		{
 			Screens::state = Screens::endScrene;
 			Background::stopTransition = false;
+			rotation = false;
 			SavePlayersRecords();
 			PlaySound(Audio::loseGame);
 		}

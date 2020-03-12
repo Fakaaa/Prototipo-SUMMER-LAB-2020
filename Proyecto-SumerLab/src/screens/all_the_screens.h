@@ -11,6 +11,7 @@ namespace Screens
 	extern States state;
 
 	extern void Initialize();
+	extern void Unload();
 	extern void screenControler();
 }
 
