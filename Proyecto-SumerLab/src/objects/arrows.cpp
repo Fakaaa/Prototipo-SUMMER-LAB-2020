@@ -4,6 +4,7 @@
 
 namespace Arrows
 {
+	//Color arrayOfColors[6] = { YELLOW, ORANGE, RED, GREEN, BLUE, SKYBLUE };
 	Color arrayOfColors[6] = { YELLOW, ORANGE, RED, GREEN, BLUE, SKYBLUE };
 	Texture2D arrayOfArrowsColors[6];
 
