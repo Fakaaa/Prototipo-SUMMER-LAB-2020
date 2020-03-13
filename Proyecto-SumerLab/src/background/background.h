@@ -17,6 +17,7 @@ namespace Background
 	extern void LoadBackground();
 	extern void Unload();
 	extern void DrawMenu();
+	extern void DrawCredits();
 	extern void DrawTransition();
 	extern void DrawGamePlay();
 }

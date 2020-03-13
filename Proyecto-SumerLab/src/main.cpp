@@ -48,6 +48,5 @@ static void UnloadAssets()
 	Arrows::UnLoad();
 	Enemies::Unload();
 	Audio::Unload();
-	Screens::Unload();
 	CloseWindow();
 }

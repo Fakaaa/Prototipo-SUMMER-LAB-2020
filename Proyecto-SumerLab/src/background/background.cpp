@@ -12,6 +12,9 @@ namespace Background
 	static BACKGROUND backgroundGame4;
 
 	static BACKGROUND backgroundMenu;
+	static BACKGROUND backgroundCredits;
+	static BACKGROUND backgroundCreditsText1;
+	static BACKGROUND backgroundCreditsText2;
 	static BACKGROUND backgroundBubbles;
 
 	static BACKGROUND backgroundBubbles1;
@@ -48,6 +51,9 @@ namespace Background
 		scrolling_back3 = 0.0f;
 
 		Image menu;
+		Image creditsText1;
+		Image creditsText2;
+		Image credits;
 		Image bubbles;
 
 		Image bubbles1;
@@ -95,6 +101,21 @@ namespace Background
 		ImageResize(&menu, GetScreenWidth(), GetScreenHeight());
 		backgroundMenu.texture = LoadTextureFromImage(menu);
 		
+		// -------------------
+		// credits
+
+		creditsText1 = LoadImage("assets/background/BGCreditos1.png");
+		ImageResize(&creditsText1, 900, 500);
+		backgroundCreditsText1.texture = LoadTextureFromImage(creditsText1);
+
+		creditsText2 = LoadImage("assets/background/BGCreditos2.png");
+		ImageResize(&creditsText2, 900, 500);
+		backgroundCreditsText2.texture = LoadTextureFromImage(creditsText2);
+		
+		credits = LoadImage("assets/background/BGCreditos.png");
+		ImageResize(&credits, GetScreenWidth(), GetScreenHeight());
+		backgroundCredits.texture = LoadTextureFromImage(credits);
+
 		//--------------------
 		// transicion
 
@@ -129,6 +150,9 @@ namespace Background
 		UnloadImage(gamePlayBack3);
 		UnloadImage(gamePlayBack4);
 		UnloadImage(menu);
+		UnloadImage(credits);
+		UnloadImage(creditsText1);
+		UnloadImage(creditsText2);
 		UnloadImage(bubbles);
 		UnloadImage(bubbles1);
 		UnloadImage(bubbles2);
@@ -164,6 +188,16 @@ namespace Background
 
 		DrawTextureV(backgroundMenu.texture, Vector2{ backgroundMenu.x, backgroundMenu.y }, WHITE);
 	}
+
+	void DrawCredits()
+	{
+		DrawTextureV(backgroundCredits.texture, Vector2{ backgroundMenu.x, backgroundMenu.y }, WHITE);
+
+		DrawTexture(backgroundCreditsText1.texture, GetScreenWidth() / 2 - backgroundCreditsText1.texture.width / 2, GetScreenHeight() / 2 - (backgroundCreditsText1.texture.height / 2 + backgroundCreditsText1.texture.height / 3), WHITE);
+		DrawTexture(backgroundCreditsText2.texture, GetScreenWidth() / 2 - backgroundCreditsText2.texture.width / 2, GetScreenHeight() / 2, WHITE);
+	}
+
+
 
 	void DrawTransition()
 	{
