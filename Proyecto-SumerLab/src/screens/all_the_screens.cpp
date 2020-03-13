@@ -10,9 +10,6 @@ namespace Screens
 {
 	States state;
 
-	static Texture2D creditN1;
-	static Texture2D creditN2;
-
 	static bool start = false;
 	static float time = 5;
 
@@ -27,26 +24,6 @@ namespace Screens
 	void Initialize()
 	{
 		state = menu;
-
-		Image credits1;
-		Image credits2;
-
-		credits1 = LoadImage("assets/background/BGCreditos1.png");
-		ImageResize(&credits1, 900, 500);
-		creditN1 = LoadTextureFromImage(credits1);
-
-		credits2 = LoadImage("assets/background/BGCreditos2.png");
-		ImageResize(&credits2, 900, 500);
-		creditN2 = LoadTextureFromImage(credits2);
-
-		UnloadImage(credits1);
-		UnloadImage(credits2);
-	}
-
-	void Unload()
-	{
-		UnloadTexture(creditN1);
-		UnloadTexture(creditN2);
 	}
 
 	void screenControler()
@@ -124,10 +101,7 @@ namespace Screens
 		BeginDrawing();
 		ClearBackground(DARKBLUE);
 
-		Background::DrawMenu();
-
-		DrawTexture(creditN1, GetScreenWidth() / 2 - creditN1.width / 2, GetScreenHeight() / 2 - (creditN1.height / 2 + creditN1.height / 3), WHITE);
-		DrawTexture(creditN2, GetScreenWidth() / 2 - creditN2.width / 2, GetScreenHeight() / 2, WHITE);
+		Background::DrawCredits();
 
 		EndDrawing();
 	}
