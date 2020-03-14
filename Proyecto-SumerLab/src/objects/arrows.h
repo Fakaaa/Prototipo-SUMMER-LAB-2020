@@ -10,26 +10,27 @@ namespace Arrows
 
 	struct ARROW
 	{
-		Texture2D bodyTexture;
-		Vector2 texturePos;
+		Texture2D texture;
+		Vector2 pos;
 		Rectangle body;
 		Color color;
 		int position;
 		bool initGame;
 		bool initCredits;
 		bool initTablePoints;
+		bool exit;
 	};
 
 	extern ARROW arrowsGame[3];
-
 	extern ARROW arrowsMenu[6];
+	extern ARROW arrowExit;
 
 	extern void Initialize();
 	extern void UnLoad();
-	extern void ReScaleAndLoad();
 	extern void Reset();
 	extern void ChangeColor();
 	extern void DrawGamePlay();
+	extern void DrawCredits_TalbePoints();
 	extern void DrawMenu();
 }
 

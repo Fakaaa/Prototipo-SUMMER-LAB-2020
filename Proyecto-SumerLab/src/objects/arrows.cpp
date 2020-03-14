@@ -4,12 +4,12 @@
 
 namespace Arrows
 {
-	//Color arrayOfColors[6] = { YELLOW, ORANGE, RED, GREEN, BLUE, SKYBLUE };
-	Color arrayOfColors[6] = { YELLOW, ORANGE, RED, GREEN, BLUE, SKYBLUE };
+	Color arrayOfColors[6] = { BLACK, BLUE, WHITE, YELLOW, ORANGE, RED };
 	Texture2D arrayOfArrowsColors[6];
 
 	ARROW arrowsGame[3];
 	ARROW arrowsMenu[6];
+	ARROW arrowExit;
 
 	static const int HEIGHT = 100;
 	static const int WIDTH = 200;
@@ -17,6 +17,8 @@ namespace Arrows
 	static int memory_random0 = 0;
 	static int memory_random1 = 0;
 	static int memory_random2 = 0;
+
+	static void ReScaleAndLoad();
 
 	void Initialize()
 	{
@@ -33,44 +35,38 @@ namespace Arrows
 
 		//------------
 
-		arrowsGame[0].bodyTexture.height = HEIGHT;
-		arrowsGame[0].bodyTexture.width = WIDTH;
-		arrowsGame[0].texturePos.x = static_cast<float>(GetScreenWidth() / 2 - WIDTH / 2);
-		arrowsGame[0].texturePos.y = static_cast<float>(GetScreenHeight() / 4);
+		arrowsGame[0].pos.x = static_cast<float>(GetScreenWidth() / 2 - WIDTH / 2);
+		arrowsGame[0].pos.y = static_cast<float>(GetScreenHeight() / 4);
 
 		random0Text = GetRandomValue(0, 5);
-		arrowsGame[0].bodyTexture = arrayOfArrowsColors[random0Text];
+		arrowsGame[0].texture = arrayOfArrowsColors[random0Text];
 		arrowsGame[0].position = random0Text;
 
 		//------------
 
-		arrowsGame[1].bodyTexture.height = HEIGHT;
-		arrowsGame[1].bodyTexture.width = WIDTH;
-		arrowsGame[1].texturePos.x = static_cast<float>(GetScreenWidth() / 2 - WIDTH / 2);
-		arrowsGame[1].texturePos.y = static_cast<float>(GetScreenHeight() / 4 + GetScreenHeight() / 4);
+		arrowsGame[1].pos.x = static_cast<float>(GetScreenWidth() / 2 - WIDTH / 2);
+		arrowsGame[1].pos.y = static_cast<float>(GetScreenHeight() / 4 + GetScreenHeight() / 4);
 
 		do
 		{
 			random1Text = GetRandomValue(0, 5);
 		} while (random1Text == random0Text);
-		arrowsGame[1].bodyTexture = arrayOfArrowsColors[random1Text];
+		arrowsGame[1].texture = arrayOfArrowsColors[random1Text];
 		arrowsGame[1].position = random1Text;
 
 		//------------
 
-		arrowsGame[2].bodyTexture.height = HEIGHT;
-		arrowsGame[2].bodyTexture.width = WIDTH;
-		arrowsGame[2].texturePos.x = static_cast<float>(GetScreenWidth() / 2 - WIDTH / 2);
-		arrowsGame[2].texturePos.y = static_cast<float>(GetScreenHeight() / 4 + GetScreenHeight() / 4 + GetScreenHeight() / 4);
+		arrowsGame[2].pos.x = static_cast<float>(GetScreenWidth() / 2 - WIDTH / 2);
+		arrowsGame[2].pos.y = static_cast<float>(GetScreenHeight() / 4 + GetScreenHeight() / 4 + GetScreenHeight() / 4);
 
 		do
 		{
 			random2Text = GetRandomValue(0, 5);
 		} while (random2Text == random0Text || random2Text == random1Text);
-		arrowsGame[2].bodyTexture = arrayOfArrowsColors[random2Text];
+		arrowsGame[2].texture = arrayOfArrowsColors[random2Text];
 		arrowsGame[2].position = random2Text;
 
-		//------------
+		//----------------------------------
 
 		int distance = GetScreenWidth() / 7;
 		int cont = 1;
@@ -90,27 +86,35 @@ namespace Arrows
 
 			cont++;
 		}
-		randomMenuGame = GetRandomValue(0, 5);
+		randomMenuGame = GetRandomValue(0, 4);
 		arrowsMenu[randomMenuGame].initGame = true;
 		
 		do
 		{
-			randomMenuCredits = GetRandomValue(0, 5);
+			randomMenuCredits = GetRandomValue(0, 4);
 		} while (randomMenuCredits == randomMenuGame);
 		
 		arrowsMenu[randomMenuCredits].initCredits = true;
 
 		do
 		{
-			randomMenuTablePoints = GetRandomValue(0, 5);
+			randomMenuTablePoints = GetRandomValue(0, 4);
 		} while (randomMenuTablePoints == randomMenuGame || randomMenuTablePoints == randomMenuCredits);
 
 		arrowsMenu[randomMenuTablePoints].initTablePoints = true;
+
+		// ---------------------------------
+
+		arrowExit.pos.x = static_cast<float>(HEIGHT);
+		arrowExit.pos.y = static_cast<float>(GetScreenHeight() - arrowExit.texture.height);
+		arrowExit.exit = true;
+		arrowExit.color = arrayOfColors[5];
 	}
 
-	void ReScaleAndLoad()
+	static void ReScaleAndLoad()
 	{
 		Image arrows[6];
+		Image button;
 
 		arrows[0] = LoadImage("assets/arrows/arrow1.png");
 		arrows[1] = LoadImage("assets/arrows/arrow2.png");
@@ -118,21 +122,23 @@ namespace Arrows
 		arrows[3] = LoadImage("assets/arrows/arrow4.png");
 		arrows[4] = LoadImage("assets/arrows/arrow5.png");
 		arrows[5] = LoadImage("assets/arrows/arrow6.png");
+		
+		button = LoadImage("assets/arrows/boton de salir.png");
 
 		for (int i = 0; i < 6; i++)
 		{
 			ImageResize(&arrows[i], WIDTH, HEIGHT);
-		}
-
-		for (int i = 0; i < 6; i++)
-		{
 			arrayOfArrowsColors[i] = LoadTextureFromImage(arrows[i]);
 		}
+
+		ImageResize(&button, WIDTH * 2, HEIGHT * 2);
+		arrowExit.texture = LoadTextureFromImage(button);
 
 		for (int i = 0; i < 6; i++)
 		{
 			UnloadImage(arrows[i]);
 		}
+		UnloadImage(button);
 	}
 
 	void UnLoad()
@@ -154,35 +160,35 @@ namespace Arrows
 
 		//---
 
-		arrowsGame[0].texturePos.x = static_cast<float>(GetScreenWidth() / 2 - WIDTH / 2);
-		arrowsGame[0].texturePos.y = static_cast<float>(GetScreenHeight() / 4);
+		arrowsGame[0].pos.x = static_cast<float>(GetScreenWidth() / 2 - WIDTH / 2);
+		arrowsGame[0].pos.y = static_cast<float>(GetScreenHeight() / 4);
 
 		random0Text = GetRandomValue(0, 5);
-		arrowsGame[0].bodyTexture = arrayOfArrowsColors[random0Text];
+		arrowsGame[0].texture = arrayOfArrowsColors[random0Text];
 		arrowsGame[0].position = random0Text;
 
 		//---
 
-		arrowsGame[1].texturePos.x = static_cast<float>(GetScreenWidth() / 2 - WIDTH / 2);
-		arrowsGame[1].texturePos.y = static_cast<float>(GetScreenHeight() / 4 + GetScreenHeight() / 4);
+		arrowsGame[1].pos.x = static_cast<float>(GetScreenWidth() / 2 - WIDTH / 2);
+		arrowsGame[1].pos.y = static_cast<float>(GetScreenHeight() / 4 + GetScreenHeight() / 4);
 
 		do
 		{
 			random1Text = GetRandomValue(0, 5);
 		} while (random1Text == random0Text);
-		arrowsGame[1].bodyTexture = arrayOfArrowsColors[random1Text];
+		arrowsGame[1].texture = arrayOfArrowsColors[random1Text];
 		arrowsGame[1].position = random1Text;
 
 		//---
 
-		arrowsGame[2].texturePos.x = static_cast<float>(GetScreenWidth() / 2 - WIDTH / 2);
-		arrowsGame[2].texturePos.y = static_cast<float>(GetScreenHeight() / 4 + GetScreenHeight() / 4 + GetScreenHeight() / 4);
+		arrowsGame[2].pos.x = static_cast<float>(GetScreenWidth() / 2 - WIDTH / 2);
+		arrowsGame[2].pos.y = static_cast<float>(GetScreenHeight() / 4 + GetScreenHeight() / 4 + GetScreenHeight() / 4);
 
 		do
 		{
 			random2Text = GetRandomValue(0, 5);
 		} while (random2Text == random0Text || random2Text == random1Text);
-		arrowsGame[2].bodyTexture = arrayOfArrowsColors[random2Text];
+		arrowsGame[2].texture = arrayOfArrowsColors[random2Text];
 		arrowsGame[2].position = random2Text;
 
 		//---
@@ -194,19 +200,19 @@ namespace Arrows
 			arrowsMenu[i].initTablePoints = false;
 		}
 
-		randomMenuGame = GetRandomValue(0, 5);
+		randomMenuGame = GetRandomValue(0, 4);
 		arrowsMenu[randomMenuGame].initGame = true;
 
 		do
 		{
-			randomMenuCredits = GetRandomValue(0, 5);
+			randomMenuCredits = GetRandomValue(0, 4);
 		} while (randomMenuCredits == randomMenuGame);
 
 		arrowsMenu[randomMenuCredits].initCredits = true;
 
 		do
 		{
-			randomMenuTablePoints = GetRandomValue(0, 5);
+			randomMenuTablePoints = GetRandomValue(0, 4);
 		} while (randomMenuTablePoints == randomMenuGame || randomMenuTablePoints == randomMenuCredits);
 
 		arrowsMenu[randomMenuTablePoints].initTablePoints = true;
@@ -214,7 +220,6 @@ namespace Arrows
 
 	void ChangeColor()
 	{
-
 		int random0Text = 0;
 		int random1Text = 0;
 		int random2Text = 0;
@@ -224,7 +229,7 @@ namespace Arrows
 		{
 			random0Text = GetRandomValue(0, 5);
 		}
-		arrowsGame[0].bodyTexture = arrayOfArrowsColors[random0Text];
+		arrowsGame[0].texture = arrayOfArrowsColors[random0Text];
 		arrowsGame[0].position = random0Text;
 
 		//---
@@ -233,7 +238,7 @@ namespace Arrows
 		{
 			random1Text = GetRandomValue(0, 5);
 		}
-		arrowsGame[1].bodyTexture = arrayOfArrowsColors[random1Text];
+		arrowsGame[1].texture = arrayOfArrowsColors[random1Text];
 		arrowsGame[1].position = random1Text;
 
 		//---
@@ -242,7 +247,7 @@ namespace Arrows
 		{
 			random2Text = GetRandomValue(0, 5);
 		}
-		arrowsGame[2].bodyTexture = arrayOfArrowsColors[random2Text];
+		arrowsGame[2].texture = arrayOfArrowsColors[random2Text];
 		arrowsGame[2].position = random2Text;
 
 		//---
@@ -254,9 +259,14 @@ namespace Arrows
 
 	void DrawGamePlay()
 	{
-		DrawTexture(arrowsGame[0].bodyTexture, static_cast<int>(arrowsGame[0].texturePos.x), static_cast<int>(arrowsGame[0].texturePos.y), WHITE);
-		DrawTexture(arrowsGame[1].bodyTexture, static_cast<int>(arrowsGame[1].texturePos.x), static_cast<int>(arrowsGame[1].texturePos.y), WHITE);
-		DrawTexture(arrowsGame[2].bodyTexture, static_cast<int>(arrowsGame[2].texturePos.x), static_cast<int>(arrowsGame[2].texturePos.y), WHITE);
+		DrawTexture(arrowsGame[0].texture, static_cast<int>(arrowsGame[0].pos.x), static_cast<int>(arrowsGame[0].pos.y), WHITE);
+		DrawTexture(arrowsGame[1].texture, static_cast<int>(arrowsGame[1].pos.x), static_cast<int>(arrowsGame[1].pos.y), WHITE);
+		DrawTexture(arrowsGame[2].texture, static_cast<int>(arrowsGame[2].pos.x), static_cast<int>(arrowsGame[2].pos.y), WHITE);
+	}
+
+	void DrawCredits_TalbePoints()
+	{
+		DrawTexture(arrowExit.texture, static_cast<int>(arrowExit.pos.x), static_cast<int>(arrowExit.pos.y), WHITE);
 	}
 	
 	void DrawMenu()

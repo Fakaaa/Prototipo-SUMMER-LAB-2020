@@ -109,7 +109,7 @@ namespace Enemies
 
 	void Move()
 	{
-		const float DIV_SPEED = 20.0f;
+		const float DIV_SPEED = 10.0f;
 		int random = 0;
 
 		for (int i = 0; i < MAX_ENEMIES; i++)

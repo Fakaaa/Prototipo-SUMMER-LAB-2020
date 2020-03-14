@@ -65,7 +65,6 @@ namespace Screens
 	{
 		Player::InputMenu();
 		Player::Reset();
-		Player::LoadFont();
 		Enemies::Reset();
 
 		Audio::StateMenuMusic(Audio::update);
@@ -81,7 +80,7 @@ namespace Screens
 
 		Background::DrawMenu();
 		DrawTextEx(Player::fontType, "Into the Deep", Vector2{ static_cast<float>(GetScreenWidth() / 3.5), static_cast<float>(GetScreenHeight() / 3)}, 150, 10,GOLD);
-		DrawText("v0.7", 30, GetScreenHeight() - 60, 30, WHITE);
+		DrawText("v0.8", 30, GetScreenHeight() - 60, 30, WHITE);
 
 		Arrows::DrawMenu();
 
@@ -93,6 +92,8 @@ namespace Screens
 		Audio::StateMenuMusic(Audio::update);
 		Audio::StateMenuOceanMusic(Audio::update);
 
+		Player::InputOptions();
+
 		if (IsKeyPressed(KEY_ESCAPE))
 		{
 			state = menu;
@@ -103,6 +104,8 @@ namespace Screens
 
 		Background::DrawCredits();
 
+		Arrows::DrawCredits_TalbePoints();
+
 		EndDrawing();
 	}
 
@@ -110,6 +113,8 @@ namespace Screens
 	{
 		Audio::StateMenuMusic(Audio::update);
 		Audio::StateMenuOceanMusic(Audio::update);
+
+		Player::InputOptions();
 
 		if (IsKeyPressed(KEY_ESCAPE))
 		{
@@ -123,6 +128,8 @@ namespace Screens
 
 		DrawTextEx(Player::fontType, "Table Points", Vector2{ static_cast<float>(GetScreenWidth() / 3), static_cast<float>(GetScreenHeight() / 10) }, 140, 10, GOLD);
 		Player::DrawPlayersRecordsMenu();
+
+		Arrows::DrawCredits_TalbePoints();
 
 		EndDrawing();
 	}

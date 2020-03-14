@@ -39,7 +39,7 @@ namespace Player
 		player.body.height = 200;
 		player.body.width = 250;
 		player.body.x = 50;
-		player.body.y = Arrows::arrowsGame[1].texturePos.y - player.body.height / 4;
+		player.body.y = Arrows::arrowsGame[1].pos.y - player.body.height / 4;
 
 		submarino1 = LoadImage("assets/player/submarino 1.png");
 		submarino2 = LoadImage("assets/player/submarino 2.png");
@@ -58,15 +58,12 @@ namespace Player
 		player.lives = 3;
 		player.distaceRecord = 0;
 
+		fontType = LoadFontEx("assets/fonts/HighVoltageRough.ttf", 140, 0, 0);
+
 		UnloadImage(submarino1);
 		UnloadImage(submarino2);
 		UnloadImage(submarino3);
 		UnloadImage(life);
-	}
-
-	void LoadFont()
-	{
-		fontType = LoadFontEx("assets/fonts/HighVoltageRough.ttf", 140, 0, 0);
 	}
 
 	void Unload()
@@ -88,7 +85,7 @@ namespace Player
 			{
 				if (Arrows::arrowsGame[i].position == 0)
 				{
-					player.body.y = Arrows::arrowsGame[i].texturePos.y - player.body.height / 4;
+					player.body.y = Arrows::arrowsGame[i].pos.y - player.body.height / 4;
 					PlaySound(Audio::movePlayer);
 				}
 			}			
@@ -99,7 +96,7 @@ namespace Player
 			{
 				if (Arrows::arrowsGame[i].position == 1)
 				{
-					player.body.y = Arrows::arrowsGame[i].texturePos.y - player.body.height / 4;
+					player.body.y = Arrows::arrowsGame[i].pos.y - player.body.height / 4;
 					PlaySound(Audio::movePlayer);
 				}
 			}
@@ -110,7 +107,7 @@ namespace Player
 			{
 				if (Arrows::arrowsGame[i].position == 2)
 				{
-					player.body.y = Arrows::arrowsGame[i].texturePos.y - player.body.height / 4;
+					player.body.y = Arrows::arrowsGame[i].pos.y - player.body.height / 4;
 					PlaySound(Audio::movePlayer);
 				}
 			}
@@ -121,7 +118,7 @@ namespace Player
 			{
 				if (Arrows::arrowsGame[i].position == 3)
 				{
-					player.body.y = Arrows::arrowsGame[i].texturePos.y - player.body.height / 4;
+					player.body.y = Arrows::arrowsGame[i].pos.y - player.body.height / 4;
 					PlaySound(Audio::movePlayer);
 				}
 			}
@@ -132,7 +129,7 @@ namespace Player
 			{
 				if (Arrows::arrowsGame[i].position == 4)
 				{
-					player.body.y = Arrows::arrowsGame[i].texturePos.y - player.body.height / 4;
+					player.body.y = Arrows::arrowsGame[i].pos.y - player.body.height / 4;
 					PlaySound(Audio::movePlayer);
 				}
 			}
@@ -143,7 +140,7 @@ namespace Player
 			{
 				if (Arrows::arrowsGame[i].position == 5)
 				{
-					player.body.y = Arrows::arrowsGame[i].texturePos.y - player.body.height / 4;
+					player.body.y = Arrows::arrowsGame[i].pos.y - player.body.height / 4;
 					PlaySound(Audio::movePlayer);
 				}
 			}
@@ -159,7 +156,7 @@ namespace Player
 
 	void InputMenu()
 	{
-		if (IsKeyPressed(KEY_ONE)) // COLOR AMARILLO
+		if (IsKeyReleased(KEY_ONE)) // COLOR AMARILLO
 		{
 			if (Arrows::arrowsMenu[0].initGame == true)
 			{
@@ -178,7 +175,7 @@ namespace Player
 				PlaySound(Audio::clickMenu);
 			}
 		}
-		if (IsKeyPressed(KEY_TWO)) // COLOR NARANJA
+		if (IsKeyReleased(KEY_TWO)) // COLOR NARANJA
 		{
 			if (Arrows::arrowsMenu[1].initGame == true)
 			{
@@ -197,7 +194,7 @@ namespace Player
 				PlaySound(Audio::clickMenu);
 			}
 		}
-		if (IsKeyPressed(KEY_THREE)) // COLOR ROJO
+		if (IsKeyReleased(KEY_THREE)) // COLOR ROJO
 		{
 			if (Arrows::arrowsMenu[2].initGame == true)
 			{
@@ -216,7 +213,7 @@ namespace Player
 				PlaySound(Audio::clickMenu);
 			}
 		}
-		if (IsKeyPressed(KEY_FOUR)) // COLOR VERDE
+		if (IsKeyReleased(KEY_FOUR)) // COLOR VERDE
 		{
 			if (Arrows::arrowsMenu[3].initGame == true)
 			{
@@ -235,7 +232,7 @@ namespace Player
 				PlaySound(Audio::clickMenu);
 			}
 		}
-		if (IsKeyPressed(KEY_FIVE)) // COLOR AZUL
+		if (IsKeyReleased(KEY_FIVE)) // COLOR AZUL
 		{
 			if (Arrows::arrowsMenu[4].initGame == true)
 			{
@@ -254,7 +251,7 @@ namespace Player
 				PlaySound(Audio::clickMenu);
 			}
 		}
-		if (IsKeyPressed(KEY_SIX)) // COLOR SKYBLUE
+		if (IsKeyReleased(KEY_SIX)) // COLOR SKYBLUE
 		{			
 			if (Arrows::arrowsMenu[5].initGame == true)
 			{
@@ -270,6 +267,18 @@ namespace Player
 			else if (Arrows::arrowsMenu[5].initTablePoints == true)
 			{
 				Screens::state = Screens::tablePoints;
+				PlaySound(Audio::clickMenu);
+			}
+		}
+	}
+
+	void InputOptions()
+	{
+		if (IsKeyPressed(KEY_SIX))
+		{
+			if (Arrows::arrowExit.exit == true)
+			{
+				Screens::state = Screens::menu;
 				PlaySound(Audio::clickMenu);
 			}
 		}
@@ -310,7 +319,7 @@ namespace Player
 	void Reset()
 	{
 		player.body.x = 50;
-		player.body.y = Arrows::arrowsGame[1].texturePos.y - player.body.height / 4;
+		player.body.y = Arrows::arrowsGame[1].pos.y - player.body.height / 4;
 
 		player.lives = 3;
 		player.distaceRecord = 0;

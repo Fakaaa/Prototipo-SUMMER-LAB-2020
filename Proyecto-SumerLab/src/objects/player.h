@@ -22,10 +22,10 @@ namespace Player
 	extern bool rotation;
 
 	extern void Initialize();
-	extern void LoadFont();
 	extern void Unload();
 	extern void InputGamePlay();
 	extern void InputMenu();
+	extern void InputOptions();
 	extern void DistanceTraveled();
 	extern void RotationLife();
 	extern void Lose();

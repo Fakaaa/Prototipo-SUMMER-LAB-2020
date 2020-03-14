@@ -155,6 +155,9 @@ namespace Background
 		UnloadTexture(backgroundGame3.texture);
 		UnloadTexture(backgroundGame4.texture);
 		UnloadTexture(backgroundMenu.texture);
+		UnloadTexture(backgroundCredits.texture);
+		UnloadTexture(backgroundCreditsText1.texture);
+		UnloadTexture(backgroundCreditsText2.texture);
 		UnloadTexture(backgroundBubbles1.texture);
 		UnloadTexture(backgroundBubbles2.texture);
 		UnloadTexture(backgroundBubbles3.texture);
