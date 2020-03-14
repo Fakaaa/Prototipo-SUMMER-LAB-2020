@@ -105,8 +105,10 @@ namespace Arrows
 
 		// ---------------------------------
 
-		arrowExit.pos.x = static_cast<float>(HEIGHT);
-		arrowExit.pos.y = static_cast<float>(GetScreenHeight() - arrowExit.texture.height);
+		arrowExit.body.width = WIDTH;
+		arrowExit.body.height = HEIGHT;
+		arrowExit.body.x = static_cast<float>(arrowExit.texture.height);
+		arrowExit.body.y = static_cast<float>(GetScreenHeight() - arrowExit.texture.height * 2);
 		arrowExit.exit = true;
 		arrowExit.color = arrayOfColors[5];
 	}
@@ -131,7 +133,7 @@ namespace Arrows
 			arrayOfArrowsColors[i] = LoadTextureFromImage(arrows[i]);
 		}
 
-		ImageResize(&button, WIDTH * 2, HEIGHT * 2);
+		ImageResize(&button, WIDTH, HEIGHT);
 		arrowExit.texture = LoadTextureFromImage(button);
 
 		for (int i = 0; i < 6; i++)
@@ -266,9 +268,13 @@ namespace Arrows
 
 	void DrawCredits_TalbePoints()
 	{
-		DrawTexture(arrowExit.texture, static_cast<int>(arrowExit.pos.x), static_cast<int>(arrowExit.pos.y), WHITE);
+		float FONT = 60;
+
+		DrawTexture(arrowExit.texture, static_cast<int>(arrowExit.body.x), static_cast<int>(arrowExit.body.y), WHITE);
+
+		DrawTextEx(Player::fontType, "ATRAS", Vector2{ ((arrowExit.body.x + arrowExit.body.width / 2) - (MeasureText("ATRAS", static_cast<int>(70)) / 4)) , arrowExit.body.y + arrowExit.body.height / 4 }, FONT, 2, BLACK);
 	}
-	
+
 	void DrawMenu()
 	{
 		float FONT = 60;

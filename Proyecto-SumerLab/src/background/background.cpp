@@ -20,6 +20,12 @@ namespace Background
 	static BACKGROUND backgroundBubbles2;
 	static BACKGROUND backgroundBubbles3;
 
+	static BACKGROUND logo;
+	static BACKGROUND panel;
+
+	static BACKGROUND logoImageCampus;
+	static BACKGROUND logoSumerLab;
+
 	static float scrolling_menuBack;
 	static float scrolling_gameBack;
 	static float scrolling_bubbles1;
@@ -48,9 +54,15 @@ namespace Background
 		scrolling_back3 = 0.0f;
 
 		Image menu;
+		Image logoImage;
+		Image panelImage;
+
 		Image creditsText1;
 		Image creditsText2;
 		Image credits;
+
+		Image imageCampus;
+		Image sumerLab;
 
 		Image bubbles1;
 		Image bubbles2;
@@ -97,6 +109,18 @@ namespace Background
 		ImageResize(&menu, GetScreenWidth(), GetScreenHeight());
 		backgroundMenu.texture = LoadTextureFromImage(menu);
 		
+		logoImage = LoadImage("assets/background/logo.png");
+		ImageResize(&logoImage, GetScreenWidth() / 4, GetScreenWidth() / 4);
+		logo.texture = LoadTextureFromImage(logoImage);
+		logo.x = static_cast<float>(GetScreenWidth() / 2 - logo.texture.width / 2);
+		logo.y = static_cast<float>(GetScreenHeight() / 20);
+
+		panelImage = LoadImage("assets/background/panel.png");
+		ImageResize(&panelImage, GetScreenWidth() / 2 + GetScreenWidth() / 3, GetScreenHeight() / 2);
+		panel.texture = LoadTextureFromImage(panelImage);
+		panel.x = static_cast<float>(GetScreenWidth() / 2 - panel.texture.width / 2);
+		panel.y = static_cast<float>(GetScreenHeight() / 2);
+		
 		// -------------------
 		// credits
 
@@ -111,6 +135,18 @@ namespace Background
 		credits = LoadImage("assets/background/BGCreditos.png");
 		ImageResize(&credits, GetScreenWidth(), GetScreenHeight());
 		backgroundCredits.texture = LoadTextureFromImage(credits);
+
+		imageCampus = LoadImage("assets/logos/Logo Image si el fondo es oscuro.png");
+		ImageResize(&imageCampus, GetScreenWidth() / 6, GetScreenHeight() / 6);
+		logoImageCampus.texture = LoadTextureFromImage(imageCampus);
+		logoImageCampus.x = static_cast<float>(GetScreenWidth() - logoImageCampus.texture.width);
+		logoImageCampus.y = static_cast<float>(GetScreenHeight() - logoImageCampus.texture.height);
+
+		sumerLab = LoadImage("assets/logos/Logo Lab.png");
+		ImageResize(&sumerLab, GetScreenWidth() / 6, GetScreenHeight() / 6);
+		logoSumerLab.texture = LoadTextureFromImage(sumerLab);
+		logoSumerLab.x = static_cast<float>(GetScreenWidth() / 2 + logoSumerLab.texture.width);
+		logoSumerLab.y = static_cast<float>(GetScreenHeight() - logoImageCampus.texture.height);
 
 		//--------------------
 		// transicion		
@@ -140,9 +176,13 @@ namespace Background
 		UnloadImage(gamePlayBack3);
 		UnloadImage(gamePlayBack4);
 		UnloadImage(menu);
+		UnloadImage(logoImage);
+		UnloadImage(panelImage);
 		UnloadImage(credits);
 		UnloadImage(creditsText1);
 		UnloadImage(creditsText2);
+		UnloadImage(imageCampus);
+		UnloadImage(sumerLab);
 		UnloadImage(bubbles1);
 		UnloadImage(bubbles2);
 		UnloadImage(bubbles3);
@@ -155,9 +195,13 @@ namespace Background
 		UnloadTexture(backgroundGame3.texture);
 		UnloadTexture(backgroundGame4.texture);
 		UnloadTexture(backgroundMenu.texture);
+		UnloadTexture(logo.texture);
+		UnloadTexture(panel.texture);
 		UnloadTexture(backgroundCredits.texture);
 		UnloadTexture(backgroundCreditsText1.texture);
 		UnloadTexture(backgroundCreditsText2.texture);
+		UnloadTexture(logoImageCampus.texture);
+		UnloadTexture(logoSumerLab.texture);
 		UnloadTexture(backgroundBubbles1.texture);
 		UnloadTexture(backgroundBubbles2.texture);
 		UnloadTexture(backgroundBubbles3.texture);
@@ -177,6 +221,9 @@ namespace Background
 		scrolling_back3 = 0.0f;
 
 		DrawTextureV(backgroundMenu.texture, Vector2{ backgroundMenu.x, backgroundMenu.y }, WHITE);
+
+		DrawTexture(logo.texture, static_cast<int>(logo.x), static_cast<int>(logo.y), WHITE);
+		DrawTexture(panel.texture, static_cast<int>(panel.x), static_cast<int>(panel.y), WHITE);
 	}
 
 	void DrawCredits()
@@ -185,9 +232,10 @@ namespace Background
 
 		DrawTexture(backgroundCreditsText1.texture, GetScreenWidth() / 2 - backgroundCreditsText1.texture.width / 2, GetScreenHeight() / 2 - (backgroundCreditsText1.texture.height / 2 + backgroundCreditsText1.texture.height / 3), WHITE);
 		DrawTexture(backgroundCreditsText2.texture, GetScreenWidth() / 2 - backgroundCreditsText2.texture.width / 2, GetScreenHeight() / 2, WHITE);
+
+		DrawTexture(logoImageCampus.texture, static_cast<int>(logoImageCampus.x), static_cast<int>(logoImageCampus.y), WHITE);
+		DrawTexture(logoSumerLab.texture, static_cast<int>(logoSumerLab.x), static_cast<int>(logoSumerLab.y), WHITE);
 	}
-
-
 
 	void DrawTransition()
 	{
