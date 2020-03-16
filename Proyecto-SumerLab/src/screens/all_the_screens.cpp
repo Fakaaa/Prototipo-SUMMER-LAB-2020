@@ -79,7 +79,6 @@ namespace Screens
 		ClearBackground(DARKBLUE);
 
 		Background::DrawMenu();
-		//DrawTextEx(Player::fontType, "Into the Deep", Vector2{ static_cast<float>(GetScreenWidth() / 3.5), static_cast<float>(GetScreenHeight() / 3)}, 150, 10,GOLD);
 		DrawText("v0.9", 30, GetScreenHeight() - 60, 30, WHITE);
 
 		Arrows::DrawMenu();
@@ -126,7 +125,6 @@ namespace Screens
 
 		Background::DrawMenu();
 
-		DrawTextEx(Player::fontType, "Table Points", Vector2{ static_cast<float>(GetScreenWidth() / 3), static_cast<float>(GetScreenHeight() / 10) }, 140, 10, GOLD);
 		Player::DrawPlayersRecordsMenu();
 
 		Arrows::DrawCredits_TalbePoints();

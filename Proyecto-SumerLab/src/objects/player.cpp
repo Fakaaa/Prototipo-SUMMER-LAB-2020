@@ -366,11 +366,16 @@ namespace Player
 	
 	void DrawPlayersRecordsMenu()
 	{
-		DrawTextEx(fontType, FormatText("1ra posicion - %i", static_cast<int>(playersRecords[0])), Vector2{ static_cast<float>(GetScreenWidth() / 3), 300}, 60, 2, WHITE);
-		DrawTextEx(fontType, FormatText("2da posicion - %i", static_cast<int>(playersRecords[1])), Vector2{ static_cast<float>(GetScreenWidth() / 3), 500}, 60, 2, WHITE);
-		DrawTextEx(fontType, FormatText("3ra posicion - %i", static_cast<int>(playersRecords[2])), Vector2{ static_cast<float>(GetScreenWidth() / 3), 700}, 60, 2, WHITE);
-		DrawTextEx(fontType, FormatText("4ta posicion - %i", static_cast<int>(playersRecords[3])), Vector2{ static_cast<float>(GetScreenWidth() / 3), 900}, 60, 2, WHITE);
-		DrawTextEx(fontType, FormatText("5ta posicion - %i", static_cast<int>(playersRecords[4])), Vector2{ static_cast<float>(GetScreenWidth() / 3), 1100}, 60, 2, WHITE);
+		float fontTittle = 140;
+		float font = 60;
+
+		DrawTextEx(Player::fontType, "Tabla de Puntos", Vector2{ static_cast<float>(GetScreenWidth() / 3 - fontTittle / 2), static_cast<float>(GetScreenHeight() / 10) }, fontTittle, 10, GOLD);
+
+		DrawTextEx(fontType, FormatText("1ra posicion - %i", static_cast<int>(playersRecords[0])), Vector2{ static_cast<float>(GetScreenWidth() / 2 - font * 2.5), 300}, font, 2, WHITE);
+		DrawTextEx(fontType, FormatText("2da posicion - %i", static_cast<int>(playersRecords[1])), Vector2{ static_cast<float>(GetScreenWidth() / 2 - font * 2.5), 500}, font, 2, WHITE);
+		DrawTextEx(fontType, FormatText("3ra posicion - %i", static_cast<int>(playersRecords[2])), Vector2{ static_cast<float>(GetScreenWidth() / 2 - font * 2.5), 700}, font, 2, WHITE);
+		DrawTextEx(fontType, FormatText("4ta posicion - %i", static_cast<int>(playersRecords[3])), Vector2{ static_cast<float>(GetScreenWidth() / 2 - font * 2.5), 900}, font, 2, WHITE);
+		DrawTextEx(fontType, FormatText("5ta posicion - %i", static_cast<int>(playersRecords[4])), Vector2{ static_cast<float>(GetScreenWidth() / 2 - font * 2.5), 1100}, font, 2, WHITE);
 	}
 
 	// ----------------------

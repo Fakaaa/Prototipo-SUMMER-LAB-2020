@@ -1,6 +1,7 @@
 #include "background.h"
 
 #include "objects/player.h"
+#include "screens/all_the_screens.h"
 
 namespace Background
 {
@@ -136,17 +137,17 @@ namespace Background
 		ImageResize(&credits, GetScreenWidth(), GetScreenHeight());
 		backgroundCredits.texture = LoadTextureFromImage(credits);
 
+		sumerLab = LoadImage("assets/logos/Logo Lab.png");
+		ImageResize(&sumerLab, GetScreenWidth() / 8, GetScreenWidth() / 8);
+		logoSumerLab.texture = LoadTextureFromImage(sumerLab);
+		logoSumerLab.x = static_cast<float>(GetScreenWidth() - logoSumerLab.texture.width);
+		logoSumerLab.y = static_cast<float>(GetScreenHeight() - logoSumerLab.texture.height);
+		
 		imageCampus = LoadImage("assets/logos/Logo Image si el fondo es oscuro.png");
 		ImageResize(&imageCampus, GetScreenWidth() / 6, GetScreenHeight() / 6);
 		logoImageCampus.texture = LoadTextureFromImage(imageCampus);
-		logoImageCampus.x = static_cast<float>(GetScreenWidth() - logoImageCampus.texture.width);
+		logoImageCampus.x = static_cast<float>(logoSumerLab.x - logoImageCampus.texture.width);
 		logoImageCampus.y = static_cast<float>(GetScreenHeight() - logoImageCampus.texture.height);
-
-		sumerLab = LoadImage("assets/logos/Logo Lab.png");
-		ImageResize(&sumerLab, GetScreenWidth() / 6, GetScreenHeight() / 6);
-		logoSumerLab.texture = LoadTextureFromImage(sumerLab);
-		logoSumerLab.x = static_cast<float>(GetScreenWidth() / 2 + logoSumerLab.texture.width);
-		logoSumerLab.y = static_cast<float>(GetScreenHeight() - logoImageCampus.texture.height);
 
 		//--------------------
 		// transicion		
@@ -220,10 +221,17 @@ namespace Background
 		scrolling_back2 = 0.0f;
 		scrolling_back3 = 0.0f;
 
-		DrawTextureV(backgroundMenu.texture, Vector2{ backgroundMenu.x, backgroundMenu.y }, WHITE);
+		if (Screens::state == Screens::menu)
+		{
+			DrawTextureV(backgroundMenu.texture, Vector2{ backgroundMenu.x, backgroundMenu.y }, WHITE);
 
-		DrawTexture(logo.texture, static_cast<int>(logo.x), static_cast<int>(logo.y), WHITE);
-		DrawTexture(panel.texture, static_cast<int>(panel.x), static_cast<int>(panel.y), WHITE);
+			DrawTexture(logo.texture, static_cast<int>(logo.x), static_cast<int>(logo.y), WHITE);
+			DrawTexture(panel.texture, static_cast<int>(panel.x), static_cast<int>(panel.y), WHITE);
+		}
+		else if (Screens::state == Screens::tablePoints)
+		{
+			DrawTextureV(backgroundMenu.texture, Vector2{ backgroundMenu.x, backgroundMenu.y }, WHITE);
+		}
 	}
 
 	void DrawCredits()
